@@ -14,7 +14,8 @@ interface BlogType {
 
 };
 
-const dirContent = fs.readdirSync("content", "utf-8")
+const dirContent = fs.readdirSync(`${process.cwd()}/content`, "utf-8");
+
 console.log(dirContent)
 
 const blogs: BlogType[] = dirContent.map(file=>{ 

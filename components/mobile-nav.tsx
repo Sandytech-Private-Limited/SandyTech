@@ -1,27 +1,36 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button, buttonVariants } from './ui/button'
+import { Home, User, BookOpen, Mail } from 'lucide-react'
 
 const MobileNav = () => {
   return (
-    <div>
-        <ul className="flex flex-col gap-4">
+    <div className="py-6">
+        <ul className="flex flex-col gap-6">
             <li>
-            <Link href="/" className="hover:text-primary transition-colors font-bold">Home</Link>
+              <Link href="/" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
+                <Home className="w-5 h-5" />
+                Home
+              </Link>
             </li>
             <li>
-            <Link href="/about" className="">About</Link>
+              <Link href="/about" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
+                <User className="w-5 h-5" />
+                About
+              </Link>
             </li>
             <li>
-            <Link href="/contact" className="">Contact</Link>
+              <Link href="/blog" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
+                <BookOpen className="w-5 h-5" />
+                Blog
+              </Link>
             </li>
-
-            <div className="buttons gap-2 flex text-xsm">
-
-           
-            <Link className={buttonVariants({ variant: "secondary" })} href="/login">Login</Link>  
-                <Link className={buttonVariants({ variant: "secondary" })} href="/login">Signup</Link> 
-            </div>
+            <li>
+              <Link href="/contact" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
+                <Mail className="w-5 h-5" />
+                Contact
+              </Link>
+            </li>
         </ul>
     </div>
   )

@@ -55,14 +55,14 @@ const NavBar = () => {
             />
             <div className='text-lg font-bold md:text-xl'>
                 <Link href={"/"}>
-                    ProgrammingWithSandeep
+                    Sandeep Kothapalli
                 </Link>
             </div>
-            <ul className='hidden md:flex w-full justify-end items-center space-x-4 '>
-                <li><Link href={"/"}>Home</Link></li>
-                <li><Link href={"/about"}>About</Link></li>
-                <li><Link href={"/blog"}>Blog</Link></li>
-                <li><Link href={"/contact"}>Contact</Link></li>
+            <ul className='hidden md:flex w-full justify-end items-center space-x-6 '>
+                <li><Link href={"/"} className="hover:text-primary transition-colors">Home</Link></li>
+                <li><Link href={"/about"} className="hover:text-primary transition-colors">About</Link></li>
+                <li><Link href={"/blog"} className="hover:text-primary transition-colors">Blog</Link></li>
+                <li><Link href={"/contact"} className="hover:text-primary transition-colors">Contact</Link></li>
                 <li className="buttons px-4 space-x-2">
                     {/* <Link href={"/login"} className={buttonVariants({ variant: "outline" })}>Login</Link>
                     <Link href={"/login"} className={buttonVariants({ variant: "outline" })}>Sign Up</Link> */}

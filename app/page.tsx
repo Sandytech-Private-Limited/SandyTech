@@ -2,126 +2,161 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import Typed from 'typed.js';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Code, Cloud, Cpu, Database, Globe, Smartphone, Zap } from "lucide-react";
 
 export default function Home() {
   const el = useRef(null);
 
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ['<i>ASP NET Core</i>', '&amp; C#', 'React'],
+      strings: ['ASP.NET Core', 'Azure Cloud', 'AI/LLM Applications', 'Microservices', 'React & Angular'],
       typeSpeed: 50,
+      backSpeed: 30,
+      loop: true,
     });
 
     return () => {
-      // Destroy Typed instance during cleanup to stop animation
       typed.destroy();
     };
   }, []);
 
+  const skills = [
+    { icon: Code, title: "Backend Development", description: "ASP.NET Core, C#, Web APIs, Microservices" },
+    { icon: Cloud, title: "Cloud & DevOps", description: "Azure, Kubernetes, Docker, CI/CD Pipelines" },
+    { icon: Cpu, title: "AI/LLM", description: "LLM fine-tuning, AI chatbots, Healthcare AI" },
+    { icon: Database, title: "Databases", description: "SQL Server, MongoDB, Redis, Cosmos DB" },
+    { icon: Globe, title: "Frontend", description: "React, Angular, TypeScript, Tailwind CSS" },
+    { icon: Smartphone, title: "Mobile", description: "React Native, Expo, Cross-platform apps" }
+  ];
 
   return (
-    <main>
-      <section className="container px-4 py-10 mx-auto lg:h-128 lg:space-x-8 lg:flex lg:items-center"><div className="w-full text-center lg:text-left lg:w-1/2 lg:-mt-8"><h1 className="text-3xl leading-snug text-gray-800 dark:text-gray-200 md:text-4xl">
-        A <span className="font-semibold">tech blog</span> for community <br className="hidden lg:block" /> components using <span className="font-semibold underline decoration-primary"><span ref={el} /></span></h1> <p className="mt-4 text-lg text-gray-500 dark:text-gray-300">Open source blog and templates to <br className="hidden lg:block" /> bootstrap your new apps, projects or landing sites!</p> <div className="mt-6 bg-transparent border rounded-lg dark:border-gray-700 lg:w-2/3 focus-within:border-primary focus-within:ring focus-within:ring-primary dark:focus-within:border-primary focus-within:ring-opacity-20"><form action="https://www.creative-tim.com/twcomponents/search" className="flex flex-wrap justify-between md:flex-row">
-
-          <input type="search" name="query" placeholder="Search Components" required={true} className="flex-1 h-10 px-4 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none lg:h-12 dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0" />
-
-          <button type="submit" className="flex items-center dark:bg-gray-800 justify-center w-full p-2 m-1 text-white transition-colors duration-300 transform rounded-lg lg:w-12 lg:h-12 lg:p-0 bg-primary hover:bg-primary/70 focus:outline-none focus:bg-primary/70"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button></form></div></div> <div className="w-full mt-4 lg:mt-0 lg:w-1/2"><img src="https://www.creative-tim.com/twcomponents/svg/website-designer-bro-purple.svg" alt="tailwind css components" className="w-full h-full max-w-md mx-auto" /></div>
-      </section>
-
-
-      <section className="text-gray-600 dark:text-gray-50 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <h2 className="text-4xl pb-8 mb-4 font-bold  text-center">About Our Services</h2>
-          <div className="flex flex-wrap -m-4">
-            <div className="p-4 lg:w-1/3">
-              <div className="h-full bg-gray-200 dark:bg-gray-900 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative shadow-lg">
-                <h2 className="tracking-widest text-xs title-font font-medium  mb-1">WEB DEVELOPMENT</h2>
-                <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 dark:text-white mb-3">Full-Stack Solutions</h1>
-                <p className="leading-relaxed mb-3 text-gray-700 dark:text-gray-50  ">
-                  Building robust, scalable, and responsive web applications using modern tech stacks like ASP.NeT Core,React, Node.js, and more.
-                </p>
-                <a className=" inline-flex items-center hover:text-indigo-700">Learn More
-                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="M12 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-                <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-                  <span className="text-gray-400 dark:text-gray-500 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>2.4K Views
-                  </span>
-                  <span className="text-gray-400 dark:text-gray-500 inline-flex items-center leading-none text-sm">
-                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                    </svg>32 Comments
-                  </span>
-                </div>
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+        <div className="container mx-auto px-4 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-sm font-medium mb-6">
+                <Zap className="w-4 h-4 mr-2" />
+                Senior Software Engineer
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+                Hi, I'm{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  Sandeep Kothapalli
+                </span>
+              </h1>
+              
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                Innovative and results-driven Senior Software Engineer with{" "}
+                <span className="font-semibold text-blue-600 dark:text-blue-400">12+ years</span> of experience
+                building scalable applications with{" "}
+                <span className="font-semibold text-purple-600 dark:text-purple-400">
+                  <span ref={el} />
+                </span>
+              </p>
+              
+              <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">
+                Currently transitioning towards AI/LLM-driven applications, combining strong backend expertise 
+                with modern cloud and AI technologies.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button asChild size="lg" className="text-lg px-8 py-6">
+                  <Link href="/about">
+                    View My Work
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
+                  <Link href="/contact">
+                    Get In Touch
+                  </Link>
+                </Button>
               </div>
             </div>
-            <div className="p-4 lg:w-1/3">
-              <div className="h-full bg-gray-200 dark:bg-gray-900 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative shadow-lg">
-                <h2 className="tracking-widest text-xs title-font font-medium  mb-1">MOBILE DEVELOPMENT</h2>
-                <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 dark:text-white mb-3">Cross-Platform Apps</h1>
-                <p className="leading-relaxed mb-3 text-gray-700 dark:text-gray-400">
-                  Crafting seamless mobile experiences for both Android and iOS using frameworks like React Native and Flutter.
-                </p>
-                <a className=" inline-flex items-center hover:text-indigo-700">Learn More
-                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="M12 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-                <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-                  <span className="text-gray-400 dark:text-gray-500 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>1.8K Views
-                  </span>
-                  <span className="text-gray-400 dark:text-gray-500 inline-flex items-center leading-none text-sm">
-                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                    </svg>18 Comments
-                  </span>
-                </div>
+            
+            <div className="relative">
+              <div className="relative w-full h-96 lg:h-[500px]">
+                <Image
+                  src="/logo.jpg"
+                  alt="Sandeep Kothapalli"
+                  fill
+                  className="rounded-2xl object-cover shadow-2xl"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
               </div>
-            </div>
-            <div className="p-4 lg:w-1/3">
-              <div className="h-full bg-gray-200 dark:bg-gray-900 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative shadow-lg">
-                <h2 className="tracking-widest text-xs title-font font-medium  mb-1">CLOUD SOLUTIONS</h2>
-                <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 dark:text-white mb-3">Scalable Infrastructure</h1>
-                <p className="leading-relaxed mb-3 text-gray-700 dark:text-gray-400">
-                  Implementing and managing cloud environments with AWS, Azure, and GCP to ensure your applications scale effortlessly.
-                </p>
-                <a className=" inline-flex items-center hover:text-indigo-700">Learn More
-                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="M12 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-                <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-                  <span className="text-gray-400 dark:text-gray-500 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>3.1K Views
-                  </span>
-                  <span className="text-gray-400 dark:text-gray-500 inline-flex items-center leading-none text-sm">
-                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                    </svg>24 Comments
-                  </span>
-                </div>
-              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-purple-500 rounded-full opacity-20 animate-pulse delay-1000"></div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Skills Section */}
+      <section className="py-20 bg-white dark:bg-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Core Expertise
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              A comprehensive skill set spanning backend development, cloud architecture, 
+              AI/ML applications, and modern frontend technologies.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {skills.map((skill, index) => (
+              <div
+                key={index}
+                className="group p-8 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <skill.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  {skill.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {skill.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Build Something Amazing?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Let's discuss how my expertise in modern software development can help bring your ideas to life.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-6">
+              <Link href="/contact">
+                Start a Project
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="text-lg px-8 py-6 border-white text-white hover:bg-white hover:text-blue-600">
+              <Link href="/blog">
+                Read My Blog
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

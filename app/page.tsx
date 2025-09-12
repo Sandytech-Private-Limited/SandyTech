@@ -40,7 +40,7 @@ export default function Home() {
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-sm font-medium mb-6">
                 <Zap className="w-4 h-4 mr-2" />
-                Senior Software Engineer
+                Senior Technical Lead
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
@@ -69,6 +69,11 @@ export default function Home() {
                   <Link href="/about">
                     View My Work
                     <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-6">
+                  <Link href="/resume">
+                    View Resume
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">

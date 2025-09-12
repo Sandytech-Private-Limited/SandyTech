@@ -24,70 +24,54 @@ import Link from "next/link";
 
 export default function About() {
   const skills = {
-    "Programming & Frameworks": ["C#", "ASP.NET Core", ".NET Framework", "WPF (MVVM)", "Angular", "React", "JavaScript/TypeScript", "Expo React Native"],
-    "Cloud & DevOps": ["Microsoft Azure", "Kubernetes (AKS)", "Docker", "Terraform", "GitHub Actions", "CI/CD pipelines", "Azure DevOps"],
-    "Microservices & Middleware": ["Dapr", "Service Bus", "SignalR", "REST APIs", "gRPC"],
-    "Databases": ["SQL Server", "MongoDB", "LiteDB", "Redis", "Supabase", "Cosmos DB"],
-    "AI & ML": ["LLM fine-tuning", "AI-powered chatbots", "AI healthcare triage", "Recommendation systems"],
-    "Other Tools": ["Syncfusion", "Tailwind", "shadcn/ui", "Recharts", "Playwright", "SonarQube"]
+    "Cloud/Backend": [".NET 6+", "ASP.NET Core", "Dapr", "Azure Functions", "Microservices"],
+    "Frontend": ["Angular", "React", "JavaScript/TypeScript", "Blazor"],
+    "DevOps": ["Docker", "Kubernetes", "Azure AKS", "Helm", "Terraform"],
+    "Databases": ["SQL Server", "Cosmos DB", "PostgreSQL"],
+    "Architecture": ["CQRS", "Event Sourcing", "Clean Architecture"]
   };
 
   const experience = [
     {
-      title: "Senior .NET Developer / Architect",
-      company: "Freelance & Independent Product Developer",
-      period: "2018 – Present",
-      description: "Designed and implemented multiple .NET Core Web APIs with MongoDB and Redis backends. Built real-time chat assistants with SignalR, integrating typing indicators, emojis, and chatbot personality customization.",
+      title: "Technical Lead",
+      company: "Progience Technologies",
+      period: "06/2023 – Present",
+      description: "Leading cloud-native .NET solutions with microservices, Dapr, and Kubernetes on Azure.",
       achievements: [
-        "Developed B2C Offer Platform (MVP) with scalable MongoDB schema and modern UI",
-        "Architected microservices-based systems using Dapr Actors, Workflows, and Bindings",
-        "Implemented cloud-native solutions with Azure (AKS, ACR, KeyVault, Functions) and GitHub Actions CI/CD",
-        "Experimented with AI/LLM-powered applications including Educative.ai, MediAssist AI, and legal LLMs"
+        "CrimeTrax: Designed microservices with Dapr (pub/sub, state), Dockerized services, deployed on AKS with 99.9% uptime.",
+        "Implemented CQRS/Mediator to separate read/write workloads, improving throughput by 40%.",
+        "Led integration of Angular frontend with .NET backend APIs.",
+        "JusticeTrax LIMS-plus: Modernized monolith to microservices with Azure Functions and Blazor WASM.",
+        "Reduced deployment time by 60% using Kubernetes Helm charts; mentored team on Dapr best practices."
       ]
     },
     {
-      title: "Software Engineer",
-      company: "Multiple Enterprise Projects (Service & Product based)",
-      period: "2012 – 2018",
-      description: "Led backend development for enterprise-grade .NET applications with SQL Server. Migrated legacy .NET Framework systems to .NET Core and Azure Cloud.",
+      title: "Senior Software Engineer",
+      company: "Rollick",
+      period: "11/2020 – 05/2023",
+      description: "Built React-based customer portals with .NET microservices; automated CI/CD using GitHub Actions and Azure Container Registry.",
       achievements: [
-        "Built WPF desktop apps using MVVM and Syncfusion controls",
-        "Designed secure authentication systems with OpenID Connect and OAuth2",
-        "Led team mentoring and architecture design for multiple enterprise projects"
+        "Delivered multiple microservices integrated with React frontends.",
+        "Implemented robust CI/CD pipelines across environments."
       ]
     }
   ];
 
   const projects = [
     {
-      name: "Educative.ai (MVP)",
-      description: "AI-powered learning platform with chat/video-based learning, quizzes, and certificates",
-      tech: ["AI/LLM", "React", "ASP.NET Core", "MongoDB"]
+      name: "CrimeTrax",
+      description: "Law enforcement analytics platform: Microservices with Dapr (pub/sub, state), AKS deployments, CQRS/Mediator for high throughput.",
+      tech: [".NET", "Dapr", "AKS", "CQRS", "Angular"]
     },
     {
-      name: "MediAssist AI",
-      description: "AI healthcare triage and escalation system using Dapr Workflow & Agents",
-      tech: ["AI/Healthcare", "Dapr", "Azure", "Microservices"]
+      name: "JusticeTrax LIMS-plus",
+      description: "Modernized monolith to microservices using Azure Functions and Blazor WASM.",
+      tech: ["Azure Functions", "Blazor", "Microservices"]
     },
     {
-      name: "B2C Offer Platform",
-      description: "Vendor-user marketplace with scalable MongoDB schema, web app MVP, and roadmap for mobile",
-      tech: ["React", "MongoDB", "ASP.NET Core", "Azure"]
-    },
-    {
-      name: "Real-time Chat Assistant",
-      description: "SignalR-based chat app with dark mode, typing indicators, voice input, and chat history",
-      tech: ["SignalR", "ASP.NET Core", "React", "Real-time"]
-    },
-    {
-      name: "Health Platform App (MVP)",
-      description: "Built with React Native (Expo) + Supabase for lab test booking, teleconsultation, and health records",
-      tech: ["React Native", "Expo", "Supabase", "Healthcare"]
-    },
-    {
-      name: "NexusEd",
-      description: "Teacher-student discovery platform with strong vetting, controlled contact, and trust-focused design",
-      tech: ["React", "ASP.NET Core", "Education", "Trust Systems"]
+      name: "Customer Portals (Rollick)",
+      description: "React-based portals backed by .NET microservices with automated CI/CD using GitHub Actions and ACR.",
+      tech: ["React", ".NET", "GitHub Actions", "ACR"]
     }
   ];
 
@@ -106,13 +90,18 @@ export default function About() {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  Innovative and results-driven Senior Software Engineer with 12+ years of experience in designing, 
-                  developing, and deploying scalable applications.
+                  Innovative Technical Lead with 12+ years of expertise in cloud-native .NET solutions and scalable architectures.
                 </p>
-                <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">
-                  Currently transitioning towards AI/LLM-driven applications, combining strong backend expertise 
-                  with modern cloud and AI technologies.
-                </p>
+                <div className="text-lg text-gray-600 dark:text-gray-300 mb-8 space-y-2">
+                  <p>Specialized in:</p>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li>Microservices & Dapr: Event-driven architectures, service orchestration</li>
+                    <li>Containerization: Docker, Kubernetes, Azure AKS</li>
+                    <li>Frontend: Angular, React, Blazor</li>
+                    <li>DevOps: CI/CD (Azure DevOps/GitHub Actions), Infrastructure-as-Code</li>
+                    <li>Design Patterns: CQRS, Mediator, Repository, Domain-Driven Design</li>
+                  </ul>
+                </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Button asChild size="lg">
                     <Link href="/contact">

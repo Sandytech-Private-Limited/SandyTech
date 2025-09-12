@@ -62,6 +62,7 @@ const NavBar = () => {
                 <li><Link href={"/"} className="hover:text-primary transition-colors">Home</Link></li>
                 <li><Link href={"/about"} className="hover:text-primary transition-colors">About</Link></li>
                 <li><Link href={"/blog"} className="hover:text-primary transition-colors">Blog</Link></li>
+                <li><Link href={"/resume"} className="hover:text-primary transition-colors">Resume</Link></li>
                 <li><Link href={"/contact"} className="hover:text-primary transition-colors">Contact</Link></li>
                 <li className="buttons px-4 space-x-2">
                     {/* <Link href={"/login"} className={buttonVariants({ variant: "outline" })}>Login</Link>

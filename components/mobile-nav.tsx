@@ -26,6 +26,12 @@ const MobileNav = () => {
               </Link>
             </li>
             <li>
+              <Link href="/resume" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
+                <BookOpen className="w-5 h-5" />
+                Resume
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
                 <Mail className="w-5 h-5" />
                 Contact

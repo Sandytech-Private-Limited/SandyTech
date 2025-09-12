@@ -198,7 +198,7 @@ const BlogList = () => {
 
 export const metadata: Metadata = {
   title: 'Technical Blog - Sandeep Kothapalli',
-  description: 'A comprehensive technical blog covering modern software development, AI/ML applications, cloud architecture, and emerging technologies. Insights, tutorials, and thoughts from a Senior Software Engineer with 12+ years of experience.',
+  description: 'A comprehensive technical blog covering modern software development, AI/ML applications, cloud architecture, and emerging technologies. Insights, tutorials, and thoughts from a Senior Technical Lead with 12+ years of experience.',
 }
 
 export default BlogList;

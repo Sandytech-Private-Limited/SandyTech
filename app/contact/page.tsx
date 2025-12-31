@@ -18,7 +18,10 @@ import {
   MessageSquare,
   Code,
   Cloud,
-  Cpu
+  Cpu,
+  CheckCircle2,
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -29,6 +32,9 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -38,11 +44,42 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can integrate with email services like EmailJS, Formspree, etc.
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setSubmitMessage('Thank you! Your message has been sent successfully. I\'ll get back to you within 24 hours.');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+        setSubmitMessage(data.error || 'Something went wrong. Please try again or email me directly at sandeepdotnet@hotmail.com');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage('Failed to send message. Please try again or email me directly at sandeepdotnet@hotmail.com');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -73,19 +110,19 @@ const Contact = () => {
     {
       icon: Github,
       name: "GitHub",
-      url: "https://github.com/sandeepkothapalli",
+      url: "https://github.com/websabre",
       description: "Check out my code repositories"
     },
     {
       icon: Linkedin,
       name: "LinkedIn",
-      url: "https://linkedin.com/in/sandeepkothapalli",
+      url: "https://www.linkedin.com/in/kothapallisandeep/",
       description: "Connect with me professionally"
     },
     {
       icon: Twitter,
       name: "Twitter",
-      url: "https://twitter.com/sandeepkothapalli",
+      url: "https://x.com/sandeepattech",
       description: "Follow for tech updates"
     }
   ];
@@ -248,9 +285,37 @@ const Contact = () => {
                         />
                       </div>
                       
-                      <Button type="submit" size="lg" className="w-full">
-                        <Send className="w-5 h-5 mr-2" />
-                        Send Message
+                      {submitStatus === 'success' && (
+                        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-start gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-green-700 dark:text-green-300">{submitMessage}</p>
+                        </div>
+                      )}
+
+                      {submitStatus === 'error' && (
+                        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
+                          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-red-700 dark:text-red-300">{submitMessage}</p>
+                        </div>
+                      )}
+
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full" 
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5 mr-2" />
+                            Send Message
+                          </>
+                        )}
                       </Button>
                       
                       <p className="text-sm text-gray-500 dark:text-gray-400 text-center">

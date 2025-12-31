@@ -42,7 +42,8 @@ export default function Home() {
     "url": "https://kothapallisandeep.com",
     "sameAs": [
       "https://www.linkedin.com/in/kothapallisandeep/",
-      "https://github.com/websabre"
+      "https://github.com/websabre",
+      "https://x.com/websabre1"
     ],
     "knowsAbout": [
       ".NET",
@@ -100,8 +101,8 @@ export default function Home() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button asChild size="lg" className="text-lg px-8 py-6">
-                  <Link href="/about">
-                    View My Work
+                  <Link href="/projects">
+                    View Projects
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </Button>

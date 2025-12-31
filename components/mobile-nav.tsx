@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button, buttonVariants } from './ui/button'
-import { Home, User, BookOpen, Mail } from 'lucide-react'
+import { Home, User, BookOpen, Mail, FolderKanban } from 'lucide-react'
 
 const MobileNav = () => {
   return (
@@ -17,6 +17,12 @@ const MobileNav = () => {
               <Link href="/about" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
                 <User className="w-5 h-5" />
                 About
+              </Link>
+            </li>
+            <li>
+              <Link href="/projects" className="flex items-center gap-3 hover:text-primary transition-colors font-medium text-lg">
+                <FolderKanban className="w-5 h-5" />
+                Projects
               </Link>
             </li>
             <li>

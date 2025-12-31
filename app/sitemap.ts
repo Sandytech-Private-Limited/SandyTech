@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import fs from 'fs'
 import matter from 'gray-matter'
+import { projects } from '@/data/projects'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://kothapallisandeep.com'
@@ -17,6 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/projects`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
@@ -39,6 +46,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
+  // Dynamic project pages
+  const projectPages = projects.map(project => ({
+    url: `${baseUrl}/projects/${project.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
   // Dynamic blog pages
   const contentDir = `${process.cwd()}/content`
   const files = fs.readdirSync(contentDir)
@@ -55,6 +70,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     })
 
-  return [...staticPages, ...blogPages]
+  return [...staticPages, ...projectPages, ...blogPages]
 }
 

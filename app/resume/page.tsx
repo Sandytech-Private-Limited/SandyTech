@@ -373,38 +373,110 @@ const ResumePage = () => {
               </div>
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
-                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Amphion Medical Solutions Web Platform</h4>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Amphion Medical Solutions (U.S Company)</p>
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">CrimeTrax - Law Enforcement Analytics Platform</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Law Enforcement Agency (2023 - Present)</p>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>ASP.NET and C# web application for medical solutions with role-based workflows and operational support.</span>
+                      <span>Cloud-native microservices platform built with .NET, Dapr, and Kubernetes serving <span className="font-semibold text-green-600">100K+ daily active users</span>.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Implemented secure auth, CI/CD, and automated tests to enhance release reliability, reducing defects by <span className="font-semibold text-green-600">30%</span> and saving <span className="font-semibold text-green-600">10 hours/week</span>.</span>
+                      <span>Achieved <span className="font-semibold text-green-600">99.9% uptime</span> and <span className="font-semibold text-green-600">40% throughput improvement</span> using CQRS/Mediator pattern.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Optimized application and database layers, improving workflow efficiency by <span className="font-semibold text-green-600">20%</span> under peak usage.</span>
+                      <span>Features real-time analytics, predictive policing, and resource optimization with event-driven architecture.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">JusticeTrax LIMS-plus - Laboratory Management System</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Versaterm JusticeTrax (2021 - 2023)</p>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Modernized legacy system to microservices using Azure Functions and Blazor WASM.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Reduced deployment time by <span className="font-semibold text-green-600">60%</span>, infrastructure costs by <span className="font-semibold text-green-600">50%</span>, and improved performance by <span className="font-semibold text-green-600">45%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Handles complex evidence processing workflows with real-time tracking and compliance reporting.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">AI-Powered RAG Pipeline for Enterprise Documentation</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Internal Project (2024 - Present)</p>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Enterprise-grade RAG system enabling intelligent search and Q&A from company knowledge bases.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Achieved <span className="font-semibold text-green-600">85% query accuracy</span>, <span className="font-semibold text-green-600">2s average response time</span>, and <span className="font-semibold text-green-600">60% cost reduction</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Uses vector embeddings, semantic search, and LLM integration with Azure OpenAI and Cognitive Search.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Amphion Medical Solutions Web Platform</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Amphion Medical Solutions (U.S Company) (2019 - 2020)</p>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>HIPAA-compliant healthcare platform with role-based workflows and secure patient data management.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Reduced defects by <span className="font-semibold text-green-600">30%</span>, saved <span className="font-semibold text-green-600">10 hours/week</span>, and improved efficiency by <span className="font-semibold text-green-600">20%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Features real-time scheduling, billing integration, and comprehensive audit trails.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Customer Portal Platform (Rollick)</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Rollick (2020 - 2023)</p>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Multi-tenant React-based customer portal with .NET microservices backend.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Achieved <span className="font-semibold text-green-600">99.95% uptime</span>, reduced defects by <span className="font-semibold text-green-600">90%</span>, and saved <span className="font-semibold text-green-600">20+ hours/week</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Features automated CI/CD, fault tolerance, and comprehensive analytics with automated health checks.</span>
                     </li>
                   </ul>
                 </div>
                 <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">ProSight Insurance Portal</h4>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Prosight (Insurance domain)</p>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Prosight (Insurance domain) (2018 - 2019)</p>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Insurance domain website delivering policy and claims features with performant UI and API integrations.</span>
+                      <span>Insurance platform with policy management and claims processing features.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Delivered responsive UI and ASP.NET APIs, increasing page load speed and boosting user engagement by <span className="font-semibold text-green-600">10%</span>.</span>
+                      <span>Increased user engagement by <span className="font-semibold text-green-600">10%</span>, improved throughput by <span className="font-semibold text-green-600">20%</span>, and reduced query latency by <span className="font-semibold text-green-600">1000ms</span>.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Tuned SQL and indexing to raise throughput by <span className="font-semibold text-green-600">20%</span> and reduce query latency by <span className="font-semibold text-green-600">1000ms</span>.</span>
+                      <span>Features real-time notifications, mobile-responsive design, and payment processing integration.</span>
                     </li>
                   </ul>
                 </div>

@@ -118,16 +118,52 @@ export default function About() {
 
   const projects = [
     {
+      name: "CrimeTrax - Law Enforcement Analytics Platform",
+      company: "Law Enforcement Agency",
+      description: "Cloud-native microservices platform built with .NET, Dapr, and Kubernetes. Achieved 99.9% uptime, 40% throughput improvement, and serves 100K+ daily active users. Features real-time analytics, predictive policing, and resource optimization.",
+      tech: [".NET 8", "Dapr", "Kubernetes", "Azure AKS", "CQRS", "Angular", "Azure Cosmos DB"]
+    },
+    {
+      name: "JusticeTrax LIMS-plus - Laboratory Management System",
+      company: "Versaterm JusticeTrax",
+      description: "Modernized legacy system to microservices using Azure Functions and Blazor WASM. Reduced deployment time by 60%, infrastructure costs by 50%, and improved performance by 45%. Handles complex evidence processing workflows with real-time tracking.",
+      tech: ["Azure Functions", "Blazor WASM", ".NET 6", "Azure Service Bus", "SQL Server"]
+    },
+    {
+      name: "AI-Powered RAG Pipeline for Enterprise Documentation",
+      company: "Internal Project",
+      description: "Built enterprise-grade RAG system enabling intelligent search and Q&A from company knowledge bases. Achieved 85% query accuracy, 2s average response time, and 60% cost reduction. Uses vector embeddings, semantic search, and LLM integration.",
+      tech: ["Python", "Azure OpenAI", "Azure Cognitive Search", "Vector Databases", "LangChain", "Next.js"]
+    },
+    {
       name: "Amphion Medical Solutions Web Platform",
       company: "Amphion Medical Solutions (U.S Company)",
-      description: "ASP.NET and C# web application for medical solutions with role-based workflows and operational support. Implemented secure auth, CI/CD, and automated tests to enhance release reliability, reducing defects by 30% and saving 10 hours/week. Optimized application and database layers, improving workflow efficiency by 20% under peak usage.",
-      tech: ["ASP.NET", "C#", "SQL", "CI/CD", "Automated Testing"]
+      description: "HIPAA-compliant healthcare platform with role-based workflows and secure patient data management. Reduced defects by 30%, saved 10 hours/week, and improved efficiency by 20%. Features real-time scheduling, billing integration, and comprehensive audit trails.",
+      tech: ["ASP.NET Core", "C#", "SQL Server", "Azure", "React", "SignalR"]
+    },
+    {
+      name: "Customer Portal Platform (Rollick)",
+      company: "Rollick",
+      description: "Multi-tenant React-based customer portal with .NET microservices backend. Achieved 99.95% uptime, reduced defects by 90%, and saved 20+ hours/week. Features automated CI/CD, fault tolerance, and comprehensive analytics.",
+      tech: ["React", "Next.js", ".NET Core", "Microservices", "AWS", "Docker", "GitHub Actions"]
     },
     {
       name: "ProSight Insurance Portal",
       company: "Prosight (Insurance domain)",
-      description: "Insurance domain website delivering policy and claims features with performant UI and API integrations. Delivered responsive UI and ASP.NET APIs, increasing page load speed and boosting user engagement by 10%. Tuned SQL and indexing to raise throughput by 20% and reduce query latency by 1000ms.",
-      tech: ["ASP.NET", "SQL", "Performance Optimization", "API Integration"]
+      description: "Insurance platform with policy management and claims processing. Increased user engagement by 10%, improved throughput by 20%, and reduced query latency by 1000ms. Features real-time notifications and mobile-responsive design.",
+      tech: ["ASP.NET", "SQL Server", "Entity Framework", "Azure", "JavaScript", "Bootstrap"]
+    },
+    {
+      name: "Microservices Migration Framework",
+      company: "Internal Project",
+      description: "Reusable framework and tooling for migrating monolithic applications to microservices. Reduced migration time by 50%, enabled 3 successful migrations, and achieved 40% code reusability. Includes code generators, patterns, and deployment automation.",
+      tech: [".NET", "Dapr", "Kubernetes", "Helm", "Terraform", "Docker", "Azure DevOps"]
+    },
+    {
+      name: "Event-Driven Analytics Platform",
+      company: "Internal Project",
+      description: "Real-time event processing platform handling 1M+ events daily with sub-500ms latency. Achieved 99.9% uptime using event sourcing, CQRS, and stream processing. Provides real-time dashboards, alerts, and comprehensive analytics.",
+      tech: ["Azure Event Hubs", "Azure Stream Analytics", ".NET", "Kafka", "Redis", "Power BI"]
     }
   ];
 

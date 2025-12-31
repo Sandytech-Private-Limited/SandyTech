@@ -1,7 +1,13 @@
 ---
 title: JavaScript Tutorial
 slug: js-tutorial
-description: Comprehensive guide on learning JavaScript from basics to advanced topics.  
+description: Comprehensive guide on learning JavaScript from basics to advanced topics. Learn JavaScript with kothapallisandeep on SandyTech.
+imageUrl: https://images.pexels.com/photos/11035386/pexels-photo-11035386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Programming
+date: 2024-01-22
+readTime: 9 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "JavaScript", "JS", "JavaScript tutorial", "web development", "frontend development"]
+hashtags: ["#JavaScript", "#JS", "#WebDevelopment", "#Frontend", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 

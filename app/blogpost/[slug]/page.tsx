@@ -13,7 +13,8 @@ import Onthispage from '@/components/Onthispage'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { rehypePrettyCode } from 'rehype-pretty-code'
 import { transformerCopyButton } from '@rehype-pretty/transformers'
-import { Metadata, ResolvingMetadata } from 'next' 
+import { Metadata, ResolvingMetadata } from 'next'
+import StructuredData from '@/components/StructuredData' 
 
  
 type Props = {
@@ -48,11 +49,62 @@ const fileContent = fs.readFileSync(filePath, "utf-8");
 const {data, content} = matter(fileContent)
 
 const htmlContent = (await processor.process(content)).toString()
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": data.title,
+    "description": data.description,
+    "image": data.imageUrl ? (data.imageUrl.startsWith('http') ? data.imageUrl : `https://kothapallisandeep.com${data.imageUrl}`) : "https://kothapallisandeep.com/logo.jpg",
+    "datePublished": data.date || new Date().toISOString(),
+    "dateModified": data.date || new Date().toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": "Sandeep Kothapalli",
+      "alternateName": ["kothapallisandeep", "sandeepkothapalli"],
+      "url": "https://kothapallisandeep.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SandyTech",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://kothapallisandeep.com/logo.jpg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://kothapallisandeep.com/blogpost/${data.slug}`
+    },
+    "keywords": [
+      "kothapallisandeep",
+      "sandeepkothapalli",
+      "sandytech",
+      "sandytech org",
+      "AI automation",
+      "Idea to MVP",
+      ...(data.keywords || []),
+      ...(data.hashtags || []).map((tag: string) => tag.replace('#', ''))
+    ].join(', '),
+    "articleSection": data.category || "Technology",
+    "wordCount": content.split(/\s+/).length
+  };
+
   return (
    <MaxWidthWrapper className='prose dark:prose-invert'> 
+   <StructuredData data={structuredData} />
    <div className='flex '> 
     <div className='px-16'> 
         <h1>{data.title}</h1>
+        {data.hashtags && (
+          <div className="flex flex-wrap gap-2 my-4">
+            {data.hashtags.map((tag: string, index: number) => (
+              <span key={index} className="text-sm text-blue-600 dark:text-blue-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
         <div dangerouslySetInnerHTML={{__html: htmlContent}}></div> 
     </div>
         <Onthispage className="text-sm w-[50%]" htmlContent={htmlContent}/>
@@ -71,9 +123,50 @@ export async function generateMetadata(
   const filePath = `content/${params.slug}.md`
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const {data} = matter(fileContent)
+  
+  const keywords = [
+    "kothapallisandeep",
+    "sandeepkothapalli",
+    "sandytech",
+    "sandytech org",
+    "AI automation",
+    "Idea to MVP",
+    ...(data.keywords || []),
+    ...(data.hashtags || []).map((tag: string) => tag.replace('#', ''))
+  ];
+  
+  const title = `${data.title} | Sandeep Kothapalli - SandyTech`;
+  const description = data.description || `Learn about ${data.title} from Sandeep Kothapalli (kothapallisandeep), Technical Lead and Solution Architect. Expert insights on ${data.category || 'technology'} and AI automation.`;
+  
   return {
-    title: `${data.title} - ProgrammingWithSandy`, 
-    description: data.description
+    title,
+    description,
+    keywords: keywords.join(', '),
+    authors: [{ name: "Sandeep Kothapalli" }],
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      publishedTime: data.date,
+      authors: ["Sandeep Kothapalli"],
+      tags: data.hashtags || [],
+      images: data.imageUrl ? [
+        {
+          url: data.imageUrl.startsWith('http') ? data.imageUrl : `https://kothapallisandeep.com${data.imageUrl}`,
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        }
+      ] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: data.imageUrl ? [data.imageUrl.startsWith('http') ? data.imageUrl : `https://kothapallisandeep.com${data.imageUrl}`] : [],
+    },
+    alternates: {
+      canonical: `https://kothapallisandeep.com/blogpost/${data.slug}`,
+    },
   }
-
 }

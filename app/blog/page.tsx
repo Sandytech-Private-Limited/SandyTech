@@ -197,8 +197,18 @@ const BlogList = () => {
 };
 
 export const metadata: Metadata = {
-  title: 'Technical Blog - Sandeep Kothapalli',
-  description: 'A comprehensive technical blog covering modern software development, AI/ML applications, cloud architecture, and emerging technologies. Insights, tutorials, and thoughts from a Senior Technical Lead with 12+ years of experience.',
+  title: 'Technical Blog | kothapallisandeep | SandyTech - AI Automation & Idea to MVP',
+  description: 'Comprehensive technical blog by kothapallisandeep (Sandeep Kothapalli) on SandyTech covering modern software development, AI automation, cloud architecture, microservices, Dapr, Kubernetes, RAG pipelines, and more. Expert insights from Idea to MVP.',
+  keywords: ['kothapallisandeep', 'sandeepkothapalli', 'sandytech', 'sandytech org', 'AI automation', 'Idea to MVP', 'technical blog', 'software development', 'cloud architecture', 'microservices', 'AI/ML'],
+  openGraph: {
+    title: 'Technical Blog | kothapallisandeep | SandyTech',
+    description: 'Expert technical insights on software development, AI automation, and cloud architecture from Sandeep Kothapalli',
+    type: 'website',
+    url: 'https://kothapallisandeep.com/blog',
+  },
+  alternates: {
+    canonical: 'https://kothapallisandeep.com/blog',
+  },
 }
 
 export default BlogList;

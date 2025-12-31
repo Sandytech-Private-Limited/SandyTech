@@ -1,8 +1,13 @@
 ---
 title: DSA vs. Development - Understanding the Difference and Importance
 slug: dsa-vs-development
-description: Explore the differences between Data Structures and Algorithms (DSA) and Software Development, and understand their roles in building efficient and effective applications.
+description: Explore the differences between Data Structures and Algorithms (DSA) and Software Development, and understand their roles in building efficient and effective applications. Insights from kothapallisandeep on SandyTech.
 imageUrl: https://images.pexels.com/photos/1181332/pexels-photo-1181332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Development
+date: 2024-02-25
+readTime: 6 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "DSA", "data structures", "algorithms", "software development", "programming fundamentals"]
+hashtags: ["#DSA", "#DataStructures", "#Algorithms", "#SoftwareDevelopment", "#Programming", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # DSA vs. Development: Understanding the Difference and Importance

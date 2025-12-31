@@ -1,8 +1,13 @@
 ---
 title: C Programming Tutorial
 slug: c-programming-tutorial
-description: Comprehensive guide on learning C programming from basics to advanced topics.
+description: Comprehensive guide on learning C programming from basics to advanced topics. Learn C programming with kothapallisandeep on SandyTech - from Idea to MVP.
 imageUrl: /images/coding.jpeg
+category: Programming
+date: 2024-01-08
+readTime: 10 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "C programming", "C language", "C tutorial", "systems programming", "learn C"]
+hashtags: ["#CProgramming", "#CLanguage", "#SystemsProgramming", "#Programming", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # C Programming Tutorial: A Comprehensive Guide

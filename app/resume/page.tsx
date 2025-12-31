@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Download, Printer, Mail, Phone, MapPin, Calendar, Award, Code, Cloud, Database, Cpu, Globe } from "lucide-react";
+import { Download, Printer, Mail, Phone, MapPin, Calendar, Award, Code, Cloud, Database, Cpu, Globe, Briefcase } from "lucide-react";
 import React, { useRef } from "react";
 
 const ResumePage = () => {
@@ -14,11 +14,14 @@ const ResumePage = () => {
   };
 
   const skills = {
-    "Cloud/Backend": [".NET 6+", "ASP.NET Core", "Dapr", "Azure Functions", "Microservices"],
-    "Frontend": ["Angular", "React", "JavaScript/TypeScript", "Blazor"],
-    "DevOps": ["Docker", "Kubernetes", "Azure AKS", "Helm", "Terraform"],
-    "Databases": ["SQL Server", "Cosmos DB", "PostgreSQL"],
-    "Architecture": ["CQRS", "Event Sourcing", "Clean Architecture"]
+    "Architecture & Design": ["Domain-Driven Design (DDD)", "Clean Architecture", "Event-Driven Architecture", "System Design & Distributed Systems", "Microservices Architecture & Dapr Actor Model", "Performance Optimization & Reliability Engineering", "High Availability, Scalability & Resilience"],
+    "AI & LLM": ["Agent-based Workflows & Tool Invocation", "AI Performance Considerations (latency, Cost, Accuracy)", "Secure AI Feature Integrations in Cloud Systems", "RAG Fundamentals", "Vector Search & Embeddings", "LLM integration in Enterprise Applications", "Prompt Engineering for Production workflows", "Structured Prompting & Output Parsing", "Context Assembly & Ranking for LLM inputs", "Token Usage Optimization & Prompt Compression", "Vector indexing & similarity search", "Hybrid Retrieval (Vector+keyword search)", "Applied Vector Stores (cloud-managed or open-source)"],
+    "Programming & Frameworks": ["C#", ".NET", "ASP.NET Core", "JavaScript", "TypeScript", "Python"],
+    "Frontend & Mobile": ["React", "React Native", "Next.js", "JavaScript", "TypeScript"],
+    "Cloud & DevOps": ["Microsoft Azure", "Amazon Web Services (AWS)", "CI/CD", "DevOps & Observability", "Git", "Azure DevOps", "Automated Testing"],
+    "Databases": ["SQL Server", "Azure Cosmos DB", "NoSQL"],
+    "APIs & Services": ["API-First Design (REST, gRPC)", "Dapr", "Actor Model", "Microservices"],
+    "Tools & Practices": ["Sprint planning & estimation", "Code Reviews & Engineering Best Practices"]
   };
 
   const getSkillIcon = (category: string) => {
@@ -56,20 +59,20 @@ const ResumePage = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4"></div>
               <p className="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-4">
-                Senior Technical Lead | Cloud-Native .NET Architect | Full-Stack Developer
+                TECHNICAL LEAD | Solution Architect | Cloud & Distributed Systems (AI-Enabled Platforms)
               </p>
               <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  Hyderabad, India
+                  Hyderabad, India (Open to US / EU / Remote)
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  (+91) 8019145771
+                  +91-8019145771
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  sandeepdotnet@hotmail.com
+                  Sandeep.kothapalli1@hotmail.com
                 </div>
               </div>
             </header>
@@ -83,13 +86,17 @@ const ResumePage = () => {
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Professional Summary</h3>
               </div>
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                  Senior Technical Lead and Solution Architect with <span className="font-semibold text-blue-600 dark:text-blue-400">12+ years</span> of experience 
+                  designing and delivering <span className="font-semibold">enterprise-scale, cloud-native platforms</span>. Strong expertise in 
+                  <span className="font-semibold"> .NET, Azure, microservices, Dapr, Kubernetes, distributed systems, and system design</span>, 
+                  with a proven track record of leading teams, defining technical roadmaps, and modernizing legacy systems.
+                </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Innovative Technical Lead with <span className="font-semibold text-blue-600 dark:text-blue-400">12+ years</span> of expertise in cloud-native .NET solutions and scalable architectures. 
-                  Specialized in <span className="font-semibold">Microservices & Dapr</span> (event-driven architectures, service orchestration), 
-                  <span className="font-semibold"> Containerization</span> (Docker, Kubernetes, Azure AKS), 
-                  <span className="font-semibold"> Frontend</span> (Angular, React, Blazor), 
-                  <span className="font-semibold"> DevOps</span> (CI/CD, IaC), and 
-                  <span className="font-semibold"> Design Patterns</span> (CQRS, Mediator, Repository, DDD).
+                  Over the past year, expanded expertise into <span className="font-semibold">AI-enabled systems</span>, contributing to the design 
+                  and integration of <span className="font-semibold">LLM-based features such as RAG pipelines and agent-driven workflows</span> within 
+                  existing cloud and microservices architectures. Known for balancing <span className="font-semibold">scalability, reliability, 
+                  security, and performance</span> while aligning technology with business outcomes.
                 </p>
               </div>
             </section>
@@ -135,35 +142,69 @@ const ResumePage = () => {
                   <div className="flex justify-between items-start mb-3">
                     <div>
                       <h4 className="text-xl font-bold text-gray-900 dark:text-white">Technical Lead</h4>
-                      <p className="text-blue-600 dark:text-blue-400 font-semibold">Progience Technologies</p>
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold">Progience Technologies, Hyderabad</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: Next.js, Express.js, Amazon Web Services (AWS), Microsoft Azure, SQL, Entity Framework, Design Patterns</p>
                     </div>
                     <Badge variant="outline" className="text-sm">
-                      06/2023 – Present
+                      Jun 2023 - Present
                     </Badge>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-3 italic">
-                    Leading cloud-native .NET solutions with microservices, Dapr, and Kubernetes on Azure.
-                  </p>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span><span className="font-semibold">CrimeTrax:</span> Microservices with Dapr (pub/sub, state), Docker, AKS; 99.9% uptime.</span>
+                      <span>Lead end-to-end architecture and delivery of mission-critical enterprise platforms across multiple domains.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>CQRS/Mediator for read/write separation; <span className="font-semibold text-green-600">+40% throughput</span>.</span>
+                      <span>Define and own the technical roadmap, guiding teams in adopting microservices, Dapr actor model, container orchestration, and cloud-native deployment.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Led Angular frontend integration with .NET backend APIs.</span>
+                      <span>Design highly available distributed systems supporting horizontal scalability, fault tolerance, and independent deployability.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span><span className="font-semibold">JusticeTrax LIMS-plus:</span> Modernized monolith via Azure Functions + Blazor WASM.</span>
+                      <span>Collaborate with product, UX, QA, and DevOps to translate business requirements into robust, maintainable solutions.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Reduced deployment time <span className="font-semibold text-green-600">60%</span> using Helm; mentored team on Dapr.</span>
+                      <span>Mentor and coach engineers across levels; conduct code reviews and enforce engineering best practices.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Improved CI/CD pipelines and deployment automation, reducing release cycles by <span className="font-semibold text-green-600">30%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Reduced production incidents by <span className="font-semibold text-green-600">50%</span> through improved observability and reliability patterns.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Partnered with stakeholders to deliver user-centric features, increasing engagement by <span className="font-semibold text-green-600">60%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2 mt-4">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span><span className="font-semibold">AI-Enabled Contributions (Supporting Role):</span></span>
+                    </li>
+                    <li className="flex items-start gap-2 pl-6">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Contributed to the design and implementation of LLM-based features integrated into existing microservices platforms.</span>
+                    </li>
+                    <li className="flex items-start gap-2 pl-6">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Assisted in building RAG pipelines for internal and client documentation use cases, focusing on chunking strategies, embeddings, and retrieval accuracy.</span>
+                    </li>
+                    <li className="flex items-start gap-2 pl-6">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Supported agent-driven workflows enabling tool-based automation within business processes.</span>
+                    </li>
+                    <li className="flex items-start gap-2 pl-6">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Worked on optimizing p95 latency and cost for AI-enabled endpoints through caching and prompt optimization.</span>
+                    </li>
+                    <li className="flex items-start gap-2 pl-6">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Ensured AI features followed enterprise standards for security, access control, and auditability.</span>
                     </li>
                   </ul>
                 </div>
@@ -172,27 +213,231 @@ const ResumePage = () => {
                   <div className="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full"></div>
                   <div className="flex justify-between items-start mb-3">
                     <div>
-                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">Senior Software Engineer</h4>
-                      <p className="text-green-600 dark:text-green-400 font-semibold">Rollick</p>
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">Senior Web Developer / Senior Software Engineer</h4>
+                      <p className="text-green-600 dark:text-green-400 font-semibold">Rollick, Hyderabad</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: NEXT.js, React Native, Express.js, Amazon Web Services (AWS), SQL</p>
                     </div>
                     <Badge variant="outline" className="text-sm">
-                      11/2020 – 05/2023
+                      Nov 2020 - May 2023
                     </Badge>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-3 italic">
-                    Built React-based customer portals with .NET microservices; automated CI/CD using GitHub Actions and Azure Container Registry.
-                  </p>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Delivered multiple microservices integrated with React frontends.</span>
+                      <span>Designed and developed scalable web platforms using .NET, React, Next.js, AWS, and SQL.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Implemented robust CI/CD pipelines across environments.</span>
+                      <span>Migrated legacy monolithic systems to service-oriented and microservices architectures.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Improved performance and maintainability through Clean Architecture and systematic refactoring.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Implemented secure authentication, logging, and error handling, reducing production defects by <span className="font-semibold text-green-600">90%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Established CI/CD pipelines and automated testing, saving <span className="font-semibold text-green-600">20+ engineering hours per week</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Implemented fault tolerance and rollback mechanisms, reducing <span className="font-semibold text-green-600">MTTR to under 15 minutes</span>.</span>
                     </li>
                   </ul>
                 </div>
+
+                <div className="border-l-4 border-orange-500 pl-6 relative">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-orange-500 rounded-full"></div>
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">Senior Programmer Analyst</h4>
+                      <p className="text-orange-600 dark:text-orange-400 font-semibold">Versaterm JusticeTrax, Hyderabad</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: ASP.NET, C#, SQL, Entity Framework, Microsoft Azure</p>
+                    </div>
+                    <Badge variant="outline" className="text-sm">
+                      Jun 2017 - Nov 2020
+                    </Badge>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Designed and maintained enterprise modules using ASP.NET, C#, SQL, Azure.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Optimized database models and queries, improving performance by <span className="font-semibold text-green-600">50%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Strengthened SDLC practices with unit testing and peer reviews, lowering defects by <span className="font-semibold text-green-600">30%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Improved delivery velocity by <span className="font-semibold text-green-600">50%</span> through cross-team coordination.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="border-l-4 border-yellow-500 pl-6 relative">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-yellow-500 rounded-full"></div>
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">Software Developer</h4>
+                      <p className="text-yellow-600 dark:text-yellow-400 font-semibold">Pie Software Solutions, Vizag</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: ASP.NET, C#, SQL, Entity Framework</p>
+                    </div>
+                    <Badge variant="outline" className="text-sm">
+                      Jul 2014 - May 2017
+                    </Badge>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Developed end-to-end web and desktop applications using ASP.NET, C#, SQL.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Owned testing, deployment, and production support, reducing issue resolution time by <span className="font-semibold text-green-600">12 hours</span>.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="border-l-4 border-pink-500 pl-6 relative">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-pink-500 rounded-full"></div>
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">Software Engineer</h4>
+                      <p className="text-pink-600 dark:text-pink-400 font-semibold">Welfare Group of Companies</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: ASP.NET, C#, SQL</p>
+                    </div>
+                    <Badge variant="outline" className="text-sm">
+                      May 2013 - Jun 2014
+                    </Badge>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Refactored components to enhance maintainability, reducing defects by <span className="font-semibold text-green-600">10%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Collaborated on database design and maintenance, improving data integrity by <span className="font-semibold text-green-600">20%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Built and supported web application modules, improving data integrity by <span className="font-semibold text-green-600">20%</span>.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="border-l-4 border-indigo-500 pl-6 relative">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full"></div>
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">Software Engineer</h4>
+                      <p className="text-indigo-600 dark:text-indigo-400 font-semibold">Ram Informatics</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: ASP.NET, C#, SQL</p>
+                    </div>
+                    <Badge variant="outline" className="text-sm">
+                      Feb 2012 - May 2013
+                    </Badge>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Delivered dynamic website development with ASP.NET and C#, creating robust CRUD functionality.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Executed coding, database design, and maintenance, boosting performance by <span className="font-semibold text-green-600">40%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Assisted deployments and root-cause analysis, reducing support backlog by <span className="font-semibold text-green-600">20%</span>.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* Projects */}
+            <section className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                  <Code className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Projects</h3>
+              </div>
+              <div className="space-y-6">
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Amphion Medical Solutions Web Platform</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Amphion Medical Solutions (U.S Company)</p>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>ASP.NET and C# web application for medical solutions with role-based workflows and operational support.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Implemented secure auth, CI/CD, and automated tests to enhance release reliability, reducing defects by <span className="font-semibold text-green-600">30%</span> and saving <span className="font-semibold text-green-600">10 hours/week</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Optimized application and database layers, improving workflow efficiency by <span className="font-semibold text-green-600">20%</span> under peak usage.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">ProSight Insurance Portal</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">Prosight (Insurance domain)</p>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Insurance domain website delivering policy and claims features with performant UI and API integrations.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Delivered responsive UI and ASP.NET APIs, increasing page load speed and boosting user engagement by <span className="font-semibold text-green-600">10%</span>.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Tuned SQL and indexing to raise throughput by <span className="font-semibold text-green-600">20%</span> and reduce query latency by <span className="font-semibold text-green-600">1000ms</span>.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* Selected Achievements */}
+            <section className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-r from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center">
+                  <Award className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Selected Achievements</h3>
+              </div>
+              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Architected and delivered <span className="font-semibold">cloud-native microservices platforms</span> using Dapr and Kubernetes, improving deployment frequency and scalability.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Led migration from monolithic systems to <span className="font-semibold">distributed architectures</span>, improving performance and reducing infrastructure costs.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Introduced CI/CD pipelines and infrastructure automation, reducing critical defects and MTTR.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Integrated <span className="font-semibold">AI-assisted capabilities</span> into enterprise systems while maintaining reliability, security, and performance standards.</span>
+                  </li>
+                </ul>
               </div>
             </section>
 
@@ -210,11 +455,7 @@ const ResumePage = () => {
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                      <span>MCA – JNTU (2010)</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                      <span>B.Sc – Andhra University (2006)</span>
+                      <span>MCA, Computer Science - VITAM, Vizag (2010)</span>
                     </li>
                   </ul>
                 </div>
@@ -223,10 +464,28 @@ const ResumePage = () => {
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      <span>Microsoft Certified: C# (70-483)</span>
+                      <span>Microsoft Certified: C# Certified Developer</span>
                     </li>
                   </ul>
                 </div>
+              </div>
+            </section>
+
+            {/* Professional Development */}
+            <section className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <Briefcase className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Professional Development</h3>
+              </div>
+              <div className="bg-gradient-to-r from-violet-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Regular speaker and mentor in internal technical forums and team workshops on microservices, cloud architecture, Dapr, Clean Architecture. 
+                  Strong problem-solving mindset, capable of bridging business requirements and technical execution, comfortable working with cross-functional 
+                  and geographically distributed teams. Self-driven continuous learner - keeping up with latest technology trends in cloud, containers, 
+                  microservices, frontend/mobile frameworks.
+                </p>
               </div>
             </section>
           </div>

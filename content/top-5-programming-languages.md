@@ -1,7 +1,13 @@
 ---
 title: Top 5 Programming Languages to Learn in 2024
 slug: top-5-programming-languages
-description: Discover the top 5 programming languages to learn in 2024, each offering unique advantages and opportunities for career growth.
+description: Discover the top 5 programming languages to learn in 2024, each offering unique advantages and opportunities for career growth. Insights from kothapallisandeep on SandyTech.
+imageUrl: https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Programming
+date: 2024-02-15
+readTime: 5 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "programming languages", "best programming languages", "learn programming", "career growth", "software development"]
+hashtags: ["#Programming", "#ProgrammingLanguages", "#LearnToCode", "#SoftwareDevelopment", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Top 5 Programming Languages to Learn in 2024

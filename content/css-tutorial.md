@@ -1,8 +1,13 @@
 ---
 title: CSS Tutorial
 slug: css-tutorial
-description: Comprehensive guide on learning CSS, from styling basics to advanced techniques like Flexbox, Grid, and animations.
+description: Comprehensive guide on learning CSS, from styling basics to advanced techniques like Flexbox, Grid, and animations. Master CSS with kothapallisandeep on SandyTech.
 imageUrl: https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Development
+date: 2024-01-12
+readTime: 8 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "CSS", "CSS3", "styling", "Flexbox", "CSS Grid", "web design", "responsive design"]
+hashtags: ["#CSS", "#CSS3", "#WebDesign", "#Flexbox", "#CSSGrid", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # CSS Tutorial: A Comprehensive Guide

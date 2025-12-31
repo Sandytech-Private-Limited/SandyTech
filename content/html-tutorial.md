@@ -1,8 +1,13 @@
 ---
 title: HTML Tutorial
 slug: html-tutorial
-description: Comprehensive guide on learning HTML, from the basics of structuring web pages to advanced elements and semantics.
-imageURl: https://images.pexels.com/photos/19387205/pexels-photo-19387205/free-photo-of-laptop-by-monitor-on-desk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+description: Comprehensive guide on learning HTML, from the basics of structuring web pages to advanced elements and semantics. Learn HTML with kothapallisandeep on SandyTech.
+imageUrl: https://images.pexels.com/photos/19387205/pexels-photo-19387205/free-photo-of-laptop-by-monitor-on-desk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Development
+date: 2024-01-10
+readTime: 7 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "HTML", "HTML5", "web development", "HTML tutorial", "markup language", "semantic HTML"]
+hashtags: ["#HTML", "#HTML5", "#WebDevelopment", "#Frontend", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # HTML Tutorial: A Comprehensive Guide

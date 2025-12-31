@@ -1,7 +1,13 @@
 ---
 title: Cybersecurity Roadmap - A Guide to Protecting Your Digital Assets
 slug: cybersecurity-roadmap
-description: Explore a step-by-step roadmap for building a robust cybersecurity strategy to safeguard your digital assets and protect against cyber threats.
+description: Explore a step-by-step roadmap for building a robust cybersecurity strategy to safeguard your digital assets and protect against cyber threats. Security guide from kothapallisandeep on SandyTech.
+imageUrl: https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Security
+date: 2024-03-01
+readTime: 8 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "cybersecurity", "security roadmap", "digital security", "cyber threats", "information security"]
+hashtags: ["#Cybersecurity", "#Security", "#InfoSec", "#DigitalSecurity", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Cybersecurity Roadmap: A Guide to Protecting Your Digital Assets

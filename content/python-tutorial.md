@@ -1,7 +1,13 @@
 ---
 title: Python Tutorial
 slug: python-tutorial
-description: Comprehensive guide on learning Python from basics to advanced topics.
+description: Comprehensive guide on learning Python from basics to advanced topics. Learn Python programming with kothapallisandeep on SandyTech - your guide from Idea to MVP.
+imageUrl: https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Programming
+date: 2024-01-15
+readTime: 8 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "Python", "programming tutorial", "Python basics", "Python advanced", "learn Python", "Python programming"]
+hashtags: ["#Python", "#Programming", "#LearnPython", "#PythonTutorial", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Python Tutorial: A Comprehensive Guide

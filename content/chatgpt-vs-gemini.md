@@ -1,7 +1,13 @@
 ---
 title: ChatGPT vs. Gemini - A Comparative Analysis
 slug: chatgpt-vs-gemini
-description: Explore the differences between ChatGPT and Gemini, two leading conversational AI models, and understand their unique features and capabilities.
+description: Explore the differences between ChatGPT and Gemini, two leading conversational AI models, and understand their unique features and capabilities. AI automation insights from kothapallisandeep on SandyTech.
+imageUrl: https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: AI
+date: 2024-02-20
+readTime: 7 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "ChatGPT", "Gemini", "AI models", "LLM", "conversational AI", "OpenAI", "Google AI"]
+hashtags: ["#ChatGPT", "#Gemini", "#AI", "#LLM", "#AIAutomation", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # ChatGPT vs. Gemini: A Comparative Analysis

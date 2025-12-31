@@ -1,8 +1,13 @@
 ---
 title: C++ Programming Tutorial
 slug: cpp-programming-tutorial
-description: Comprehensive guide on learning C++ programming from basics to advanced topics.
+description: Comprehensive guide on learning C++ programming from basics to advanced topics. Master C++ with kothapallisandeep on SandyTech - from Idea to MVP.
 imageUrl: /images/cpp.png
+category: Programming
+date: 2024-01-05
+readTime: 11 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "C++", "C++ programming", "C++ tutorial", "object oriented programming", "learn C++"]
+hashtags: ["#CPlusPlus", "#CPP", "#OOP", "#Programming", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # C++ Programming Tutorial: A Comprehensive Guide

@@ -12,8 +12,57 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: SiteConfig.title,
+  title: {
+    default: SiteConfig.title,
+    template: `%s | ${SiteConfig.title}`,
+  },
   description: SiteConfig.description,
+  keywords: SiteConfig.keywords,
+  authors: [{ name: SiteConfig.author }],
+  creator: SiteConfig.author,
+  publisher: SiteConfig.author,
+  metadataBase: new URL(SiteConfig.url),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: SiteConfig.url,
+    title: SiteConfig.title,
+    description: SiteConfig.description,
+    siteName: 'SandyTech - Sandeep Kothapalli Portfolio',
+    images: [
+      {
+        url: `${SiteConfig.url}/logo.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Sandeep Kothapalli - Technical Lead & Solution Architect',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SiteConfig.title,
+    description: SiteConfig.description,
+    images: [`${SiteConfig.url}/logo.jpg`],
+    creator: '@kothapallisandeep',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add Google Search Console verification when available
+    // google: 'your-verification-code',
+  },
 };
 
 export default function RootLayout({

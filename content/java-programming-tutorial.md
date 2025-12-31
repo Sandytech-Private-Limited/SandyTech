@@ -1,7 +1,13 @@
 ---
 title: Java Programming Tutorial
 slug: java-programming-tutorial
-description: Comprehensive guide on learning Java programming from basics to advanced topics.
+description: Comprehensive guide on learning Java programming from basics to advanced topics. Learn Java with kothapallisandeep on SandyTech.
+imageUrl: https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Programming
+date: 2024-02-01
+readTime: 12 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "Java", "Java programming", "Java tutorial", "object oriented programming", "JVM"]
+hashtags: ["#Java", "#JavaProgramming", "#OOP", "#JVM", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Java Programming Tutorial: A Comprehensive Guide

@@ -1,7 +1,13 @@
 ---
 title: TypeScript Tutorial
 slug: typescript-tutorial
-description: Comprehensive guide on learning TypeScript from basics to advanced topics.  
+description: Comprehensive guide on learning TypeScript from basics to advanced topics. Master TypeScript with kothapallisandeep on SandyTech - from Idea to MVP.
+imageUrl: https://images.pexels.com/photos/574077/pexels-photo-574077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+category: Programming
+date: 2024-01-25
+readTime: 9 min read
+keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "TypeScript", "TS tutorial", "TypeScript programming", "type safety", "JavaScript superset"]
+hashtags: ["#TypeScript", "#TS", "#TypeSafety", "#Programming", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Introduction to TypeScript

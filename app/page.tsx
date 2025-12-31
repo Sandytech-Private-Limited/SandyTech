@@ -5,13 +5,14 @@ import Typed from 'typed.js';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Cloud, Cpu, Database, Globe, Smartphone, Zap } from "lucide-react";
+import StructuredData from "@/components/StructuredData";
 
 export default function Home() {
   const el = useRef(null);
 
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ['ASP.NET Core', 'Azure Cloud', 'AI/LLM Applications', 'Microservices', 'React & Angular'],
+      strings: ['.NET & Azure', 'Microservices & Dapr', 'AI-Enabled Platforms', 'Kubernetes', 'Distributed Systems'],
       typeSpeed: 50,
       backSpeed: 30,
       loop: true,
@@ -23,16 +24,48 @@ export default function Home() {
   }, []);
 
   const skills = [
-    { icon: Code, title: "Backend Development", description: "ASP.NET Core, C#, Web APIs, Microservices" },
-    { icon: Cloud, title: "Cloud & DevOps", description: "Azure, Kubernetes, Docker, CI/CD Pipelines" },
-    { icon: Cpu, title: "AI/LLM", description: "LLM fine-tuning, AI chatbots, Healthcare AI" },
-    { icon: Database, title: "Databases", description: "SQL Server, MongoDB, Redis, Cosmos DB" },
-    { icon: Globe, title: "Frontend", description: "React, Angular, TypeScript, Tailwind CSS" },
-    { icon: Smartphone, title: "Mobile", description: "React Native, Expo, Cross-platform apps" }
+    { icon: Code, title: "Backend Development", description: "C#, .NET, ASP.NET Core, Microservices, Dapr, Actor Model" },
+    { icon: Cloud, title: "Cloud & DevOps", description: "Azure, Kubernetes, Docker, CI/CD, Observability" },
+    { icon: Cpu, title: "AI/LLM & Architecture", description: "RAG Pipelines, Agent Workflows, Vector Search, DDD, Clean Architecture" },
+    { icon: Database, title: "Databases", description: "SQL Server, Azure Cosmos DB, NoSQL, Vector Stores" },
+    { icon: Globe, title: "Frontend", description: "React, Next.js, React Native, JavaScript, TypeScript" },
+    { icon: Zap, title: "System Design", description: "Event-Driven Architecture, Distributed Systems, Performance Optimization" }
   ];
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sandeep Kothapalli",
+    "alternateName": ["kothapallisandeep", "sandeepkothapalli", "SandyTech"],
+    "jobTitle": "Technical Lead | Solution Architect",
+    "description": "Technical Lead and Solution Architect with 12+ years of experience in cloud-native platforms, AI automation, and distributed systems. Expert in .NET, Azure, microservices, Dapr, Kubernetes, and AI-enabled platforms.",
+    "url": "https://kothapallisandeep.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/kothapallisandeep/",
+      "https://github.com/websabre"
+    ],
+    "knowsAbout": [
+      ".NET",
+      "Azure",
+      "Microservices",
+      "Dapr",
+      "Kubernetes",
+      "AI Automation",
+      "RAG Pipelines",
+      "Distributed Systems",
+      "System Design",
+      "Domain Driven Design",
+      "Clean Architecture"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "SandyTech"
+    }
+  };
 
   return (
     <main className="min-h-screen">
+      <StructuredData data={structuredData} />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
         <div className="container mx-auto px-4 py-20">
@@ -40,7 +73,7 @@ export default function Home() {
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-sm font-medium mb-6">
                 <Zap className="w-4 h-4 mr-2" />
-                Senior Technical Lead
+                Technical Lead | Solution Architect | Cloud & Distributed Systems
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
@@ -51,17 +84,18 @@ export default function Home() {
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                Innovative and results-driven Senior Software Engineer with{" "}
+                Senior Technical Lead and Solution Architect with{" "}
                 <span className="font-semibold text-blue-600 dark:text-blue-400">12+ years</span> of experience
-                building scalable applications with{" "}
+                designing and delivering enterprise-scale, cloud-native platforms with{" "}
                 <span className="font-semibold text-purple-600 dark:text-purple-400">
                   <span ref={el} />
                 </span>
               </p>
               
               <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">
-                Currently transitioning towards AI/LLM-driven applications, combining strong backend expertise 
-                with modern cloud and AI technologies.
+                Strong expertise in .NET, Azure, microservices, Dapr, Kubernetes, distributed systems, and system design. 
+                Recently expanded into AI-enabled systems, contributing to LLM-based features such as RAG pipelines and 
+                agent-driven workflows within cloud and microservices architectures.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

@@ -24,54 +24,110 @@ import Link from "next/link";
 
 export default function About() {
   const skills = {
-    "Cloud/Backend": [".NET 6+", "ASP.NET Core", "Dapr", "Azure Functions", "Microservices"],
-    "Frontend": ["Angular", "React", "JavaScript/TypeScript", "Blazor"],
-    "DevOps": ["Docker", "Kubernetes", "Azure AKS", "Helm", "Terraform"],
-    "Databases": ["SQL Server", "Cosmos DB", "PostgreSQL"],
-    "Architecture": ["CQRS", "Event Sourcing", "Clean Architecture"]
+    "Architecture & Design": ["Domain-Driven Design (DDD)", "Clean Architecture", "Event-Driven Architecture", "System Design", "Distributed Systems", "Microservices Architecture", "Dapr Actor Model"],
+    "AI & LLM": ["RAG Fundamentals", "Vector Search & Embeddings", "Agent-based Workflows", "Tool Invocation", "Prompt Engineering", "Structured Prompting", "Context Assembly & Ranking", "Token Usage Optimization", "Hybrid Retrieval"],
+    "Programming & Frameworks": ["C#", ".NET", "ASP.NET Core", "JavaScript", "TypeScript", "Python"],
+    "Frontend & Mobile": ["React", "React Native", "Next.js", "JavaScript", "TypeScript"],
+    "Cloud & DevOps": ["Microsoft Azure", "Amazon Web Services (AWS)", "Kubernetes", "Docker", "CI/CD", "Azure DevOps", "Observability"],
+    "Databases": ["SQL Server", "Azure Cosmos DB", "NoSQL", "Vector Stores"],
+    "APIs & Services": ["REST", "gRPC", "API-First Design", "Dapr", "Microservices"],
+    "Tools & Practices": ["Git", "Automated Testing", "Code Reviews", "Engineering Best Practices", "Sprint Planning & Estimation"]
   };
 
   const experience = [
     {
       title: "Technical Lead",
-      company: "Progience Technologies",
-      period: "06/2023 – Present",
-      description: "Leading cloud-native .NET solutions with microservices, Dapr, and Kubernetes on Azure.",
+      company: "Progience Technologies, Hyderabad",
+      period: "Jun 2023 - Present",
+      technologies: "Next.js, Express.js, Amazon Web Services (AWS), Microsoft Azure, SQL, Entity Framework, Design Patterns",
+      description: "Lead end-to-end architecture and delivery of mission-critical enterprise platforms across multiple domains.",
       achievements: [
-        "CrimeTrax: Designed microservices with Dapr (pub/sub, state), Dockerized services, deployed on AKS with 99.9% uptime.",
-        "Implemented CQRS/Mediator to separate read/write workloads, improving throughput by 40%.",
-        "Led integration of Angular frontend with .NET backend APIs.",
-        "JusticeTrax LIMS-plus: Modernized monolith to microservices with Azure Functions and Blazor WASM.",
-        "Reduced deployment time by 60% using Kubernetes Helm charts; mentored team on Dapr best practices."
+        "Define and own the technical roadmap, guiding teams in adopting microservices, Dapr actor model, container orchestration, and cloud-native deployment.",
+        "Design highly available distributed systems supporting horizontal scalability, fault tolerance, and independent deployability.",
+        "Collaborate with product, UX, QA, and DevOps to translate business requirements into robust, maintainable solutions.",
+        "Mentor and coach engineers across levels; conduct code reviews and enforce engineering best practices.",
+        "Improved CI/CD pipelines and deployment automation, reducing release cycles by 30%.",
+        "Reduced production incidents by 50% through improved observability and reliability patterns.",
+        "Partnered with stakeholders to deliver user-centric features, increasing engagement by 60%.",
+        "AI-Enabled Contributions: Contributed to design and implementation of LLM-based features integrated into existing microservices platforms.",
+        "Assisted in building RAG pipelines for internal and client documentation use cases, focusing on chunking strategies, embeddings, and retrieval accuracy.",
+        "Supported agent-driven workflows enabling tool-based automation within business processes.",
+        "Worked on optimizing p95 latency and cost for AI-enabled endpoints through caching and prompt optimization.",
+        "Ensured AI features followed enterprise standards for security, access control, and auditability."
       ]
     },
     {
-      title: "Senior Software Engineer",
-      company: "Rollick",
-      period: "11/2020 – 05/2023",
-      description: "Built React-based customer portals with .NET microservices; automated CI/CD using GitHub Actions and Azure Container Registry.",
+      title: "Senior Web Developer / Senior Software Engineer",
+      company: "Rollick, Hyderabad",
+      period: "Nov 2020 - May 2023",
+      technologies: "NEXT.js, React Native, Express.js, Amazon Web Services (AWS), SQL",
+      description: "Designed and developed scalable web platforms using .NET, React, Next.js, AWS, and SQL.",
       achievements: [
-        "Delivered multiple microservices integrated with React frontends.",
-        "Implemented robust CI/CD pipelines across environments."
+        "Migrated legacy monolithic systems to service-oriented and microservices architectures.",
+        "Improved performance and maintainability through Clean Architecture and systematic refactoring.",
+        "Implemented secure authentication, logging, and error handling, reducing production defects by 90%.",
+        "Established CI/CD pipelines and automated testing, saving 20+ engineering hours per week.",
+        "Implemented fault tolerance and rollback mechanisms, reducing MTTR to under 15 minutes."
+      ]
+    },
+    {
+      title: "Senior Programmer Analyst",
+      company: "Versaterm JusticeTrax, Hyderabad",
+      period: "Jun 2017 - Nov 2020",
+      technologies: "ASP.NET, C#, SQL, Entity Framework, Microsoft Azure",
+      description: "Designed and maintained enterprise modules using ASP.NET, C#, SQL, Azure.",
+      achievements: [
+        "Optimized database models and queries, improving performance by 50%.",
+        "Strengthened SDLC practices with unit testing and peer reviews, lowering defects by 30%.",
+        "Improved delivery velocity by 50% through cross-team coordination."
+      ]
+    },
+    {
+      title: "Software Developer",
+      company: "Pie Software Solutions, Vizag",
+      period: "Jul 2014 - May 2017",
+      technologies: "ASP.NET, C#, SQL, Entity Framework",
+      description: "Developed end-to-end web and desktop applications using ASP.NET, C#, SQL.",
+      achievements: [
+        "Owned testing, deployment, and production support, reducing issue resolution time by 12 hours."
+      ]
+    },
+    {
+      title: "Software Engineer",
+      company: "Welfare Group of Companies",
+      period: "May 2013 - Jun 2014",
+      technologies: "ASP.NET, C#, SQL",
+      description: "Refactored components and built web application modules.",
+      achievements: [
+        "Refactored components to enhance maintainability, reducing defects by 10%.",
+        "Collaborated on database design and maintenance, improving data integrity by 20%."
+      ]
+    },
+    {
+      title: "Software Engineer",
+      company: "Ram Informatics",
+      period: "Feb 2012 - May 2013",
+      technologies: "ASP.NET, C#, SQL",
+      description: "Delivered dynamic website development with ASP.NET and C#.",
+      achievements: [
+        "Executed coding, database design, and maintenance, boosting performance by 40%.",
+        "Assisted deployments and root-cause analysis, reducing support backlog by 20%."
       ]
     }
   ];
 
   const projects = [
     {
-      name: "CrimeTrax",
-      description: "Law enforcement analytics platform: Microservices with Dapr (pub/sub, state), AKS deployments, CQRS/Mediator for high throughput.",
-      tech: [".NET", "Dapr", "AKS", "CQRS", "Angular"]
+      name: "Amphion Medical Solutions Web Platform",
+      company: "Amphion Medical Solutions (U.S Company)",
+      description: "ASP.NET and C# web application for medical solutions with role-based workflows and operational support. Implemented secure auth, CI/CD, and automated tests to enhance release reliability, reducing defects by 30% and saving 10 hours/week. Optimized application and database layers, improving workflow efficiency by 20% under peak usage.",
+      tech: ["ASP.NET", "C#", "SQL", "CI/CD", "Automated Testing"]
     },
     {
-      name: "JusticeTrax LIMS-plus",
-      description: "Modernized monolith to microservices using Azure Functions and Blazor WASM.",
-      tech: ["Azure Functions", "Blazor", "Microservices"]
-    },
-    {
-      name: "Customer Portals (Rollick)",
-      description: "React-based portals backed by .NET microservices with automated CI/CD using GitHub Actions and ACR.",
-      tech: ["React", ".NET", "GitHub Actions", "ACR"]
+      name: "ProSight Insurance Portal",
+      company: "Prosight (Insurance domain)",
+      description: "Insurance domain website delivering policy and claims features with performant UI and API integrations. Delivered responsive UI and ASP.NET APIs, increasing page load speed and boosting user engagement by 10%. Tuned SQL and indexing to raise throughput by 20% and reduce query latency by 1000ms.",
+      tech: ["ASP.NET", "SQL", "Performance Optimization", "API Integration"]
     }
   ];
 
@@ -90,16 +146,19 @@ export default function About() {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  Innovative Technical Lead with 12+ years of expertise in cloud-native .NET solutions and scalable architectures.
+                  Senior Technical Lead and Solution Architect with 12+ years of experience designing and delivering 
+                  enterprise-scale, cloud-native platforms. Strong expertise in .NET, Azure, microservices, Dapr, 
+                  Kubernetes, distributed systems, and system design.
                 </p>
                 <div className="text-lg text-gray-600 dark:text-gray-300 mb-8 space-y-2">
                   <p>Specialized in:</p>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>Microservices & Dapr: Event-driven architectures, service orchestration</li>
-                    <li>Containerization: Docker, Kubernetes, Azure AKS</li>
-                    <li>Frontend: Angular, React, Blazor</li>
-                    <li>DevOps: CI/CD (Azure DevOps/GitHub Actions), Infrastructure-as-Code</li>
-                    <li>Design Patterns: CQRS, Mediator, Repository, Domain-Driven Design</li>
+                    <li>Domain-Driven Design (DDD) & Clean Architecture</li>
+                    <li>Microservices Architecture & Dapr Actor Model</li>
+                    <li>AI-Enabled Systems: RAG pipelines, agent-driven workflows, vector search</li>
+                    <li>Event-Driven Architecture & Distributed Systems</li>
+                    <li>Performance Optimization & Reliability Engineering</li>
+                    <li>CI/CD, DevOps & Observability</li>
                   </ul>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -142,10 +201,16 @@ export default function About() {
             </h2>
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Skilled in building cloud-native microservices with Dapr, Kubernetes, and CI/CD pipelines, 
-                and experienced in developing real-time chat apps, B2C platforms, health apps, and AI-powered 
-                learning systems. Passionate about problem solving, architecture design, team mentoring, 
-                and indie product building.
+                Senior Technical Lead and Solution Architect with 12+ years of experience designing and delivering 
+                enterprise-scale, cloud-native platforms. Strong expertise in .NET, Azure, microservices, Dapr, 
+                Kubernetes, distributed systems, and system design, with a proven track record of leading teams, 
+                defining technical roadmaps, and modernizing legacy systems.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+                Over the past year, expanded expertise into AI-enabled systems, contributing to the design and 
+                integration of LLM-based features such as RAG pipelines and agent-driven workflows within existing 
+                cloud and microservices architectures. Known for balancing scalability, reliability, security, and 
+                performance while aligning technology with business outcomes.
               </p>
             </div>
           </div>
@@ -209,9 +274,14 @@ export default function About() {
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
                     {job.description}
                   </p>
+                  {job.technologies && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 italic">
+                      <span className="font-semibold">Technologies:</span> {job.technologies}
+                    </p>
+                  )}
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Key Achievements:</h4>
                     <ul className="space-y-2">
@@ -240,9 +310,14 @@ export default function About() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
                 <div key={index} className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                     {project.name}
                   </h3>
+                  {project.company && (
+                    <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">
+                      {project.company}
+                    </p>
+                  )}
                   <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                     {project.description}
                   </p>
@@ -274,13 +349,13 @@ export default function About() {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Education</h3>
                 </div>
                 <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                  Bachelor of Technology (B.Tech)
+                  MCA, Computer Science
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Computer Science & Engineering
+                  VITAM, Vizag
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  [University/College Name Placeholder]
+                  2010
                 </p>
               </div>
               
@@ -291,13 +366,7 @@ export default function About() {
                 </div>
                 <ul className="space-y-2">
                   <li className="text-gray-600 dark:text-gray-300">
-                    Microsoft Certified: Azure Developer Associate
-                  </li>
-                  <li className="text-gray-600 dark:text-gray-300">
-                    Kubernetes Fundamentals (CKAD/CKA)
-                  </li>
-                  <li className="text-gray-600 dark:text-gray-300">
-                    AI/ML Fundamentals – Coursera/DeepLearning.ai
+                    Microsoft Certified: C# Certified Developer
                   </li>
                 </ul>
               </div>
@@ -315,10 +384,10 @@ export default function About() {
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                "AI/LLM development (Legal AI, Healthcare AI, EdTech AI)",
-                "Cloud-native architecture and DevOps",
-                "Indie product development and startup ecosystems",
-                "Reading existential, brainy, and scientific books"
+                "Regular speaker and mentor in internal technical forums and team workshops on microservices, cloud architecture, Dapr, Clean Architecture",
+                "Strong problem-solving mindset, capable of bridging business requirements and technical execution",
+                "Comfortable working with cross-functional and geographically distributed teams",
+                "Self-driven continuous learner - keeping up with latest technology trends in cloud, containers, microservices, frontend/mobile frameworks"
               ].map((interest, index) => (
                 <div key={index} className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg">
                   <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">

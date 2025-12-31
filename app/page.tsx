@@ -43,7 +43,7 @@ export default function Home() {
     "sameAs": [
       "https://www.linkedin.com/in/kothapallisandeep/",
       "https://github.com/websabre",
-      "https://x.com/websabre1"
+      "https://x.com/sandeepattech"
     ],
     "knowsAbout": [
       ".NET",

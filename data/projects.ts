@@ -4,6 +4,7 @@ export interface Project {
   category: string;
   client: string;
   period: string;
+  url?: string;
   description: string;
   longDescription: string;
   technologies: string[];
@@ -304,6 +305,108 @@ export const projects: Project[] = [
       "Auto-scaling is essential for variable workloads",
       "Batching improves throughput",
       "Event sourcing provides valuable audit capabilities"
+    ]
+  },
+  {
+    id: 9,
+    name: "NexusEd — Collaborative EdTech Platform",
+    category: "Product / SaaS",
+    client: "SandyTech (Own Product)",
+    period: "2024 - Present",
+    url: "https://nexused.net",
+    description: "Full-stack collaborative EdTech platform with WebRTC live classrooms, AI tutor powered by GPT-4o Vision, tutor marketplace with smart matching, and full institutional module. Built from zero to production in 12 weeks.",
+    longDescription: "NexusEd is a comprehensive EdTech platform designed around three interconnected ecosystems — students, teachers, and institutions. Students get personalized dashboards, progress tracking, and certificate management. Teachers access template-based content tools, live class scheduling, and portfolio pages. Institutions manage cohorts, analytics, and branding. The platform features WebRTC-powered live classrooms, an AI tutor powered by GPT-4o Vision, and a tutor marketplace with smart matching.",
+    technologies: ["React", "Next.js", "Node.js", "MongoDB", "WebRTC", "Socket.io", "GPT-4o Vision", "Tailwind CSS", "TypeScript"],
+    achievements: [
+      { metric: "12 Weeks", label: "Zero to Production" },
+      { metric: "Live", label: "In Production" },
+      { metric: "3", label: "Ecosystem Roles" }
+    ],
+    keyFeatures: [
+      "WebRTC-powered live classrooms with real-time video and chat",
+      "AI tutor powered by GPT-4o Vision for intelligent assistance",
+      "Tutor marketplace with smart matching algorithm",
+      "Student dashboards with progress tracking and certificate management",
+      "Institutional analytics with cohort and enrollment management",
+      "Certificate verification via unique codes"
+    ],
+    challenges: "Building a multi-role platform with deeply different UX needs for students, teachers, and institutions while keeping the codebase maintainable and the UI cohesive.",
+    solution: "Used role-based routing with shared component libraries, Tailwind CSS design tokens for consistent theming, and a modular Next.js app directory structure per role.",
+    impact: "Enables end-to-end collaborative education management — from content creation to certification — in a single platform. Built and shipped from zero to production in 12 weeks.",
+    problemStatement: "Existing EdTech tools are siloed: teachers use one platform, students another, and institutions have no unified view. NexusEd unifies all three under one product.",
+    architecture: "Next.js frontend with React component library. Node.js/Express API layer. MongoDB for flexible schema across roles. WebRTC for live video. GPT-4o Vision for AI tutor.",
+    lessonsLearned: [
+      "Multi-role platforms require careful information architecture from day one",
+      "WebRTC requires careful NAT traversal and fallback handling for production reliability",
+      "AI tutors built on GPT-4o Vision need structured prompt engineering for educational context"
+    ]
+  },
+  {
+    id: 10,
+    name: "Affixx — Smart Affiliate & Creator Platform",
+    category: "Product / SaaS",
+    client: "SandyTech (Own Product)",
+    period: "2025 - Present",
+    url: "https://www.affixx.app",
+    description: "A modern affiliate and creator monetization platform that helps brands and creators track, manage, and scale their partnership programs with real-time analytics and automated payouts.",
+    longDescription: "Affixx is a SandyTech-built SaaS platform designed for brands and content creators to manage affiliate partnerships at scale. The platform provides real-time conversion tracking, automated commission calculations, creator dashboards, and payout management. Built with a clean, mobile-first UI and deep analytics, Affixx solves the fragmentation problem in creator monetization — replacing spreadsheets and manual tracking with a single, real-time source of truth.",
+    technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe", "Cloudflare R2"],
+    achievements: [
+      { metric: "Live", label: "In Production" },
+      { metric: "Real-time", label: "Conversion Tracking" },
+      { metric: "Automated", label: "Commission & Payouts" }
+    ],
+    keyFeatures: [
+      "Real-time affiliate conversion tracking",
+      "Creator dashboard with earnings analytics",
+      "Automated commission calculation and payouts",
+      "Brand portal for campaign management",
+      "Mobile-first responsive design",
+      "Deep analytics and performance reporting"
+    ],
+    challenges: "Building reliable real-time attribution across multiple traffic sources and devices while keeping the platform affordable for small brands and independent creators.",
+    solution: "Used event-driven architecture with webhook-based conversion tracking, fingerprinting for cross-device attribution, and a tiered pricing model starting with a free plan.",
+    impact: "Enables brands and creators to replace manual spreadsheet-based affiliate tracking with an automated, real-time platform — reducing admin overhead and increasing payout accuracy.",
+    problemStatement: "Affiliate and creator programs are hard to manage at scale — existing tools are expensive, complex, or built for enterprise. Affixx targets the underserved mid-market.",
+    architecture: "Next.js frontend with Node.js API layer. PostgreSQL for transactional data. Cloudflare R2 for asset storage. Stripe for payouts. Real-time event processing for conversion tracking.",
+    lessonsLearned: [
+      "Attribution accuracy is the core trust metric for affiliate platforms",
+      "Free tier is essential for creator adoption in a competitive market",
+      "Real-time dashboards significantly improve user engagement and retention"
+    ]
+  },
+  {
+    id: 11,
+    name: "360JobReady — AI Career Platform",
+    category: "Product / SaaS",
+    client: "SandyTech (Own Product)",
+    period: "2025 - Present",
+    url: "https://www.360jobready.com",
+    description: "AI-powered career platform with resume builder, ATS-optimised templates, skill-based job matching, and cover letter generator. Designed for Indian freshers and job seekers.",
+    longDescription: "360JobReady is a comprehensive AI career platform built specifically for Indian freshers and job seekers navigating the competitive job market. The platform combines AI-powered resume building with ATS optimisation, intelligent skill-based job matching, and automated cover letter generation. Users can build interview-ready resumes, get matched with relevant opportunities, and prepare for interviews — all in one place. Built and shipped by SandyTech in production.",
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "OpenAI GPT-4o", "Tailwind CSS", "Razorpay"],
+    achievements: [
+      { metric: "Live", label: "In Production" },
+      { metric: "AI-Powered", label: "Resume Builder" },
+      { metric: "ATS", label: "Optimised Templates" }
+    ],
+    keyFeatures: [
+      "AI-powered resume builder with ATS optimisation",
+      "Skill-based intelligent job matching",
+      "Automated cover letter generator",
+      "Interview preparation tools",
+      "Multiple professional resume templates",
+      "Free to start, no credit card required"
+    ],
+    challenges: "Indian freshers face unique challenges: limited experience, ATS filters rejecting resumes, and generic career tools not designed for the Indian job market.",
+    solution: "Built an AI-first platform using GPT-4o for content generation and ATS scoring, with templates and matching logic tuned specifically for Indian employers and job boards.",
+    impact: "Helps Indian freshers and job seekers create ATS-ready resumes and find relevant jobs faster — addressing a gap in the market for affordable, AI-powered career tools.",
+    problemStatement: "Generic resume builders and job boards are not optimised for Indian freshers who need ATS-specific guidance, skill-gap analysis, and localised job matching.",
+    architecture: "Next.js frontend with Node.js/Express API. MongoDB for user data and resume storage. GPT-4o for AI content generation and ATS scoring. Razorpay for premium subscriptions.",
+    lessonsLearned: [
+      "ATS optimisation is the highest-value feature for job seekers — lead with it",
+      "AI-generated content needs human-friendly editing UX to feel empowering, not robotic",
+      "Indian job market has distinct requirements that global tools ignore"
     ]
   }
 ];

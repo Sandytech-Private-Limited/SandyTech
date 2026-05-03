@@ -72,11 +72,11 @@ const Contact = () => {
         });
       } else {
         setSubmitStatus('error');
-        setSubmitMessage(data.error || 'Something went wrong. Please try again or email me directly at sandeepdotnet@hotmail.com');
+        setSubmitMessage(data.error || 'Something went wrong. Please try again or email me directly at info@sandytech.org');
       }
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage('Failed to send message. Please try again or email me directly at sandeepdotnet@hotmail.com');
+      setSubmitMessage('Failed to send message. Please try again or email me directly at info@sandytech.org');
     } finally {
       setIsSubmitting(false);
     }
@@ -86,9 +86,9 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "sandeepdotnet@hotmail.com",
-      description: "Send me an email anytime",
-      link: "mailto:sandeepdotnet@hotmail.com"
+      value: "info@sandytech.org",
+      description: "SandyTech enquiries & project briefs",
+      link: "mailto:info@sandytech.org"
     },
     {
       icon: Phone,
@@ -115,9 +115,15 @@ const Contact = () => {
     },
     {
       icon: Linkedin,
-      name: "LinkedIn",
+      name: "LinkedIn (Personal)",
       url: "https://www.linkedin.com/in/kothapallisandeep/",
       description: "Connect with me professionally"
+    },
+    {
+      icon: Linkedin,
+      name: "LinkedIn (SandyTech)",
+      url: "https://www.linkedin.com/company/sandytech-pvt-ltd/?viewAsMember=false",
+      description: "Follow SandyTech Pvt Ltd"
     },
     {
       icon: Twitter,
@@ -153,7 +159,7 @@ const Contact = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Let's{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">
                 Connect
               </span>
             </h1>
@@ -187,7 +193,7 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <Card key={index} className="text-center hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
                       <info.icon className="w-8 h-8 text-white" />
                     </div>
                     <CardTitle className="text-xl">{info.title}</CardTitle>
@@ -197,7 +203,7 @@ const Contact = () => {
                     {info.link ? (
                       <Link 
                         href={info.link}
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors"
+                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors"
                       >
                         {info.value}
                       </Link>
@@ -338,7 +344,7 @@ const Contact = () => {
                   <CardContent className="space-y-4">
                     {services.map((service, index) => (
                       <div key={index} className="flex items-start space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
                           <service.icon className="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -400,6 +406,40 @@ const Contact = () => {
                         <span className="text-gray-700 dark:text-gray-300">Response time: 24 hours</span>
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
+
+                {/* Book a Call */}
+                <Card className="border-indigo-200 dark:border-indigo-800 bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-indigo-700 dark:text-indigo-300 flex items-center gap-2">
+                      <Calendar className="w-5 h-5" />
+                      Book a Free 30-Min Call
+                    </CardTitle>
+                    <CardDescription>
+                      Architecture consultation · zero pitch attached
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                      Got a product idea, a technical challenge, or need a second opinion on your architecture?
+                      Pick a slot — no sales process, just a straight technical conversation.
+                    </p>
+                    <a
+                      href="https://calendly.com/sandeepkothapalli/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-full px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-colors gap-2 mb-3"
+                    >
+                      <Calendar className="w-4 h-4" />
+                      Schedule on Calendly
+                    </a>
+                    <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+                      Or email{" "}
+                      <a href="mailto:info@sandytech.org?subject=Consultation Request" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                        info@sandytech.org
+                      </a>
+                    </p>
                   </CardContent>
                 </Card>
               </div>

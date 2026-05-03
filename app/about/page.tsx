@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Calendar, 
-  MapPin, 
-  Award, 
-  Code, 
-  Cloud, 
-  Database, 
-  Cpu, 
-  Globe, 
+import {
+  Calendar,
+  MapPin,
+  Award,
+  Code,
+  Cloud,
+  Database,
+  Cpu,
+  Globe,
   Smartphone,
   Users,
   BookOpen,
@@ -21,20 +21,55 @@ import {
   Mail
 } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Sandeep Kothapalli — Senior Architect & Founder of SandyTech Pvt Ltd. 13+ years building enterprise cloud platforms, AI/LLM systems, and production MVPs. Based in Hyderabad. Specialising in .NET, Azure, Dapr, Kubernetes, RAG pipelines, and real-time platforms.",
+  keywords: ["Sandeep Kothapalli", "kothapallisandeep", "SandyTech", "Senior Architect", "SandyTech Founder", "Hyderabad architect", ".NET architect", "Azure architect", "AI MVP", "about"],
+  alternates: { canonical: "https://kothapallisandeep.com/about" },
+  openGraph: {
+    title: "About Sandeep Kothapalli — Senior Architect & SandyTech Founder",
+    description: "13+ years building cloud-native platforms, AI/LLM systems, and production MVPs via SandyTech Pvt Ltd. Expert in .NET, Azure, Kubernetes, Dapr, and RAG pipelines.",
+    url: "https://kothapallisandeep.com/about",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Sandeep Kothapalli — Senior Architect & SandyTech Founder",
+    description: "13+ years building cloud-native platforms, AI/LLM systems, and MVPs. Founder of SandyTech Pvt Ltd.",
+    creator: "@sandeepattech",
+  },
+};
 
 export default function About() {
   const skills = {
     "Architecture & Design": ["Domain-Driven Design (DDD)", "Clean Architecture", "Event-Driven Architecture", "System Design", "Distributed Systems", "Microservices Architecture", "Dapr Actor Model"],
-    "AI & LLM": ["RAG Fundamentals", "Vector Search & Embeddings", "Agent-based Workflows", "Tool Invocation", "Prompt Engineering", "Structured Prompting", "Context Assembly & Ranking", "Token Usage Optimization", "Hybrid Retrieval"],
+    "AI & LLM": ["RAG Fundamentals", "Vector Search & Embeddings", "Agent-based Workflows", "Multi-Agent Orchestration", "Tool Invocation", "Prompt Engineering", "Structured Prompting", "Context Assembly & Ranking", "Token Usage Optimization", "Hybrid Retrieval"],
     "Programming & Frameworks": ["C#", ".NET", "ASP.NET Core", "JavaScript", "TypeScript", "Python"],
     "Frontend & Mobile": ["React", "React Native", "Next.js", "JavaScript", "TypeScript"],
-    "Cloud & DevOps": ["Microsoft Azure", "Amazon Web Services (AWS)", "Kubernetes", "Docker", "CI/CD", "Azure DevOps", "Observability"],
-    "Databases": ["SQL Server", "Azure Cosmos DB", "NoSQL", "Vector Stores"],
+    "Cloud & DevOps": ["Microsoft Azure", "Amazon Web Services (AWS)", "Kubernetes", "Docker", "CI/CD", "Azure DevOps", "Terraform", "Azure Pipelines", "Observability"],
+    "Databases": ["SQL Server", "Azure Cosmos DB", "Azure PostgreSQL Flexible Server", "NoSQL", "Vector Stores"],
     "APIs & Services": ["REST", "gRPC", "API-First Design", "Dapr", "Microservices"],
-    "Tools & Practices": ["Git", "Automated Testing", "Code Reviews", "Engineering Best Practices", "Sprint Planning & Estimation"]
+    "Payment & Integrations": ["Razorpay (Payment Gateway, Route & Split)", "API-First Design", "Third-party Integrations"],
+    "Automation": ["n8n Workflow Automation", "Social Media Automation", "Business Process Automation"],
+    "Tools & Practices": ["Git", "Automated Testing", "Code Reviews", "Engineering Best Practices", "Sprint Planning & Estimation", "Supply Chain Security"]
   };
 
   const experience = [
+    {
+      title: "Founder & Director",
+      company: "SandyTech Private Limited, Hyderabad",
+      period: "Dec 2024 - Present",
+      technologies: "Next.js, React, Node.js, AI/LLM, Azure, n8n, Automation",
+      description: "Founded SandyTech Pvt Ltd (CIN: U62011TS2025PTC208019) to deliver AI-powered MVPs and automation solutions for startups and SMBs.",
+      achievements: [
+        "Building AI-powered product platforms and automation workflows delivered in 6-8 weeks.",
+        "Architecting multi-agent orchestration systems and LLM-integrated products for client businesses.",
+        "Developing full-stack SaaS products including EdTech platforms and B2B lead generation tools.",
+        "Positioning SandyTech as a go-to partner for startups needing cloud-native MVPs with AI capabilities."
+      ]
+    },
     {
       title: "Technical Lead",
       company: "Progience Technologies, Hyderabad",
@@ -177,25 +212,31 @@ export default function About() {
               <div className="text-center lg:text-left">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                   About{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-500">
                     Sandeep Kothapalli
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  Senior Technical Lead and Solution Architect with 12+ years of experience designing and delivering 
-                  enterprise-scale, cloud-native platforms. Strong expertise in .NET, Azure, microservices, Dapr, 
-                  Kubernetes, distributed systems, and system design.
+                  I help startups and SMEs turn ideas into deployed AI products — typically in 6 to 8 weeks. After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I started SandyTech to solve a problem I kept seeing: founders with strong ideas but no technical partner to ship them.
                 </p>
                 <div className="text-lg text-gray-600 dark:text-gray-300 mb-8 space-y-2">
-                  <p>Specialized in:</p>
+                  <p>Specialising in:</p>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>Domain-Driven Design (DDD) & Clean Architecture</li>
-                    <li>Microservices Architecture & Dapr Actor Model</li>
-                    <li>AI-Enabled Systems: RAG pipelines, agent-driven workflows, vector search</li>
-                    <li>Event-Driven Architecture & Distributed Systems</li>
-                    <li>Performance Optimization & Reliability Engineering</li>
-                    <li>CI/CD, DevOps & Observability</li>
+                    <li>AI-Powered MVP Development (idea to shipped product in 6–8 weeks)</li>
+                    <li>Cloud Architecture & Migration (legacy .NET to Azure — architecture, execution, handover)</li>
+                    <li>Real-time platforms with WebRTC, Socket.io, and event-driven architecture</li>
+                    <li>AI automation workflows (n8n, LangChain, GPT-4o, custom pipelines)</li>
+                    <li>Enterprise .NET, microservices, Dapr, and Kubernetes systems</li>
                   </ul>
+                </div>
+                <div className="flex items-center gap-3 mb-6 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 border border-indigo-100 dark:border-slate-600">
+                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Briefcase className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Founder & Director, SandyTech Pvt Ltd</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">AI-Powered MVPs & Automation · Built in 6-8 Weeks · <Link href="https://sandytech.org" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">sandytech.org</Link></p>
+                  </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Button asChild size="lg">
@@ -235,18 +276,12 @@ export default function About() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               Profile Summary
             </h2>
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
+            <div className="bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Senior Technical Lead and Solution Architect with 12+ years of experience designing and delivering 
-                enterprise-scale, cloud-native platforms. Strong expertise in .NET, Azure, microservices, Dapr, 
-                Kubernetes, distributed systems, and system design, with a proven track record of leading teams, 
-                defining technical roadmaps, and modernizing legacy systems.
+                After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I founded SandyTech Pvt Ltd to solve a recurring problem: founders with strong ideas but no technical partner to ship them. SandyTech specialises in AI-powered MVP development, cloud migration, automation workflows, and corporate AI training.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-                Over the past year, expanded expertise into AI-enabled systems, contributing to the design and 
-                integration of LLM-based features such as RAG pipelines and agent-driven workflows within existing 
-                cloud and microservices architectures. Known for balancing scalability, reliability, security, and 
-                performance while aligning technology with business outcomes.
+                This year: built <a href="https://nexused.net" target="_blank" rel="noopener noreferrer" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">NexusEd (nexused.net)</a> — a real-time EdTech platform with WebRTC live classrooms, AI tutor powered by GPT-4o Vision, tutor marketplace with smart matching, and full institutional module — from zero to production in 12 weeks. Also shipped <a href="https://www.360jobready.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">360JobReady (360jobready.com)</a> — an AI career platform for Indian freshers with ATS-optimised resume builder and skill-based job matching. Both are live, in production, and free to start.
               </p>
             </div>
           </div>
@@ -301,7 +336,7 @@ export default function About() {
                       <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
                         {job.title}
                       </h3>
-                      <p className="text-lg text-blue-600 dark:text-blue-400 font-medium mb-2">
+                      <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium mb-2">
                         {job.company}
                       </p>
                       <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -323,7 +358,7 @@ export default function About() {
                     <ul className="space-y-2">
                       {job.achievements.map((achievement, achIndex) => (
                         <li key={achIndex} className="flex items-start text-gray-600 dark:text-gray-300">
-                          <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                          <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                           {achievement}
                         </li>
                       ))}
@@ -350,7 +385,7 @@ export default function About() {
                     {project.name}
                   </h3>
                   {project.company && (
-                    <p className="text-sm text-blue-600 dark:text-blue-400 mb-3">
+                    <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-3">
                       {project.company}
                     </p>
                   )}
@@ -379,9 +414,9 @@ export default function About() {
               Education & Certifications
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
+              <div className="bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
                 <div className="flex items-center mb-4">
-                  <GraduationCap className="w-8 h-8 text-blue-500 mr-3" />
+                  <GraduationCap className="w-8 h-8 text-indigo-500 mr-3" />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Education</h3>
                 </div>
                 <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">

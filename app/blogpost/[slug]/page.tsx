@@ -135,8 +135,8 @@ export async function generateMetadata(
     ...(data.hashtags || []).map((tag: string) => tag.replace('#', ''))
   ];
   
-  const title = `${data.title} | Sandeep Kothapalli - SandyTech`;
-  const description = data.description || `Learn about ${data.title} from Sandeep Kothapalli (kothapallisandeep), Technical Lead and Solution Architect. Expert insights on ${data.category || 'technology'} and AI automation.`;
+  const title = data.title;
+  const description = data.description || `${data.title} — technical insights from Sandeep Kothapalli, Senior Architect & Founder of SandyTech Pvt Ltd. 13+ years in ${data.category || 'cloud-native'} engineering.`;
   
   return {
     title,
@@ -163,6 +163,7 @@ export async function generateMetadata(
       card: 'summary_large_image',
       title,
       description,
+      creator: '@sandeepattech',
       images: data.imageUrl ? [data.imageUrl.startsWith('http') ? data.imageUrl : `https://kothapallisandeep.com${data.imageUrl}`] : [],
     },
     alternates: {

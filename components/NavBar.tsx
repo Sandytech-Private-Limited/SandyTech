@@ -49,19 +49,23 @@ const NavBar = () => {
     return (
         <nav className='h-16 bg-background/50 sticky top-0 border-b px-8 backdrop-blur flex items-center justify-between z-10'>
             <LoadingBar
-                color='#6028ff'
+                color='#4f46e5'
                 progress={progress}
                 onLoaderFinished={() => setProgress(0)}
             />
-            <div className='text-lg font-bold md:text-xl'>
+            <div className='text-lg font-bold md:text-xl flex items-center gap-2'>
                 <Link href={"/"}>
                     Sandeep Kothapalli
                 </Link>
+                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-700">
+                    SandyTech
+                </span>
             </div>
             <ul className='hidden md:flex w-full justify-end items-center space-x-6 '>
                 <li><Link href={"/"} className="hover:text-primary transition-colors">Home</Link></li>
                 <li><Link href={"/about"} className="hover:text-primary transition-colors">About</Link></li>
                 <li><Link href={"/projects"} className="hover:text-primary transition-colors">Projects</Link></li>
+                <li><Link href={"/services"} className="hover:text-primary transition-colors">Services</Link></li>
                 <li><Link href={"/blog"} className="hover:text-primary transition-colors">Blog</Link></li>
                 <li><Link href={"/resume"} className="hover:text-primary transition-colors">Resume</Link></li>
                 <li><Link href={"/contact"} className="hover:text-primary transition-colors">Contact</Link></li>

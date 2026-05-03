@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import SiteConfig from "@/config/site";
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider"
 
 const fontSans = FontSans({
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
         url: `${SiteConfig.url}/logo.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Sandeep Kothapalli - Technical Lead & Solution Architect',
+        alt: 'Sandeep Kothapalli - Senior Architect & SandyTech Founder',
       },
     ],
   },
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
     title: SiteConfig.title,
     description: SiteConfig.description,
     images: [`${SiteConfig.url}/logo.jpg`],
-    creator: '@kothapallisandeep',
+    creator: '@sandeepattech',
   },
   robots: {
     index: true,
@@ -86,6 +87,7 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

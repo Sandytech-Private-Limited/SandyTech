@@ -1,79 +1,101 @@
 # Email Setup Guide
 
-This guide explains how to set up the contact form to send emails to `sandeepdotnet@hotmail.com`.
+This guide explains how to set up the contact form to send emails to `sandeepdotnet@hotmail.com` using Nodemailer with SMTP.
 
-## Option 1: Using Resend (Recommended)
+## ⚠️ Important: Hotmail/Outlook Basic Auth Disabled
 
-Resend is a modern email API service that's easy to set up and reliable.
+**Microsoft has disabled basic authentication for Hotmail/Outlook accounts.** You cannot use Hotmail/Outlook SMTP directly anymore.
+
+## Recommended Solution: Use Gmail SMTP
+
+Gmail still supports App Passwords and works reliably with Nodemailer.
 
 ### Steps:
 
-1. **Sign up for Resend**
-   - Go to [https://resend.com](https://resend.com)
-   - Create a free account (100 emails/day free tier)
+1. **Get a Gmail App Password**
+   - Go to [Google Account Settings](https://myaccount.google.com/)
+   - Click "Security" → "2-Step Verification" (enable it if not already enabled)
+   - Scroll down to "App passwords"
+   - Create a new app password for "Mail"
+   - Copy the 16-character password (you'll need this for `SMTP_PASS`)
 
-2. **Get your API Key**
-   - Navigate to API Keys section in Resend dashboard
-   - Create a new API key
-   - Copy the API key (starts with `re_`)
-
-3. **Verify your domain (Optional but Recommended)**
-   - For production, verify your domain `kothapallisandeep.com`
-   - Add DNS records as instructed by Resend
-   - This allows you to send from `contact@kothapallisandeep.com`
-
-4. **Set Environment Variables**
+2. **Set Environment Variables**
    - Create a `.env.local` file in the root directory
    - Add the following:
    ```env
-   RESEND_API_KEY=re_your_api_key_here
-   FROM_EMAIL=contact@kothapallisandeep.com
-   ```
-   - For testing without domain verification, use: `FROM_EMAIL=onboarding@resend.dev`
-
-5. **Deploy**
-   - Add the same environment variables to your hosting platform (Vercel, Netlify, etc.)
-   - The contact form will now send emails to `sandeepdotnet@hotmail.com`
-
-## Option 2: Using Nodemailer with SMTP
-
-If you prefer using SMTP directly (e.g., with Gmail, Outlook, or custom SMTP):
-
-1. **Install Nodemailer**
-   ```bash
-   npm install nodemailer
-   ```
-
-2. **Update the API route** to use Nodemailer instead of Resend
-
-3. **Set Environment Variables**
-   ```env
-   SMTP_HOST=smtp-mail.outlook.com
+   SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
-   SMTP_USER=sandeepdotnet@hotmail.com
-   SMTP_PASS=your_app_password
+   SMTP_USER=your-email@gmail.com
+   SMTP_PASS=your_16_character_app_password
    ```
+
+3. **Alternative: Use a Transactional Email Service**
+   For production, consider using:
+   - **SendGrid** (free tier: 100 emails/day)
+   - **Mailgun** (free tier: 5,000 emails/month)
+   - **Amazon SES** (very affordable)
+   
+   These services are more reliable and don't have authentication issues.
+
+4. **Deploy**
+   - Add the same environment variables to your hosting platform (Vercel, Netlify, etc.)
+   - The contact form will now send emails from the user's email address to `sandeepdotnet@hotmail.com`
+
+## How It Works
+
+- **From**: The user's email address (from the contact form)
+- **To**: `sandeepdotnet@hotmail.com` (your email)
+- **Reply To**: The user's email address (so you can reply directly)
 
 ## Testing
 
 1. **Development Mode**
-   - Without API key: Form will log to console
-   - With API key: Form will send actual emails
+   - Set the environment variables in `.env.local`
+   - Test the form - emails will be sent from the user's email address
 
 2. **Production Mode**
-   - Must have `RESEND_API_KEY` set
-   - Otherwise, form will show error message
+   - Make sure all SMTP environment variables are set
+   - The form will send actual emails
 
 ## Troubleshooting
 
-- **Emails not sending**: Check that `RESEND_API_KEY` is set correctly
-- **Domain not verified**: Use `onboarding@resend.dev` for testing
-- **Rate limits**: Resend free tier allows 100 emails/day
-- **Spam folder**: Check spam folder if emails aren't received
+- **"Basic authentication is disabled" error**: 
+  - **Hotmail/Outlook no longer supports basic auth**
+  - **Solution**: Switch to Gmail SMTP (recommended) or use a transactional email service
+  - See "Recommended Solution" above for Gmail setup
+
+- **Authentication failed (EAUTH)**: 
+  - Make sure you're using an App Password, not your regular password
+  - For Gmail: Generate a new App Password from Google Account Settings
+  - Make sure 2-Step Verification is enabled on your Google account
+  - The App Password should be 16 characters (no spaces)
+
+- **Connection failed (ECONNECTION)**:
+  - Check that `SMTP_HOST` and `SMTP_PORT` are correct
+  - For Gmail: `smtp.gmail.com:587` (or `465` for SSL)
+  - Make sure your firewall isn't blocking the connection
+
+- **Emails not received**:
+  - Check your spam folder
+  - Verify the `SMTP_USER` email address is correct
+  - Make sure the app password is correct
+
+- **"From" address issues**:
+  - Some SMTP servers may override the "from" address for security
+  - The email will still show the user's email in the content and reply-to field
 
 ## Current Configuration
 
 - **To Email**: `sandeepdotnet@hotmail.com` (hardcoded in API route)
-- **From Email**: Configurable via `FROM_EMAIL` environment variable
-- **Reply To**: Uses the sender's email from the form
+- **SMTP Host**: Configurable via `SMTP_HOST` (default: `smtp-mail.outlook.com`)
+- **SMTP Port**: Configurable via `SMTP_PORT` (default: `587`)
+- **SMTP User**: Configurable via `SMTP_USER` (default: `sandeepdotnet@hotmail.com`)
+- **SMTP Password**: Configurable via `SMTP_PASS` (required - use App Password)
+- **From**: User's email address from the form
+- **Reply To**: User's email address from the form
 
+## Security Notes
+
+- Never commit `.env.local` to version control
+- Use App Passwords, not your regular account password
+- App Passwords are more secure and can be revoked if needed

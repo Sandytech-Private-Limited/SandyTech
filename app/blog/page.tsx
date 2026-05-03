@@ -83,7 +83,7 @@ const BlogList = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Technical{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">
                 Blog
               </span>
             </h1>
@@ -151,7 +151,7 @@ const BlogList = () => {
                       {blog.readTime}
                     </div>
                     
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                       {blog.title}
                     </h2>
                     
@@ -161,7 +161,7 @@ const BlogList = () => {
                     
                     <Link
                       href={`/blogpost/${blog.slug}`}
-                      className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 transition-colors group"
+                      className="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors group"
                     >
                       Read More
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -175,7 +175,7 @@ const BlogList = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-16 bg-gradient-to-r from-indigo-600 to-emerald-600">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Stay Updated with Latest Insights
@@ -197,17 +197,21 @@ const BlogList = () => {
 };
 
 export const metadata: Metadata = {
-  title: 'Technical Blog | kothapallisandeep | SandyTech - AI Automation & Idea to MVP',
-  description: 'Comprehensive technical blog by kothapallisandeep (Sandeep Kothapalli) on SandyTech covering modern software development, AI automation, cloud architecture, microservices, Dapr, Kubernetes, RAG pipelines, and more. Expert insights from Idea to MVP.',
-  keywords: ['kothapallisandeep', 'sandeepkothapalli', 'sandytech', 'sandytech org', 'AI automation', 'Idea to MVP', 'technical blog', 'software development', 'cloud architecture', 'microservices', 'AI/ML'],
+  title: 'Blog',
+  description: 'Technical blog by Sandeep Kothapalli — in-depth articles on .NET microservices, Azure cloud architecture, AI/LLM and RAG pipelines, Dapr, Kubernetes, WebRTC, n8n automation, and SandyTech MVP delivery. Real-world lessons from 13+ years of enterprise engineering.',
+  keywords: ['Sandeep Kothapalli blog', 'kothapallisandeep', 'SandyTech blog', 'technical blog', '.NET blog', 'Azure blog', 'AI architecture blog', 'RAG pipeline', 'Dapr', 'Kubernetes', 'cloud-native blog'],
+  alternates: { canonical: 'https://kothapallisandeep.com/blog' },
   openGraph: {
-    title: 'Technical Blog | kothapallisandeep | SandyTech',
-    description: 'Expert technical insights on software development, AI automation, and cloud architecture from Sandeep Kothapalli',
+    title: 'Technical Blog — Sandeep Kothapalli & SandyTech',
+    description: 'In-depth articles on .NET, Azure, AI/LLM, RAG pipelines, Dapr, Kubernetes, and MVP delivery from 13+ years of enterprise engineering.',
     type: 'website',
     url: 'https://kothapallisandeep.com/blog',
   },
-  alternates: {
-    canonical: 'https://kothapallisandeep.com/blog',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Technical Blog — Sandeep Kothapalli & SandyTech',
+    description: 'In-depth articles on .NET, Azure, AI/LLM, RAG pipelines, Dapr, Kubernetes, and MVP delivery.',
+    creator: '@sandeepattech',
   },
 }
 

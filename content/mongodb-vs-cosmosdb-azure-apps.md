@@ -1,13 +1,13 @@
 ---
 title: "MongoDB Atlas vs Cosmos DB: Choosing the Right Document Store for Azure Applications"
 slug: mongodb-vs-cosmosdb-azure-apps
-description: A real cost and capability comparison of MongoDB Atlas vs Azure Cosmos DB for Azure-hosted .NET applications — covering pricing models, global distribution, change feeds, and when to choose each. By Sandeep Kothapalli, SandyTech.
+description: A real cost and capability comparison of MongoDB Atlas vs Azure Cosmos DB for Azure-hosted .NET applications — covering pricing models, global distribution, change feeds, and when to choose each. By Sandeep Kothapalli,.
 imageUrl: https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Cloud
 date: 2026-01-30
 readTime: 10 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "MongoDB Atlas", "Cosmos DB", "Azure", "document database", ".NET", "NoSQL", "cloud database", "global distribution", "change feed"]
-hashtags: ["#MongoDB", "#CosmosDB", "#Azure", "#Database", "#DotNet", "#NoSQL", "#SandyTech", "#KothapalliSandeep", "#CloudNative"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "MongoDB Atlas", "Cosmos DB", "Azure", "document database", ".NET", "NoSQL", "cloud database", "global distribution", "change feed"]
+hashtags: ["#MongoDB", "#CosmosDB", "#Azure", "#Database", "#DotNet", "#NoSQL", "#KothapalliSandeep", "#CloudNative"]
 ---
 
 # MongoDB Atlas vs Cosmos DB: Choosing the Right Document Store for Azure Applications
@@ -48,19 +48,19 @@ Both databases support event-driven patterns, but the implementations differ.
 // Azure Functions Cosmos trigger
 [FunctionName("ProcessOrderChanges")]
 public async Task Run(
-    [CosmosDBTrigger(
-        databaseName: "orders-db",
-        containerName: "orders",
-        Connection = "CosmosDBConnection",
-        LeaseContainerName = "leases",
-        CreateLeaseContainerIfNotExists = true)]
-    IReadOnlyList<Order> changedOrders,
-    ILogger log)
+ [CosmosDBTrigger(
+ databaseName: "orders-db",
+ containerName: "orders",
+ Connection = "CosmosDBConnection",
+ LeaseContainerName = "leases",
+ CreateLeaseContainerIfNotExists = true)]
+ IReadOnlyList<Order> changedOrders,
+ ILogger log)
 {
-    foreach (var order in changedOrders)
-    {
-        await _eventBus.PublishAsync(new OrderChangedEvent(order));
-    }
+ foreach (var order in changedOrders)
+ {
+ await _eventBus.PublishAsync(new OrderChangedEvent(order));
+ }
 }
 ```
 
@@ -69,19 +69,19 @@ public async Task Run(
 ```csharp
 // MongoDB change stream in .NET
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Order>>()
-    .Match(change => change.OperationType == ChangeStreamOperationType.Insert 
-                  || change.OperationType == ChangeStreamOperationType.Update);
+ .Match(change => change.OperationType == ChangeStreamOperationType.Insert 
+ || change.OperationType == ChangeStreamOperationType.Update);
 
 using var cursor = await collection.WatchAsync(pipeline, new ChangeStreamOptions
 {
-    FullDocument = ChangeStreamFullDocumentOption.UpdateLookup,
-    ResumeAfter = lastResumeToken
+ FullDocument = ChangeStreamFullDocumentOption.UpdateLookup,
+ ResumeAfter = lastResumeToken
 });
 
 await cursor.ForEachAsync(change =>
 {
-    // change.FullDocument contains the updated document
-    // change.UpdateDescription.UpdatedFields contains only the changed fields
+ // change.FullDocument contains the updated document
+ // change.UpdateDescription.UpdatedFields contains only the changed fields
 });
 ```
 
@@ -96,8 +96,8 @@ For Cosmos DB, managed identity is native and first-class:
 ```csharp
 var credential = new DefaultAzureCredential();
 var cosmosClient = new CosmosClient(
-    accountEndpoint: "https://my-cosmos.documents.azure.com:443/",
-    tokenCredential: credential
+ accountEndpoint: "https://my-cosmos.documents.azure.com:443/",
+ tokenCredential: credential
 );
 ```
 
@@ -106,8 +106,8 @@ For Atlas, managed identity works through a middle layer — you store the conne
 ```csharp
 // Atlas with connection string from Key Vault via managed identity
 var secretClient = new SecretClient(
-    new Uri("https://my-vault.vault.azure.net/"),
-    new DefaultAzureCredential()
+ new Uri("https://my-vault.vault.azure.net/"),
+ new DefaultAzureCredential()
 );
 var connString = await secretClient.GetSecretAsync("mongodb-atlas-connection-string");
 var mongoClient = new MongoClient(connString.Value.Value);
@@ -129,7 +129,7 @@ var mongoClient = new MongoClient(connString.Value.Value);
 - Your query patterns are complex and hard to optimise for RU cost
 - You need the richer full-text search capabilities of Atlas Search (built on Lucene)
 
-## What We Use at SandyTech
+## What We Use at
 
 For NexusEd and 360JobReady, we use Cosmos DB. Both products are Azure-native, and the serverless tier handles the traffic patterns of early-stage products economically. The Azure Functions triggers for Cosmos changes fit naturally into our event-driven notification flows.
 

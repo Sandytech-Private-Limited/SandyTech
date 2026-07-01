@@ -1,20 +1,20 @@
 ---
 title: "EMAOS: Building a Multi-Agent Orchestration System for Enterprise AI"
 slug: emaos-multi-agent-orchestration-framework
-description: kothapallisandeep introduces EMAOS — the Event-driven Multi-Agent Orchestration System built at SandyTech for enterprise AI workloads. Learn how agent roles (planner, executor, critic, memory), Azure Event Hubs messaging, and per-agent state management solve problems that single-LLM approaches cannot handle at scale. How sandytech's AI products are powered by EMAOS.
+description: kothapallisandeep introduces EMAOS — the Event-driven Multi-Agent Orchestration System built for enterprise AI workloads. Learn how agent roles (planner, executor, critic, memory), Azure Event Hubs messaging, and per-agent state management solve problems that single-LLM approaches cannot handle at scale. My AI products are powered by EMAOS.
 imageUrl: https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: AI
 date: 2025-01-20
 readTime: 13 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "EMAOS", "multi-agent AI", "LLM orchestration", "Azure Event Hubs", "agent framework", "AutoGen", "CrewAI", "enterprise AI", "AI automation", "planner executor critic", "agentic systems"]
-hashtags: ["#MultiAgentAI", "#LLM", "#EMAOS", "#AzureEventHubs", "#AIOrchestration", "#SandyTech", "#KothapalliSandeep", "#AutoGen", "#CrewAI", "#EnterpriseAI"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "EMAOS", "multi-agent AI", "LLM orchestration", "Azure Event Hubs", "agent framework", "AutoGen", "CrewAI", "enterprise AI", "AI automation", "planner executor critic", "agentic systems"]
+hashtags: ["#MultiAgentAI", "#LLM", "#EMAOS", "#AzureEventHubs", "#AIOrchestration", "#KothapalliSandeep", "#AutoGen", "#CrewAI", "#EnterpriseAI"]
 ---
 
 # EMAOS: Building a Multi-Agent Orchestration System for Enterprise AI
 
 Single-agent LLM systems hit a ceiling fast. I found this out the hard way while building an AI-powered document processing pipeline for a financial services client. The task: ingest unstructured documents, extract structured data, validate it against business rules, flag anomalies, and produce a final report — all autonomously. A single GPT-4o prompt with a complex system message worked in demos. It collapsed at scale.
 
-EMAOS — the **Event-driven Multi-Agent Orchestration System** — is the framework we built at SandyTech to solve this class of problem. It now powers several of our products.
+EMAOS — the **Event-driven Multi-Agent Orchestration System** — is the framework I built to solve this class of problem. It now powers several of my products.
 
 ---
 
@@ -36,21 +36,21 @@ Before getting into the architecture, it is worth understanding the specific fai
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     EMAOS Orchestrator                       │
-│                                                              │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐  ┌────────┐  │
-│  │ Planner  │    │ Executor │    │  Critic  │  │ Memory │  │
-│  │  Agent   │    │  Agent   │    │  Agent   │  │ Agent  │  │
-│  └────┬─────┘    └────┬─────┘    └────┬─────┘  └───┬────┘  │
-│       │               │               │             │        │
-│  ─────┴───────────────┴───────────────┴─────────────┴────── │
-│                  Azure Event Hubs (Message Bus)              │
+│ EMAOS Orchestrator │
+│ │
+│ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌────────┐ │
+│ │ Planner │ │ Executor │ │ Critic │ │ Memory │ │
+│ │ Agent │ │ Agent │ │ Agent │ │ Agent │ │
+│ └────┬─────┘ └────┬─────┘ └────┬─────┘ └───┬────┘ │
+│ │ │ │ │ │
+│ ─────┴───────────────┴───────────────┴─────────────┴────── │
+│ Azure Event Hubs (Message Bus) │
 └─────────────────────────────────────────────────────────────┘
-                              │
-                    ┌─────────┴─────────┐
-                    │   State Store      │
-                    │  (Redis / CosmosDB)│
-                    └───────────────────┘
+ │
+ ┌─────────┴─────────┐
+ │ State Store │
+ │ (Redis / CosmosDB)│
+ └───────────────────┘
 ```
 
 Each agent is a stateless, independently deployable process. They communicate exclusively through the message bus. No agent calls another agent directly.
@@ -65,14 +65,14 @@ The Planner is the only agent that sees the high-level task description. It uses
 
 ```json
 {
-  "task_id": "task-abc123",
-  "steps": [
-    { "step_id": "s1", "type": "extract", "depends_on": [], "input": "raw_document" },
-    { "step_id": "s2", "type": "validate", "depends_on": ["s1"], "input": "s1.output" },
-    { "step_id": "s3", "type": "enrich", "depends_on": ["s2"], "input": "s2.output" },
-    { "step_id": "s4", "type": "critique", "depends_on": ["s3"], "input": "s3.output" },
-    { "step_id": "s5", "type": "report", "depends_on": ["s4"], "input": "s4.output" }
-  ]
+ "task_id": "task-abc123",
+ "steps": [
+ { "step_id": "s1", "type": "extract", "depends_on": [], "input": "raw_document" },
+ { "step_id": "s2", "type": "validate", "depends_on": ["s1"], "input": "s1.output" },
+ { "step_id": "s3", "type": "enrich", "depends_on": ["s2"], "input": "s2.output" },
+ { "step_id": "s4", "type": "critique", "depends_on": ["s3"], "input": "s3.output" },
+ { "step_id": "s5", "type": "report", "depends_on": ["s4"], "input": "s4.output" }
+ ]
 }
 ```
 
@@ -86,27 +86,27 @@ The Executor uses lighter-weight models where possible. For a "validate structur
 
 ```python
 class ExecutorAgent:
-    async def handle_step_ready(self, event: StepReadyEvent):
-        step = await self.state_store.get_step(event.step_id)
-        model = step.metadata.get("model", "gpt-4o-mini")
+ async def handle_step_ready(self, event: StepReadyEvent):
+ step = await self.state_store.get_step(event.step_id)
+ model = step.metadata.get("model", "gpt-4o-mini")
 
-        result = await self.llm_client.complete(
-            model=model,
-            messages=self.build_messages(step),
-            tools=self.get_tools_for_step_type(step.type),
-        )
+ result = await self.llm_client.complete(
+ model=model,
+ messages=self.build_messages(step),
+ tools=self.get_tools_for_step_type(step.type),
+ )
 
-        if result.finish_reason == "tool_calls":
-            tool_result = await self.execute_tool_calls(result.tool_calls)
-            await self.publish("step.completed", {
-                "step_id": step.id,
-                "output": tool_result,
-            })
-        else:
-            await self.publish("step.failed", {
-                "step_id": step.id,
-                "error": "unexpected_finish_reason",
-            })
+ if result.finish_reason == "tool_calls":
+ tool_result = await self.execute_tool_calls(result.tool_calls)
+ await self.publish("step.completed", {
+ "step_id": step.id,
+ "output": tool_result,
+ })
+ else:
+ await self.publish("step.failed", {
+ "step_id": step.id,
+ "error": "unexpected_finish_reason",
+ })
 ```
 
 ### Critic Agent
@@ -119,20 +119,20 @@ If the Critic scores the output below threshold, it publishes a `step.rejected` 
 
 ```python
 class CriticAgent:
-    async def handle_step_completed(self, event: StepCompletedEvent):
-        step = await self.state_store.get_step(event.step_id)
-        rubric = await self.state_store.get_rubric(step.task_id, step.type)
+ async def handle_step_completed(self, event: StepCompletedEvent):
+ step = await self.state_store.get_step(event.step_id)
+ rubric = await self.state_store.get_rubric(step.task_id, step.type)
 
-        evaluation = await self.evaluate(step.output, rubric)
+ evaluation = await self.evaluate(step.output, rubric)
 
-        if evaluation.score >= rubric.threshold:
-            await self.publish("step.approved", {"step_id": step.id})
-        else:
-            await self.publish("step.rejected", {
-                "step_id": step.id,
-                "feedback": evaluation.feedback,
-                "retry_count": step.retry_count + 1,
-            })
+ if evaluation.score >= rubric.threshold:
+ await self.publish("step.approved", {"step_id": step.id})
+ else:
+ await self.publish("step.rejected", {
+ "step_id": step.id,
+ "feedback": evaluation.feedback,
+ "retry_count": step.retry_count + 1,
+ })
 ```
 
 The Critic is the most expensive agent to run because it needs a capable model — you cannot have a weak model assess a strong one effectively. We accept this cost because it dramatically reduces the failure rate at the task level.
@@ -161,22 +161,22 @@ We chose Azure Event Hubs over Service Bus for EMAOS for several reasons:
 ```python
 # Publishing an event
 producer = EventHubProducerClient.from_connection_string(
-    conn_str=os.environ["EVENT_HUB_CONNECTION_STRING"],
-    eventhub_name="emaos-events"
+ conn_str=os.environ["EVENT_HUB_CONNECTION_STRING"],
+ eventhub_name="emaos-events"
 )
 
 async def publish(event_type: str, payload: dict):
-    event_data = EventData(json.dumps({
-        "type": event_type,
-        "timestamp": datetime.utcnow().isoformat(),
-        "payload": payload,
-    }))
-    event_data.properties = {"event_type": event_type}
+ event_data = EventData(json.dumps({
+ "type": event_type,
+ "timestamp": datetime.utcnow().isoformat(),
+ "payload": payload,
+ }))
+ event_data.properties = {"event_type": event_type}
 
-    async with producer:
-        batch = await producer.create_batch()
-        batch.add(event_data)
-        await producer.send_batch(batch)
+ async with producer:
+ batch = await producer.create_batch()
+ batch.add(event_data)
+ await producer.send_batch(batch)
 ```
 
 ---
@@ -198,7 +198,7 @@ AutoGen and CrewAI are excellent for prototype-scale agentic tasks. EMAOS is des
 
 ## Where EMAOS Is Used Today
 
-At SandyTech, EMAOS powers:
+EMAOS powers:
 
 - **360JobReady**: resume analysis, job matching, gap analysis, and personalised coaching plan generation — all as an EMAOS workflow triggered per candidate
 - **Affixx**: multi-step affiliate campaign creation — Planner decomposes campaign brief, Executor agents generate copy/creatives/targeting parameters, Critic validates against brand guidelines

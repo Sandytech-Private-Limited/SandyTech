@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     url: SiteConfig.url,
     title: SiteConfig.title,
     description: SiteConfig.description,
-    siteName: 'SandyTech - Sandeep Kothapalli Portfolio',
+    siteName: 'Sandeep Kothapalli Portfolio',
     images: [
       {
         url: `${SiteConfig.url}/logo.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Sandeep Kothapalli - Senior Architect & SandyTech Founder',
+        alt: 'Sandeep Kothapalli - Senior Architect',
       },
     ],
   },

@@ -1,20 +1,20 @@
 ---
-title: "How SandyTech Delivers Production-Ready MVPs in 6–8 Weeks"
-slug: sandytech-mvp-6-8-weeks-approach
-description: Sandeep Kothapalli (kothapallisandeep) breaks down the SandyTech framework for delivering production-ready MVPs in 6–8 weeks — covering discovery, architecture, core build, integrations, hardening, and launch. What "production-ready" actually means, the default tech stack, and real examples including NexusEd, 360JobReady, and Affixx. A practical guide from sandytech.
+title: "How I Deliver Production-Ready MVPs in 6–8 Weeks"
+slug: mvp-6-8-weeks-approach
+description: Sandeep Kothapalli (kothapallisandeep) breaks down the framework for delivering production-ready MVPs in 6–8 weeks — covering discovery, architecture, core build, integrations, hardening, and launch. What "production-ready" actually means, the default tech stack, and real examples including NexusEd, 360JobReady, and Affixx. A practical guide from kothapallisandeep.
 imageUrl: https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Startup
 date: 2024-12-10
 readTime: 12 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "MVP development", "startup architecture", "6 week MVP", "production ready", "Next.js", ".NET", "Azure", "NexusEd", "360JobReady", "Affixx", "idea to MVP", "rapid development"]
-hashtags: ["#MVP", "#StartupTech", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP", "#NextJS", "#DotNet", "#Azure", "#ProductDevelopment"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "MVP development", "startup architecture", "6 week MVP", "production ready", "Next.js", ".NET", "Azure", "NexusEd", "360JobReady", "Affixx", "idea to MVP", "rapid development"]
+hashtags: ["#MVP", "#StartupTech", "#KothapalliSandeep", "#IdeaToMVP", "#NextJS", "#DotNet", "#Azure", "#ProductDevelopment"]
 ---
 
-# How SandyTech Delivers Production-Ready MVPs in 6–8 Weeks
+# How I Deliver Production-Ready MVPs in 6–8 Weeks
 
 Every week I talk to founders who have been told their idea will take 6 months and $150,000 to build. Sometimes that is true. Often it is not. The gap between a prototype and a production-ready MVP is real, but it is not as wide as many agencies make it seem — if you have the right architecture, the right defaults, and a process that eliminates waste.
 
-At SandyTech, we have delivered multiple production MVPs in 6–8 weeks. NexusEd took 12 weeks (it is a more complex platform — more on that below). 360JobReady took 7 weeks. Affixx took 6. This post explains how.
+I have delivered multiple production MVPs in 6–8 weeks. NexusEd took 12 weeks (it is a more complex platform — more on that below). 360JobReady took 7 weeks. Affixx took 6. This post explains how.
 
 ---
 
@@ -94,7 +94,7 @@ We do not wait until "after launch" for this. Week 7 is dedicated to:
 - Database seeding and data import (if applicable)
 - Smoke test on production
 - Staged rollout (if traffic volume justifies it)
-- Hypercare period: SandyTech team on standby for 72 hours post-launch
+- Hypercare period: team on standby for 72 hours post-launch
 
 ---
 
@@ -115,7 +115,7 @@ We use opinionated defaults to eliminate decision fatigue:
 | CI/CD | GitHub Actions | Azure DevOps for enterprise clients already on ADO |
 | Monitoring | Application Insights | Datadog for clients with existing Datadog subscriptions |
 
-This stack is not the "best" in any absolute sense. It is the stack where the SandyTech team has deep, hard-won experience. A team that knows its stack deeply ships faster and debugs faster than a team that picks the theoretically optimal tool for each layer.
+This stack is not the "best" in any absolute sense. It is the stack where the team has deep, hard-won experience. A team that knows its stack deeply ships faster and debugs faster than a team that picks the theoretically optimal tool for each layer.
 
 ---
 
@@ -159,4 +159,4 @@ If you have a focused idea and the discipline to stay on scope, 6–8 weeks to s
 
 ---
 
-*If you are building a product and want to understand what SandyTech could deliver in your specific case, reach out at [kothapallisandeep.com](https://kothapallisandeep.com). Week 1 discovery is where we figure out together whether the timeline fits the idea.*
+*If you are building a product and want to understand what could deliver in your specific case, reach out at [kothapallisandeep.com](https://kothapallisandeep.com). Week 1 discovery is where we figure out together whether the timeline fits the idea.*

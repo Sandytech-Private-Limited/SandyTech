@@ -1,13 +1,13 @@
 ---
 title: "Building NexusEd: Real-Time EdTech Platform Architecture with WebRTC & GPT-4o"
 slug: nexused-realtime-edtech-architecture
-description: kothapallisandeep at SandyTech shares the full architecture behind NexusEd (nexused.net) — a real-time EdTech platform built with WebRTC mesh classrooms, Socket.io signaling, GPT-4o Vision AI tutoring, Razorpay Route marketplace payments, and MongoDB. How sandytech took NexusEd from zero to production in 12 weeks, and the hard lessons learned scaling WebRTC.
+description: kothapallisandeep shares the full architecture behind NexusEd (nexused.net) — a real-time EdTech platform built with WebRTC mesh classrooms, Socket.io signaling, GPT-4o Vision AI tutoring, Razorpay Route marketplace payments, and MongoDB. How I took NexusEd from zero to production in 12 weeks, and the hard lessons learned scaling WebRTC.
 imageUrl: https://images.pexels.com/photos/4144222/pexels-photo-4144222.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Architecture
 date: 2024-11-05
 readTime: 14 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "NexusEd", "WebRTC", "EdTech architecture", "GPT-4o Vision", "real-time classroom", "Socket.io", "Razorpay Route", "tutor marketplace", "MongoDB", "live video", "AI tutor"]
-hashtags: ["#NexusEd", "#WebRTC", "#EdTech", "#GPT4o", "#SandyTech", "#KothapalliSandeep", "#SocketIO", "#RealTimeArchitecture", "#MongoDB", "#TutorMarketplace"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "NexusEd", "WebRTC", "EdTech architecture", "GPT-4o Vision", "real-time classroom", "Socket.io", "Razorpay Route", "tutor marketplace", "MongoDB", "live video", "AI tutor"]
+hashtags: ["#NexusEd", "#WebRTC", "#EdTech", "#GPT4o", "#KothapalliSandeep", "#SocketIO", "#RealTimeArchitecture", "#MongoDB", "#TutorMarketplace"]
 ---
 
 # Building NexusEd: Real-Time EdTech Platform Architecture with WebRTC & GPT-4o
@@ -22,28 +22,28 @@ This is the technical story — architecture decisions, the specific problems we
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     Next.js Frontend (nexused.net)               │
-│   Marketplace UI  │  Classroom UI  │  Dashboard  │  AI Tutor    │
+│ Next.js Frontend (nexused.net) │
+│ Marketplace UI │ Classroom UI │ Dashboard │ AI Tutor │
 └──────────┬─────────────────┬────────────────────────────────────┘
-           │                 │
-    REST API │         WebSocket│
-           │                 │
-┌──────────▼──────┐   ┌──────▼────────────┐
-│  .NET 8 API     │   │  Node.js Signaling │
-│  (App Service)  │   │  Server (Socket.io) │
-└──────────┬──────┘   └──────┬────────────┘
-           │                 │
-    ┌──────┴──────┐   ┌──────┴──────┐
-    │  MongoDB    │   │  WebRTC     │
-    │  (CosmosDB  │   │  Mesh / SFU │
-    │  for Mongo) │   │  (mediasoup)│
-    └─────────────┘   └─────────────┘
-           │
-    ┌──────┴──────────────────────────┐
-    │  Azure OpenAI (GPT-4o Vision)   │
-    │  Razorpay Route (Payments)      │
-    │  Azure Blob Storage (Recordings)│
-    └─────────────────────────────────┘
+ │ │
+ REST API │ WebSocket│
+ │ │
+┌──────────▼──────┐ ┌──────▼────────────┐
+│ .NET 8 API │ │ Node.js Signaling │
+│ (App Service) │ │ Server (Socket.io) │
+└──────────┬──────┘ └──────┬────────────┘
+ │ │
+ ┌──────┴──────┐ ┌──────┴──────┐
+ │ MongoDB │ │ WebRTC │
+ │ (CosmosDB │ │ Mesh / SFU │
+ │ for Mongo) │ │ (mediasoup)│
+ └─────────────┘ └─────────────┘
+ │
+ ┌──────┴──────────────────────────┐
+ │ Azure OpenAI (GPT-4o Vision) │
+ │ Razorpay Route (Payments) │
+ │ Azure Blob Storage (Recordings)│
+ └─────────────────────────────────┘
 ```
 
 ---
@@ -65,34 +65,34 @@ const socket = io(SIGNALING_SERVER_URL);
 socket.emit("join-room", { roomId, userId });
 
 socket.on("room-joined", async ({ routerRtpCapabilities }) => {
-  await device.load({ routerRtpCapabilities });
+ await device.load({ routerRtpCapabilities });
 
-  // Create send transport
-  socket.emit("create-transport", { direction: "send" });
+ // Create send transport
+ socket.emit("create-transport", { direction: "send" });
 });
 
 socket.on("transport-created", async ({ transportParams, direction }) => {
-  if (direction === "send") {
-    sendTransport = device.createSendTransport(transportParams);
+ if (direction === "send") {
+ sendTransport = device.createSendTransport(transportParams);
 
-    sendTransport.on("connect", ({ dtlsParameters }, callback) => {
-      socket.emit("connect-transport", {
-        transportId: sendTransport.id,
-        dtlsParameters,
-      });
-      socket.once("transport-connected", callback);
-    });
+ sendTransport.on("connect", ({ dtlsParameters }, callback) => {
+ socket.emit("connect-transport", {
+ transportId: sendTransport.id,
+ dtlsParameters,
+ });
+ socket.once("transport-connected", callback);
+ });
 
-    sendTransport.on("produce", async ({ kind, rtpParameters }, callback) => {
-      socket.emit("produce", { transportId: sendTransport.id, kind, rtpParameters });
-      socket.once("producer-created", ({ producerId }) => callback({ id: producerId }));
-    });
+ sendTransport.on("produce", async ({ kind, rtpParameters }, callback) => {
+ socket.emit("produce", { transportId: sendTransport.id, kind, rtpParameters });
+ socket.once("producer-created", ({ producerId }) => callback({ id: producerId }));
+ });
 
-    // Start producing from camera/mic
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    await sendTransport.produce({ track: stream.getVideoTracks()[0] });
-    await sendTransport.produce({ track: stream.getAudioTracks()[0] });
-  }
+ // Start producing from camera/mic
+ const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+ await sendTransport.produce({ track: stream.getVideoTracks()[0] });
+ await sendTransport.produce({ track: stream.getAudioTracks()[0] });
+ }
 });
 ```
 
@@ -109,24 +109,24 @@ Key decisions:
 const rooms = new Map(); // roomId → { router, producers, transports }
 
 io.on("connection", (socket) => {
-  socket.on("join-room", async ({ roomId, userId }) => {
-    let room = rooms.get(roomId);
+ socket.on("join-room", async ({ roomId, userId }) => {
+ let room = rooms.get(roomId);
 
-    if (!room) {
-      const router = await worker.createRouter({ mediaCodecs });
-      room = { router, producers: new Map(), transports: new Map() };
-      rooms.set(roomId, room);
-    }
+ if (!room) {
+ const router = await worker.createRouter({ mediaCodecs });
+ room = { router, producers: new Map(), transports: new Map() };
+ rooms.set(roomId, room);
+ }
 
-    socket.join(roomId);
-    socket.data.roomId = roomId;
-    socket.data.userId = userId;
+ socket.join(roomId);
+ socket.data.roomId = roomId;
+ socket.data.userId = userId;
 
-    socket.emit("room-joined", {
-      routerRtpCapabilities: room.router.rtpCapabilities,
-      existingProducers: Array.from(room.producers.values()),
-    });
-  });
+ socket.emit("room-joined", {
+ routerRtpCapabilities: room.router.rtpCapabilities,
+ existingProducers: Array.from(room.producers.values()),
+ });
+ });
 });
 ```
 
@@ -142,30 +142,30 @@ The classroom whiteboard is a `<canvas>` element (using Fabric.js). Capturing it
 
 ```javascript
 async function captureWhiteboardAndAsk(question: string): Promise<void> {
-  const canvas = fabricCanvasRef.current;
-  const imageDataUrl = canvas.toDataURL({ format: "png", quality: 0.8 });
+ const canvas = fabricCanvasRef.current;
+ const imageDataUrl = canvas.toDataURL({ format: "png", quality: 0.8 });
 
-  const base64Image = imageDataUrl.split(",")[1];
+ const base64Image = imageDataUrl.split(",")[1];
 
-  const response = await fetch("/api/ai-tutor/ask", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      question,
-      imageBase64: base64Image,
-      sessionId: currentSession.id,
-    }),
-  });
+ const response = await fetch("/api/ai-tutor/ask", {
+ method: "POST",
+ headers: { "Content-Type": "application/json" },
+ body: JSON.stringify({
+ question,
+ imageBase64: base64Image,
+ sessionId: currentSession.id,
+ }),
+ });
 
-  // Stream the response
-  const reader = response.body!.getReader();
-  const decoder = new TextDecoder();
+ // Stream the response
+ const reader = response.body!.getReader();
+ const decoder = new TextDecoder();
 
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    appendToAiChat(decoder.decode(value));
-  }
+ while (true) {
+ const { value, done } = await reader.read();
+ if (done) break;
+ appendToAiChat(decoder.decode(value));
+ }
 }
 ```
 
@@ -175,30 +175,30 @@ async function captureWhiteboardAndAsk(question: string): Promise<void> {
 // .NET 8 Minimal API
 app.MapPost("/api/ai-tutor/ask", async (AiTutorRequest request, HttpResponse response) =>
 {
-    response.Headers.ContentType = "text/plain; charset=utf-8";
-    response.Headers.CacheControl = "no-cache";
+ response.Headers.ContentType = "text/plain; charset=utf-8";
+ response.Headers.CacheControl = "no-cache";
 
-    var messages = new List<ChatMessage>
-    {
-        new SystemChatMessage(
-            "You are a helpful tutor assistant. The student has shared a whiteboard image. " +
-            "Explain clearly, step by step. If there is a math problem or diagram, analyse it carefully."),
-        new UserChatMessage(
-            ChatMessageContentPart.CreateTextPart(request.Question),
-            ChatMessageContentPart.CreateImagePart(
-                new BinaryData(Convert.FromBase64String(request.ImageBase64)),
-                "image/png")),
-    };
+ var messages = new List<ChatMessage>
+ {
+ new SystemChatMessage(
+ "You are a helpful tutor assistant. The student has shared a whiteboard image. " +
+ "Explain clearly, step by step. If there is a math problem or diagram, analyse it carefully."),
+ new UserChatMessage(
+ ChatMessageContentPart.CreateTextPart(request.Question),
+ ChatMessageContentPart.CreateImagePart(
+ new BinaryData(Convert.FromBase64String(request.ImageBase64)),
+ "image/png")),
+ };
 
-    await foreach (var update in openAiClient.CompleteChatStreamingAsync(
-        "gpt-4o", messages))
-    {
-        foreach (var part in update.ContentUpdate)
-        {
-            await response.WriteAsync(part.Text);
-            await response.Body.FlushAsync();
-        }
-    }
+ await foreach (var update in openAiClient.CompleteChatStreamingAsync(
+ "gpt-4o", messages))
+ {
+ foreach (var part in update.ContentUpdate)
+ {
+ await response.WriteAsync(part.Text);
+ await response.Body.FlushAsync();
+ }
+ }
 });
 ```
 
@@ -219,36 +219,36 @@ Schema for a session:
 
 ```javascript
 {
-  _id: ObjectId,
-  sessionCode: "nx-abc123",
-  tutorId: ObjectId,
-  subject: "Mathematics",
-  level: "Grade 10",
-  scheduledAt: ISODate,
-  durationMinutes: 60,
-  status: "completed", // scheduled | active | completed | cancelled
-  participants: [
-    { userId: ObjectId, name: "Student Name", joinedAt: ISODate, leftAt: ISODate }
-  ],
-  recording: {
-    blobUrl: "https://...",
-    durationSeconds: 3580,
-  },
-  aiInteractions: [
-    {
-      questionText: "Can you explain this equation?",
-      imageUrl: "https://...",
-      response: "...",
-      timestamp: ISODate,
-    }
-  ],
-  payment: {
-    razorpayPaymentId: "pay_...",
-    transferId: "trf_...",
-    amount: 80000, // paise
-    platformFee: 8000,
-    vendorAmount: 72000,
-  }
+ _id: ObjectId,
+ sessionCode: "nx-abc123",
+ tutorId: ObjectId,
+ subject: "Mathematics",
+ level: "Grade 10",
+ scheduledAt: ISODate,
+ durationMinutes: 60,
+ status: "completed", // scheduled | active | completed | cancelled
+ participants: [
+ { userId: ObjectId, name: "Student Name", joinedAt: ISODate, leftAt: ISODate }
+ ],
+ recording: {
+ blobUrl: "https://...",
+ durationSeconds: 3580,
+ },
+ aiInteractions: [
+ {
+ questionText: "Can you explain this equation?",
+ imageUrl: "https://...",
+ response: "...",
+ timestamp: ISODate,
+ }
+ ],
+ payment: {
+ razorpayPaymentId: "pay_...",
+ transferId: "trf_...",
+ amount: 80000, // paise
+ platformFee: 8000,
+ vendorAmount: 72000,
+ }
 }
 ```
 
@@ -265,20 +265,20 @@ We use Razorpay Route with `on_hold: 1` — the transfer to the tutor is created
 [Function("ReleasePendingPayouts")]
 public async Task Run([TimerTrigger("0 9 * * *")] TimerInfo timer)
 {
-    var cutoff = DateTime.UtcNow.AddHours(-72);
-    var pendingTransfers = await db.Sessions
-        .Where(s => s.Payment.TransferStatus == "on_hold"
-                 && s.Payment.TransferCreatedAt < cutoff
-                 && s.Payment.DisputeStatus == null)
-        .ToListAsync();
+ var cutoff = DateTime.UtcNow.AddHours(-72);
+ var pendingTransfers = await db.Sessions
+ .Where(s => s.Payment.TransferStatus == "on_hold"
+ && s.Payment.TransferCreatedAt < cutoff
+ && s.Payment.DisputeStatus == null)
+ .ToListAsync();
 
-    foreach (var session in pendingTransfers)
-    {
-        await razorpayService.ReleaseTransferHold(session.Payment.TransferId);
-        session.Payment.TransferStatus = "released";
-    }
+ foreach (var session in pendingTransfers)
+ {
+ await razorpayService.ReleaseTransferHold(session.Payment.TransferId);
+ session.Payment.TransferStatus = "released";
+ }
 
-    await db.SaveChangesAsync();
+ await db.SaveChangesAsync();
 }
 ```
 

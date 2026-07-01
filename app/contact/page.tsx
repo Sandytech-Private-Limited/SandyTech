@@ -72,11 +72,11 @@ const Contact = () => {
         });
       } else {
         setSubmitStatus('error');
-        setSubmitMessage(data.error || 'Something went wrong. Please try again or email me directly at info@sandytech.org');
+        setSubmitMessage(data.error || 'Something went wrong. Please try again or email me directly at Sandeep.kothapalli1@hotmail.com');
       }
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage('Failed to send message. Please try again or email me directly at info@sandytech.org');
+      setSubmitMessage('Failed to send message. Please try again or email me directly at Sandeep.kothapalli1@hotmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -86,9 +86,9 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "info@sandytech.org",
-      description: "SandyTech enquiries & project briefs",
-      link: "mailto:info@sandytech.org"
+      value: "Sandeep.kothapalli1@hotmail.com",
+      description: "Project enquiries & collaboration",
+      link: "mailto:Sandeep.kothapalli1@hotmail.com"
     },
     {
       icon: Phone,
@@ -115,15 +115,9 @@ const Contact = () => {
     },
     {
       icon: Linkedin,
-      name: "LinkedIn (Personal)",
+      name: "LinkedIn",
       url: "https://www.linkedin.com/in/kothapallisandeep/",
       description: "Connect with me professionally"
-    },
-    {
-      icon: Linkedin,
-      name: "LinkedIn (SandyTech)",
-      url: "https://www.linkedin.com/company/sandytech-pvt-ltd/?viewAsMember=false",
-      description: "Follow SandyTech Pvt Ltd"
     },
     {
       icon: Twitter,
@@ -436,8 +430,8 @@ const Contact = () => {
                     </a>
                     <p className="text-xs text-center text-gray-500 dark:text-gray-400">
                       Or email{" "}
-                      <a href="mailto:info@sandytech.org?subject=Consultation Request" className="text-indigo-600 dark:text-indigo-400 hover:underline">
-                        info@sandytech.org
+                      <a href="mailto:Sandeep.kothapalli1@hotmail.com?subject=Consultation Request" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                        Sandeep.kothapalli1@hotmail.com
                       </a>
                     </p>
                   </CardContent>

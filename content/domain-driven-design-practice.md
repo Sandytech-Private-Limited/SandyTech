@@ -1,13 +1,13 @@
 ---
 title: Domain-Driven Design in Practice - Building Better Software
 slug: domain-driven-design-practice
-description: Learn how to apply Domain-Driven Design (DDD) principles to build maintainable, scalable software that aligns with business requirements. Expert guide from kothapallisandeep on SandyTech.
+description: Learn how to apply Domain-Driven Design (DDD) principles to build maintainable, scalable software that aligns with business requirements. Expert guide from kothapallisandeep.
 imageUrl: https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Architecture
 date: 2024-04-01
 readTime: 16 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "DDD", "Domain Driven Design", "software architecture", "bounded contexts", "aggregates", "clean architecture", "enterprise architecture"]
-hashtags: ["#DDD", "#DomainDrivenDesign", "#SoftwareArchitecture", "#CleanArchitecture", "#EnterpriseArchitecture", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "AI automation", "Idea to MVP", "DDD", "Domain Driven Design", "software architecture", "bounded contexts", "aggregates", "clean architecture", "enterprise architecture"]
+hashtags: ["#DDD", "#DomainDrivenDesign", "#SoftwareArchitecture", "#CleanArchitecture", "#EnterpriseArchitecture", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Domain-Driven Design in Practice - Building Better Software
@@ -34,18 +34,18 @@ The ubiquitous language is a common vocabulary used by all team members to conne
 // Good: Uses domain language
 public class Order
 {
-    public OrderId Id { get; private set; }
-    public CustomerId CustomerId { get; private set; }
-    public OrderStatus Status { get; private set; }
-    public Money TotalAmount { get; private set; }
-    
-    public void MarkAsShipped()
-    {
-        if (Status != OrderStatus.Confirmed)
-            throw new InvalidOperationException("Only confirmed orders can be shipped");
-        
-        Status = OrderStatus.Shipped;
-    }
+ public OrderId Id { get; private set; }
+ public CustomerId CustomerId { get; private set; }
+ public OrderStatus Status { get; private set; }
+ public Money TotalAmount { get; private set; }
+ 
+ public void MarkAsShipped()
+ {
+ if (Status != OrderStatus.Confirmed)
+ throw new InvalidOperationException("Only confirmed orders can be shipped");
+ 
+ Status = OrderStatus.Shipped;
+ }
 }
 ```
 
@@ -57,19 +57,19 @@ A bounded context is an explicit boundary within which a domain model is valid. 
 // Order Context
 namespace OrderManagement.Domain.Orders
 {
-    public class Order
-    {
-        // Order-specific properties and behavior
-    }
+ public class Order
+ {
+ // Order-specific properties and behavior
+ }
 }
 
 // Shipping Context
 namespace Shipping.Domain.Shipments
 {
-    public class Shipment
-    {
-        // Shipping-specific properties and behavior
-    }
+ public class Shipment
+ {
+ // Shipping-specific properties and behavior
+ }
 }
 ```
 
@@ -80,15 +80,15 @@ namespace Shipping.Domain.Shipments
 ```csharp
 public class Customer : Entity<CustomerId>
 {
-    public string Name { get; private set; }
-    public Email Email { get; private set; }
-    
-    public Customer(CustomerId id, string name, Email email)
-    {
-        Id = id;
-        Name = name;
-        Email = email;
-    }
+ public string Name { get; private set; }
+ public Email Email { get; private set; }
+ 
+ public Customer(CustomerId id, string name, Email email)
+ {
+ Id = id;
+ Name = name;
+ Email = email;
+ }
 }
 ```
 
@@ -97,31 +97,31 @@ public class Customer : Entity<CustomerId>
 ```csharp
 public class Money : ValueObject
 {
-    public decimal Amount { get; }
-    public string Currency { get; }
-    
-    public Money(decimal amount, string currency)
-    {
-        if (amount < 0)
-            throw new ArgumentException("Amount cannot be negative");
-        
-        Amount = amount;
-        Currency = currency;
-    }
-    
-    public Money Add(Money other)
-    {
-        if (Currency != other.Currency)
-            throw new InvalidOperationException("Cannot add different currencies");
-        
-        return new Money(Amount + other.Amount, Currency);
-    }
-    
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Amount;
-        yield return Currency;
-    }
+ public decimal Amount { get; }
+ public string Currency { get; }
+ 
+ public Money(decimal amount, string currency)
+ {
+ if (amount < 0)
+ throw new ArgumentException("Amount cannot be negative");
+ 
+ Amount = amount;
+ Currency = currency;
+ }
+ 
+ public Money Add(Money other)
+ {
+ if (Currency != other.Currency)
+ throw new InvalidOperationException("Cannot add different currencies");
+ 
+ return new Money(Amount + other.Amount, Currency);
+ }
+ 
+ protected override IEnumerable<object> GetEqualityComponents()
+ {
+ yield return Amount;
+ yield return Currency;
+ }
 }
 ```
 
@@ -132,39 +132,39 @@ Aggregates are clusters of entities and value objects treated as a single unit:
 ```csharp
 public class Order : AggregateRoot<OrderId>
 {
-    private readonly List<OrderItem> _items = new();
-    
-    public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
-    public OrderStatus Status { get; private set; }
-    public Money TotalAmount { get; private set; }
-    
-    public void AddItem(ProductId productId, int quantity, Money unitPrice)
-    {
-        if (Status != OrderStatus.Draft)
-            throw new InvalidOperationException("Cannot modify confirmed order");
-        
-        var item = new OrderItem(productId, quantity, unitPrice);
-        _items.Add(item);
-        
-        RecalculateTotal();
-    }
-    
-    public void Confirm()
-    {
-        if (_items.Count == 0)
-            throw new InvalidOperationException("Cannot confirm empty order");
-        
-        Status = OrderStatus.Confirmed;
-        AddDomainEvent(new OrderConfirmedEvent(Id));
-    }
-    
-    private void RecalculateTotal()
-    {
-        TotalAmount = _items.Aggregate(
-            Money.Zero(Currency.USD),
-            (total, item) => total.Add(item.Subtotal)
-        );
-    }
+ private readonly List<OrderItem> _items = new();
+ 
+ public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
+ public OrderStatus Status { get; private set; }
+ public Money TotalAmount { get; private set; }
+ 
+ public void AddItem(ProductId productId, int quantity, Money unitPrice)
+ {
+ if (Status != OrderStatus.Draft)
+ throw new InvalidOperationException("Cannot modify confirmed order");
+ 
+ var item = new OrderItem(productId, quantity, unitPrice);
+ _items.Add(item);
+ 
+ RecalculateTotal();
+ }
+ 
+ public void Confirm()
+ {
+ if (_items.Count == 0)
+ throw new InvalidOperationException("Cannot confirm empty order");
+ 
+ Status = OrderStatus.Confirmed;
+ AddDomainEvent(new OrderConfirmedEvent(Id));
+ }
+ 
+ private void RecalculateTotal()
+ {
+ TotalAmount = _items.Aggregate(
+ Money.Zero(Currency.USD),
+ (total, item) => total.Add(item.Subtotal)
+ );
+ }
 }
 ```
 
@@ -175,22 +175,22 @@ Domain services contain domain logic that doesn't naturally fit within entities:
 ```csharp
 public interface IOrderPricingService
 {
-    Money CalculateTotal(Order order, Customer customer);
+ Money CalculateTotal(Order order, Customer customer);
 }
 
 public class OrderPricingService : IOrderPricingService
 {
-    private readonly IDiscountService _discountService;
-    
-    public Money CalculateTotal(Order order, Customer customer)
-    {
-        var subtotal = order.Items
-            .Sum(item => item.Subtotal.Amount);
-        
-        var discount = _discountService.CalculateDiscount(customer, subtotal);
-        
-        return new Money(subtotal - discount, "USD");
-    }
+ private readonly IDiscountService _discountService;
+ 
+ public Money CalculateTotal(Order order, Customer customer)
+ {
+ var subtotal = order.Items
+ .Sum(item => item.Subtotal.Amount);
+ 
+ var discount = _discountService.CalculateDiscount(customer, subtotal);
+ 
+ return new Money(subtotal - discount, "USD");
+ }
 }
 ```
 
@@ -200,13 +200,13 @@ DDD typically uses a layered architecture:
 
 ```
 ┌─────────────────────────────────┐
-│   Presentation Layer (UI/API)  │
+│ Presentation Layer (UI/API) │
 ├─────────────────────────────────┤
-│   Application Layer (Use Cases)│
+│ Application Layer (Use Cases)│
 ├─────────────────────────────────┤
-│   Domain Layer (Business Logic) │
+│ Domain Layer (Business Logic) │
 ├─────────────────────────────────┤
-│   Infrastructure Layer (Data)   │
+│ Infrastructure Layer (Data) │
 └─────────────────────────────────┘
 ```
 
@@ -215,28 +215,28 @@ DDD typically uses a layered architecture:
 ```csharp
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, OrderId>
 {
-    private readonly IOrderRepository _orderRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    
-    public async Task<OrderId> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
-    {
-        var order = new Order(
-            OrderId.NewId(),
-            new CustomerId(request.CustomerId),
-            request.Items.Select(i => 
-                new OrderItem(
-                    new ProductId(i.ProductId),
-                    i.Quantity,
-                    new Money(i.Price, "USD")
-                )
-            )
-        );
-        
-        await _orderRepository.AddAsync(order);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-        
-        return order.Id;
-    }
+ private readonly IOrderRepository _orderRepository;
+ private readonly IUnitOfWork _unitOfWork;
+ 
+ public async Task<OrderId> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+ {
+ var order = new Order(
+ OrderId.NewId(),
+ new CustomerId(request.CustomerId),
+ request.Items.Select(i => 
+ new OrderItem(
+ new ProductId(i.ProductId),
+ i.Quantity,
+ new Money(i.Price, "USD")
+ )
+ )
+ );
+ 
+ await _orderRepository.AddAsync(order);
+ await _unitOfWork.SaveChangesAsync(cancellationToken);
+ 
+ return order.Id;
+ }
 }
 ```
 
@@ -246,24 +246,24 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Ord
 
 ```
 OrderManagement.Domain/
-  ├── Entities/
-  ├── ValueObjects/
-  ├── Aggregates/
-  ├── DomainServices/
-  └── DomainEvents/
+ ├── Entities/
+ ├── ValueObjects/
+ ├── Aggregates/
+ ├── DomainServices/
+ └── DomainEvents/
 
 OrderManagement.Application/
-  ├── Commands/
-  ├── Queries/
-  └── DTOs/
+ ├── Commands/
+ ├── Queries/
+ └── DTOs/
 
 OrderManagement.Infrastructure/
-  ├── Persistence/
-  └── ExternalServices/
+ ├── Persistence/
+ └── ExternalServices/
 
 OrderManagement.API/
-  ├── Controllers/
-  └── Program.cs
+ ├── Controllers/
+ └── Program.cs
 ```
 
 ### Domain Events
@@ -271,17 +271,17 @@ OrderManagement.API/
 ```csharp
 public abstract class DomainEvent
 {
-    public DateTime OccurredOn { get; } = DateTime.UtcNow;
+ public DateTime OccurredOn { get; } = DateTime.UtcNow;
 }
 
 public class OrderConfirmedEvent : DomainEvent
 {
-    public OrderId OrderId { get; }
-    
-    public OrderConfirmedEvent(OrderId orderId)
-    {
-        OrderId = orderId;
-    }
+ public OrderId OrderId { get; }
+ 
+ public OrderConfirmedEvent(OrderId orderId)
+ {
+ OrderId = orderId;
+ }
 }
 ```
 

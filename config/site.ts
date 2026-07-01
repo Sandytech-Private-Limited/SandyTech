@@ -1,16 +1,13 @@
 const SiteConfig = {
-    "title": "Sandeep Kothapalli — Senior Architect & SandyTech Founder",
-    "description": "Sandeep Kothapalli — Senior Architect & Founder of SandyTech Pvt Ltd. 13+ years building cloud-native platforms, AI/LLM systems, and production MVPs. Expert in .NET, Azure, Kubernetes, Dapr, RAG pipelines. Based in Hyderabad, India.",
+    "title": "Sandeep Kothapalli — Senior Architect & Cloud-Native Engineer",
+    "description": "Sandeep Kothapalli — Senior Architect with 13+ years building cloud-native platforms, AI/LLM systems, and production MVPs. Expert in .NET, Azure, Kubernetes, Dapr, RAG pipelines. Based in Hyderabad, India.",
     "author": "Sandeep Kothapalli",
     "url": "https://kothapallisandeep.com",
     "keywords": [
         "Sandeep Kothapalli",
         "kothapallisandeep",
         "sandeepkothapalli",
-        "SandyTech",
-        "SandyTech Pvt Ltd",
         "Senior Architect",
-        "SandyTech Founder",
         "AI MVP developer",
         "Idea to MVP",
         "MVP in 6 weeks",

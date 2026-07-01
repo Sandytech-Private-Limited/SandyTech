@@ -1,13 +1,13 @@
 ---
 title: Azure Cloud Architecture Best Practices
 slug: azure-cloud-architecture-best-practices
-description: Essential best practices for designing and implementing scalable, secure, and cost-effective cloud architectures on Microsoft Azure. Expert insights from kothapallisandeep on SandyTech.
+description: Essential best practices for designing and implementing scalable, secure, and cost-effective cloud architectures on Microsoft Azure. Expert insights from kothapallisandeep.
 imageUrl: https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Cloud
 date: 2024-03-20
 readTime: 14 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "Azure", "cloud architecture", "Microsoft Azure", "scalability", "high availability", "cost optimization", "Azure DevOps", "AKS"]
-hashtags: ["#Azure", "#CloudArchitecture", "#MicrosoftAzure", "#CloudNative", "#DevOps", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "AI automation", "Idea to MVP", "Azure", "cloud architecture", "Microsoft Azure", "scalability", "high availability", "cost optimization", "Azure DevOps", "AKS"]
+hashtags: ["#Azure", "#CloudArchitecture", "#MicrosoftAzure", "#CloudNative", "#DevOps", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Azure Cloud Architecture Best Practices
@@ -26,26 +26,26 @@ Design for horizontal scaling from the start:
 
 ```json
 {
-  "profiles": [{
-    "name": "AutoScale",
-    "capacity": {
-      "minimum": 2,
-      "maximum": 10,
-      "default": 3
-    },
-    "rules": [{
-      "metricTrigger": {
-        "metricName": "CPUPercentage",
-        "operator": "GreaterThan",
-        "threshold": 70
-      },
-      "scaleAction": {
-        "direction": "Increase",
-        "type": "ChangeCount",
-        "value": 1
-      }
-    }]
-  }]
+ "profiles": [{
+ "name": "AutoScale",
+ "capacity": {
+ "minimum": 2,
+ "maximum": 10,
+ "default": 3
+ },
+ "rules": [{
+ "metricTrigger": {
+ "metricName": "CPUPercentage",
+ "operator": "GreaterThan",
+ "threshold": 70
+ },
+ "scaleAction": {
+ "direction": "Increase",
+ "type": "ChangeCount",
+ "value": 1
+ }
+ }]
+ }]
 }
 ```
 
@@ -84,12 +84,12 @@ await sender.SendMessageAsync(message);
 ```csharp
 [FunctionName("ProcessOrder")]
 public static async Task<IActionResult> Run(
-    [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
-    [CosmosDB(databaseName: "Orders", collectionName: "Items", ConnectionStringSetting = "CosmosDBConnection")] IAsyncCollector<Order> ordersOut)
+ [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+ [CosmosDB(databaseName: "Orders", collectionName: "Items", ConnectionStringSetting = "CosmosDBConnection")] IAsyncCollector<Order> ordersOut)
 {
-    var order = await JsonSerializer.DeserializeAsync<Order>(req.Body);
-    await ordersOut.AddAsync(order);
-    return new OkResult();
+ var order = await JsonSerializer.DeserializeAsync<Order>(req.Body);
+ await ordersOut.AddAsync(order);
+ return new OkResult();
 }
 ```
 
@@ -100,27 +100,27 @@ public static async Task<IActionResult> Run(
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-service
+ name: api-service
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: api-service
-  template:
-    metadata:
-      labels:
-        app: api-service
-    spec:
-      containers:
-      - name: api
-        image: myregistry.azurecr.io/api:latest
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
+ replicas: 3
+ selector:
+ matchLabels:
+ app: api-service
+ template:
+ metadata:
+ labels:
+ app: api-service
+ spec:
+ containers:
+ - name: api
+ image: myregistry.azurecr.io/api:latest
+ resources:
+ requests:
+ memory: "256Mi"
+ cpu: "250m"
+ limits:
+ memory: "512Mi"
+ cpu: "500m"
 ```
 
 ## Cost Optimization
@@ -136,14 +136,14 @@ spec:
 ```csharp
 // Azure Monitor metrics
 var metricsClient = new MetricsQueryClient(
-    new DefaultAzureCredential(),
-    new MetricsQueryClientOptions()
+ new DefaultAzureCredential(),
+ new MetricsQueryClientOptions()
 );
 
 var response = await metricsClient.QueryResourceAsync(
-    resourceId,
-    new[] { "Percentage CPU" },
-    new QueryTimeRange(TimeSpan.FromHours(1))
+ resourceId,
+ new[] { "Percentage CPU" },
+ new QueryTimeRange(TimeSpan.FromHours(1))
 );
 ```
 
@@ -176,23 +176,23 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+ vmImage: 'ubuntu-latest'
 
 steps:
 - task: Docker@2
-  inputs:
-    containerRegistry: 'AzureContainerRegistry'
-    repository: 'api'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+ inputs:
+ containerRegistry: 'AzureContainerRegistry'
+ repository: 'api'
+ command: 'buildAndPush'
+ Dockerfile: '**/Dockerfile'
 
 - task: Kubernetes@1
-  inputs:
-    connectionType: 'Azure Resource Manager'
-    kubernetesServiceEndpoint: 'AKS-Connection'
-    namespace: 'default'
-    command: 'apply'
-    arguments: '-f deployment.yaml'
+ inputs:
+ connectionType: 'Azure Resource Manager'
+ kubernetesServiceEndpoint: 'AKS-Connection'
+ namespace: 'default'
+ command: 'apply'
+ arguments: '-f deployment.yaml'
 ```
 
 ## Monitoring and Observability
@@ -203,14 +203,14 @@ steps:
 // Track custom events
 telemetryClient.TrackEvent("OrderProcessed", new Dictionary<string, string>
 {
-    { "OrderId", order.Id },
-    { "Amount", order.Amount.ToString() }
+ { "OrderId", order.Id },
+ { "Amount", order.Amount.ToString() }
 });
 
 // Track dependencies
 using (var operation = telemetryClient.StartOperation<DependencyTelemetry>("DatabaseQuery"))
 {
-    await database.ExecuteQueryAsync(query);
+ await database.ExecuteQueryAsync(query);
 }
 ```
 

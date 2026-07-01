@@ -1,13 +1,13 @@
 ---
 title: Kubernetes for .NET Developers - A Practical Guide
 slug: kubernetes-for-dotnet-developers
-description: Learn how to deploy, manage, and scale .NET applications on Kubernetes with practical examples and best practices. Guide from kothapallisandeep on SandyTech.
+description: Learn how to deploy, manage, and scale .NET applications on Kubernetes with practical examples and best practices. Guide from kothapallisandeep.
 imageUrl: https://images.pexels.com/photos/1181299/pexels-photo-1181299.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: DevOps
 date: 2024-03-25
 readTime: 13 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "Kubernetes", ".NET", "containerization", "Docker", "AKS", "orchestration", "microservices", "DevOps"]
-hashtags: ["#Kubernetes", "#DotNet", "#Docker", "#Containerization", "#DevOps", "#AKS", "#SandyTech", "#KothapalliSandeep"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "AI automation", "Idea to MVP", "Kubernetes", ".NET", "containerization", "Docker", "AKS", "orchestration", "microservices", "DevOps"]
+hashtags: ["#Kubernetes", "#DotNet", "#Docker", "#Containerization", "#DevOps", "#AKS", "#KothapalliSandeep"]
 ---
 
 # Kubernetes for .NET Developers - A Practical Guide
@@ -66,49 +66,49 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dotnet-api
+ name: dotnet-api
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: dotnet-api
-  template:
-    metadata:
-      labels:
-        app: dotnet-api
-    spec:
-      containers:
-      - name: api
-        image: myregistry.azurecr.io/dotnet-api:latest
-        ports:
-        - containerPort: 8080
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
-        - name: ConnectionStrings__DefaultConnection
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: connection-string
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 5
+ replicas: 3
+ selector:
+ matchLabels:
+ app: dotnet-api
+ template:
+ metadata:
+ labels:
+ app: dotnet-api
+ spec:
+ containers:
+ - name: api
+ image: myregistry.azurecr.io/dotnet-api:latest
+ ports:
+ - containerPort: 8080
+ env:
+ - name: ASPNETCORE_ENVIRONMENT
+ value: "Production"
+ - name: ConnectionStrings__DefaultConnection
+ valueFrom:
+ secretKeyRef:
+ name: app-secrets
+ key: connection-string
+ resources:
+ requests:
+ memory: "256Mi"
+ cpu: "250m"
+ limits:
+ memory: "512Mi"
+ cpu: "500m"
+ livenessProbe:
+ httpGet:
+ path: /health
+ port: 8080
+ initialDelaySeconds: 30
+ periodSeconds: 10
+ readinessProbe:
+ httpGet:
+ path: /ready
+ port: 8080
+ initialDelaySeconds: 10
+ periodSeconds: 5
 ```
 
 ### Service
@@ -117,15 +117,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dotnet-api-service
+ name: dotnet-api-service
 spec:
-  selector:
-    app: dotnet-api
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer
+ selector:
+ app: dotnet-api
+ ports:
+ - protocol: TCP
+ port: 80
+ targetPort: 8080
+ type: LoadBalancer
 ```
 
 ### Health Checks in .NET
@@ -133,17 +133,17 @@ spec:
 ```csharp
 // Program.cs
 builder.Services.AddHealthChecks()
-    .AddCheck("liveness", () => HealthCheckResult.Healthy())
-    .AddCheck("readiness", () => 
-    {
-        // Check database connectivity, external dependencies
-        return HealthCheckResult.Healthy();
-    });
+ .AddCheck("liveness", () => HealthCheckResult.Healthy())
+ .AddCheck("readiness", () => 
+ {
+ // Check database connectivity, external dependencies
+ return HealthCheckResult.Healthy();
+ });
 
 app.MapHealthChecks("/health");
 app.MapHealthChecks("/ready", new HealthCheckOptions
 {
-    Predicate = check => check.Tags.Contains("readiness")
+ Predicate = check => check.Tags.Contains("readiness")
 });
 ```
 
@@ -155,15 +155,15 @@ app.MapHealthChecks("/ready", new HealthCheckOptions
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-config
+ name: app-config
 data:
-  appsettings.json: |
-    {
-      "Logging": {
-        "LogLevel": "Information"
-      },
-      "AllowedHosts": "*"
-    }
+ appsettings.json: |
+ {
+ "Logging": {
+ "LogLevel": "Information"
+ },
+ "AllowedHosts": "*"
+ }
 ```
 
 ### Secrets
@@ -172,10 +172,10 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: app-secrets
+ name: app-secrets
 type: Opaque
 data:
-  connection-string: <base64-encoded-value>
+ connection-string: <base64-encoded-value>
 ```
 
 ### Using in .NET
@@ -196,27 +196,27 @@ var connectionString = configuration.GetConnectionString("DefaultConnection");
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: dotnet-api-hpa
+ name: dotnet-api-hpa
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: dotnet-api
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
+ scaleTargetRef:
+ apiVersion: apps/v1
+ kind: Deployment
+ name: dotnet-api
+ minReplicas: 2
+ maxReplicas: 10
+ metrics:
+ - type: Resource
+ resource:
+ name: cpu
+ target:
+ type: Utilization
+ averageUtilization: 70
+ - type: Resource
+ resource:
+ name: memory
+ target:
+ type: Utilization
+ averageUtilization: 80
 ```
 
 ## Logging and Monitoring
@@ -227,11 +227,11 @@ spec:
 // Use Serilog for structured logging
 builder.Host.UseSerilog((context, configuration) =>
 {
-    configuration
-        .ReadFrom.Configuration(context.Configuration)
-        .Enrich.FromLogContext()
-        .WriteTo.Console()
-        .WriteTo.Seq("http://seq-service:5341");
+ configuration
+ .ReadFrom.Configuration(context.Configuration)
+ .Enrich.FromLogContext()
+ .WriteTo.Console()
+ .WriteTo.Seq("http://seq-service:5341");
 });
 ```
 
@@ -260,11 +260,11 @@ app.UseMetricServer(); // Exposes /metrics endpoint
 
 ```yaml
 spec:
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+ strategy:
+ type: RollingUpdate
+ rollingUpdate:
+ maxSurge: 1
+ maxUnavailable: 0
 ```
 
 ### Blue-Green Deployment

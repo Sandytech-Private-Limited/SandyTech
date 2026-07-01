@@ -1,13 +1,13 @@
 ---
 title: "WebRTC at Scale: Hard Lessons from Building NexusEd's Live Classroom Infrastructure"
 slug: webrtc-scaling-lessons-nexused
-description: Real lessons from building NexusEd's live classroom system — why P2P mesh fails, mediasoup SFU architecture, TURN server costs, simulcast, debugging black screens, and running 50-participant rooms in production. By Sandeep Kothapalli, SandyTech.
+description: Real lessons from building NexusEd's live classroom system — why P2P mesh fails, mediasoup SFU architecture, TURN server costs, simulcast, debugging black screens, and running 50-participant rooms in production. By Sandeep Kothapalli,.
 imageUrl: https://images.pexels.com/photos/4226140/pexels-photo-4226140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Architecture
 date: 2026-01-25
 readTime: 12 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "WebRTC", "mediasoup", "SFU", "NexusEd", "live classroom", "video streaming", "TURN server", "simulcast", "real-time video", "coturn"]
-hashtags: ["#WebRTC", "#mediasoup", "#RealTime", "#NexusEd", "#VideoStreaming", "#SandyTech", "#KothapalliSandeep", "#LiveClassroom"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "WebRTC", "mediasoup", "SFU", "NexusEd", "live classroom", "video streaming", "TURN server", "simulcast", "real-time video", "coturn"]
+hashtags: ["#WebRTC", "#mediasoup", "#RealTime", "#NexusEd", "#VideoStreaming", "#KothapalliSandeep", "#LiveClassroom"]
 ---
 
 # WebRTC at Scale: Hard Lessons from Building NexusEd's Live Classroom Infrastructure
@@ -40,9 +40,9 @@ We chose mediasoup — an open-source Node.js/C++ SFU. It's the highest-performa
 The architecture for NexusEd:
 
 ```
-Browser A  ──publish──▶  mediasoup Router  ──forward──▶  Browser B
-Browser B  ──publish──▶  mediasoup Router  ──forward──▶  Browser A
-Browser C  ──publish──▶  mediasoup Router  ──forward──▶  Browsers A, B
+Browser A ──publish──▶ mediasoup Router ──forward──▶ Browser B
+Browser B ──publish──▶ mediasoup Router ──forward──▶ Browser A
+Browser C ──publish──▶ mediasoup Router ──forward──▶ Browsers A, B
 ```
 
 Each room is a mediasoup `Router`. Participants create `Producer` objects (their outbound streams) and `Consumer` objects (each inbound stream they want to receive). The signalling layer (we use Socket.io) coordinates the negotiation:
@@ -50,25 +50,25 @@ Each room is a mediasoup `Router`. Participants create `Producer` objects (their
 ```typescript
 // Server-side: create a consumer for a participant
 async function createConsumer(
-  router: Router,
-  producerId: string,
-  consumerTransport: WebRtcTransport,
-  rtpCapabilities: RtpCapabilities
+ router: Router,
+ producerId: string,
+ consumerTransport: WebRtcTransport,
+ rtpCapabilities: RtpCapabilities
 ): Promise<Consumer> {
-  if (!router.canConsume({ producerId, rtpCapabilities })) {
-    throw new Error('Cannot consume this producer');
-  }
-  
-  const consumer = await consumerTransport.consume({
-    producerId,
-    rtpCapabilities,
-    paused: true  // start paused, resume after client ACK
-  });
+ if (!router.canConsume({ producerId, rtpCapabilities })) {
+ throw new Error('Cannot consume this producer');
+ }
+ 
+ const consumer = await consumerTransport.consume({
+ producerId,
+ rtpCapabilities,
+ paused: true // start paused, resume after client ACK
+ });
 
-  // Resume only after client confirms it's ready
-  consumer.on('transportclose', () => consumer.close());
-  
-  return consumer;
+ // Resume only after client confirms it's ready
+ consumer.on('transportclose', () => consumer.close());
+ 
+ return consumer;
 }
 ```
 
@@ -115,18 +115,18 @@ Trickle ICE sends candidates as they're discovered, allowing connection attempts
 ```typescript
 // Client-side: send candidates as they're discovered
 peerConnection.onicecandidate = (event) => {
-  if (event.candidate) {
-    socket.emit('ice-candidate', {
-      roomId,
-      candidate: event.candidate.toJSON()
-    });
-  }
+ if (event.candidate) {
+ socket.emit('ice-candidate', {
+ roomId,
+ candidate: event.candidate.toJSON()
+ });
+ }
 };
 
 // Server-side: forward candidates to the transport
 socket.on('ice-candidate', async ({ roomId, candidate }) => {
-  const transport = getTransportForSocket(socket.id, roomId);
-  await transport.addIceCandidate(candidate);
+ const transport = getTransportForSocket(socket.id, roomId);
+ await transport.addIceCandidate(candidate);
 });
 ```
 
@@ -142,15 +142,15 @@ Mediasoup simulcast configuration on the client:
 
 ```typescript
 const videoProducer = await sendTransport.produce({
-  track: videoTrack,
-  encodings: [
-    { maxBitrate: 100_000, scaleResolutionDownBy: 4 },  // 180p
-    { maxBitrate: 300_000, scaleResolutionDownBy: 2 },  // 360p  
-    { maxBitrate: 900_000, scaleResolutionDownBy: 1 }   // 720p
-  ],
-  codecOptions: {
-    videoGoogleStartBitrate: 1000
-  }
+ track: videoTrack,
+ encodings: [
+ { maxBitrate: 100_000, scaleResolutionDownBy: 4 }, // 180p
+ { maxBitrate: 300_000, scaleResolutionDownBy: 2 }, // 360p 
+ { maxBitrate: 900_000, scaleResolutionDownBy: 1 } // 720p
+ ],
+ codecOptions: {
+ videoGoogleStartBitrate: 1000
+ }
 });
 ```
 
@@ -172,30 +172,30 @@ The `RTCPeerConnection.getStats()` API exposes everything you need for real-time
 
 ```typescript
 async function collectWebRTCStats(pc: RTCPeerConnection): Promise<RoomQualityMetrics> {
-  const stats = await pc.getStats();
-  const metrics: RoomQualityMetrics = {};
+ const stats = await pc.getStats();
+ const metrics: RoomQualityMetrics = {};
 
-  stats.forEach(report => {
-    if (report.type === 'inbound-rtp' && report.kind === 'video') {
-      metrics.videoPacketsLost = report.packetsLost;
-      metrics.videoJitter = report.jitter;
-      metrics.framesDecoded = report.framesDecoded;
-    }
-    
-    if (report.type === 'candidate-pair' && report.state === 'succeeded') {
-      metrics.roundTripTime = report.currentRoundTripTime;
-      metrics.availableOutgoingBitrate = report.availableOutgoingBitrate;
-    }
-  });
+ stats.forEach(report => {
+ if (report.type === 'inbound-rtp' && report.kind === 'video') {
+ metrics.videoPacketsLost = report.packetsLost;
+ metrics.videoJitter = report.jitter;
+ metrics.framesDecoded = report.framesDecoded;
+ }
+ 
+ if (report.type === 'candidate-pair' && report.state === 'succeeded') {
+ metrics.roundTripTime = report.currentRoundTripTime;
+ metrics.availableOutgoingBitrate = report.availableOutgoingBitrate;
+ }
+ });
 
-  return metrics;
+ return metrics;
 }
 
 // Poll every 5 seconds and ship to your telemetry pipeline
 setInterval(() => {
-  collectWebRTCStats(pc).then(metrics => {
-    analytics.track('webrtc.quality', metrics);
-  });
+ collectWebRTCStats(pc).then(metrics => {
+ analytics.track('webrtc.quality', metrics);
+ });
 }, 5000);
 ```
 

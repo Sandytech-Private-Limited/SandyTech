@@ -1,13 +1,13 @@
 ---
 title: "Dapr Actor Model: Building Stateful Microservices Without the Complexity"
 slug: dapr-actor-model-stateful-microservices
-description: Learn how to build stateful microservices using the Dapr virtual actor model — covering state persistence, timers vs reminders, and real-world patterns from a trading platform. By Sandeep Kothapalli, SandyTech.
+description: Learn how to build stateful microservices using the Dapr virtual actor model — covering state persistence, timers vs reminders, and real-world patterns from a trading platform. By Sandeep Kothapalli,.
 imageUrl: https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Architecture
 date: 2026-04-10
 readTime: 10 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "Dapr actors", "virtual actor pattern", "stateful microservices", "Dapr .NET", "actor model", "Orleans", "Akka", "distributed systems", "cloud-native"]
-hashtags: ["#Dapr", "#ActorModel", "#Microservices", "#DotNet", "#CloudNative", "#SandyTech", "#KothapalliSandeep", "#DistributedSystems"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "Dapr actors", "virtual actor pattern", "stateful microservices", "Dapr .NET", "actor model", "Orleans", "Akka", "distributed systems", "cloud-native"]
+hashtags: ["#Dapr", "#ActorModel", "#Microservices", "#DotNet", "#CloudNative", "#KothapalliSandeep", "#DistributedSystems"]
 ---
 
 # Dapr Actor Model: Building Stateful Microservices Without the Complexity
@@ -31,33 +31,33 @@ Each Dapr actor instance gets its own namespaced state, persisted in the configu
 ```csharp
 public interface IPositionActor : IActor
 {
-    Task<decimal> GetPositionAsync();
-    Task ApplyTradeAsync(TradeEvent trade);
-    Task<PositionSnapshot> SnapshotAsync();
+ Task<decimal> GetPositionAsync();
+ Task ApplyTradeAsync(TradeEvent trade);
+ Task<PositionSnapshot> SnapshotAsync();
 }
 
 public class PositionActor : Actor, IPositionActor
 {
-    private const string StateKey = "position";
+ private const string StateKey = "position";
 
-    public PositionActor(ActorHost host) : base(host) { }
+ public PositionActor(ActorHost host) : base(host) { }
 
-    public async Task<decimal> GetPositionAsync()
-    {
-        var result = await StateManager.TryGetStateAsync<PositionState>(StateKey);
-        return result.HasValue ? result.Value.NetQuantity : 0m;
-    }
+ public async Task<decimal> GetPositionAsync()
+ {
+ var result = await StateManager.TryGetStateAsync<PositionState>(StateKey);
+ return result.HasValue ? result.Value.NetQuantity : 0m;
+ }
 
-    public async Task ApplyTradeAsync(TradeEvent trade)
-    {
-        var state = (await StateManager.TryGetStateAsync<PositionState>(StateKey)).Value
-                    ?? new PositionState();
+ public async Task ApplyTradeAsync(TradeEvent trade)
+ {
+ var state = (await StateManager.TryGetStateAsync<PositionState>(StateKey)).Value
+ ?? new PositionState();
 
-        state.NetQuantity += trade.Side == TradeSide.Buy ? trade.Quantity : -trade.Quantity;
-        state.LastUpdated = DateTimeOffset.UtcNow;
+ state.NetQuantity += trade.Side == TradeSide.Buy ? trade.Quantity : -trade.Quantity;
+ state.LastUpdated = DateTimeOffset.UtcNow;
 
-        await StateManager.SetStateAsync(StateKey, state);
-    }
+ await StateManager.SetStateAsync(StateKey, state);
+ }
 }
 ```
 
@@ -74,19 +74,19 @@ Dapr actors support two kinds of scheduled callbacks: timers and reminders. They
 ```csharp
 // Register a durable reminder — survives restarts
 await RegisterReminderAsync(
-    "settlement-check",
-    null,
-    dueTime: TimeSpan.FromMinutes(5),
-    period: TimeSpan.FromMinutes(5));
+ "settlement-check",
+ null,
+ dueTime: TimeSpan.FromMinutes(5),
+ period: TimeSpan.FromMinutes(5));
 
 // Handle the reminder
 public async Task ReceiveReminderAsync(string reminderName, byte[] state,
-    TimeSpan dueTime, TimeSpan period)
+ TimeSpan dueTime, TimeSpan period)
 {
-    if (reminderName == "settlement-check")
-    {
-        await CheckPendingSettlements();
-    }
+ if (reminderName == "settlement-check")
+ {
+ await CheckPendingSettlements();
+ }
 }
 ```
 
@@ -100,9 +100,9 @@ Registration is straightforward:
 // Program.cs
 builder.Services.AddActors(options =>
 {
-    options.Actors.RegisterActor<PositionActor>();
-    options.ActorIdleTimeout = TimeSpan.FromMinutes(30);
-    options.ActorScanInterval = TimeSpan.FromSeconds(30);
+ options.Actors.RegisterActor<PositionActor>();
+ options.ActorIdleTimeout = TimeSpan.FromMinutes(30);
+ options.ActorScanInterval = TimeSpan.FromSeconds(30);
 });
 
 // ...

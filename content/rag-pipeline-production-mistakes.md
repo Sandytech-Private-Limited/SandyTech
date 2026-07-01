@@ -1,13 +1,13 @@
 ---
 title: "5 RAG Pipeline Mistakes I Made in Production (And How to Fix Them)"
 slug: rag-pipeline-production-mistakes
-description: Real lessons from building RAG pipelines for enterprise clients — five production mistakes covering chunking, metadata filtering, embedding model mismatch, re-ranking, and LLM trust. By Sandeep Kothapalli, SandyTech.
+description: Real lessons from building RAG pipelines for enterprise clients — five production mistakes covering chunking, metadata filtering, embedding model mismatch, re-ranking, and LLM trust. By Sandeep Kothapalli,.
 imageUrl: https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: AI
 date: 2026-02-18
 readTime: 11 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "RAG pipeline", "retrieval augmented generation", "LLM production", "vector search", "embeddings", "re-ranking", "AI engineering", "enterprise AI"]
-hashtags: ["#RAG", "#LLM", "#AIEngineering", "#VectorSearch", "#ArtificialIntelligence", "#SandyTech", "#KothapalliSandeep", "#GenerativeAI"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "RAG pipeline", "retrieval augmented generation", "LLM production", "vector search", "embeddings", "re-ranking", "AI engineering", "enterprise AI"]
+hashtags: ["#RAG", "#LLM", "#AIEngineering", "#VectorSearch", "#ArtificialIntelligence", "#KothapalliSandeep", "#GenerativeAI"]
 ---
 
 # 5 RAG Pipeline Mistakes I Made in Production (And How to Fix Them)
@@ -28,22 +28,22 @@ The retrieval metrics looked fine because the keyword overlap was high. The *ans
 
 ```python
 def chunk_with_context(text: str, section_title: str, max_tokens: int = 400) -> list[str]:
-    sentences = sent_tokenize(text)
-    chunks = []
-    current = f"[Section: {section_title}]\n"
-    
-    for sentence in sentences:
-        if count_tokens(current + sentence) > max_tokens:
-            if current.strip():
-                chunks.append(current.strip())
-            current = f"[Section: {section_title}]\n{sentence} "
-        else:
-            current += sentence + " "
-    
-    if current.strip():
-        chunks.append(current.strip())
-    
-    return chunks
+ sentences = sent_tokenize(text)
+ chunks = []
+ current = f"[Section: {section_title}]\n"
+ 
+ for sentence in sentences:
+ if count_tokens(current + sentence) > max_tokens:
+ if current.strip():
+ chunks.append(current.strip())
+ current = f"[Section: {section_title}]\n{sentence} "
+ else:
+ current += sentence + " "
+ 
+ if current.strip():
+ chunks.append(current.strip())
+ 
+ return chunks
 ```
 
 Also implement a "parent chunk" strategy: store small chunks for retrieval precision, but return the full parent section to the LLM. The child chunk finds the right place; the parent provides the full context.
@@ -59,16 +59,16 @@ Also implement a "parent chunk" strategy: store small chunks for retrieval preci
 ```python
 # Azure AI Search pre-filter example
 results = search_client.search(
-    search_text=None,
-    vector_queries=[
-        VectorizedQuery(
-            vector=query_embedding,
-            k_nearest_neighbors=10,
-            fields="contentVector"
-        )
-    ],
-    filter="jurisdiction eq 'UK' and year ge 2024 and department eq 'Finance'",
-    top=5
+ search_text=None,
+ vector_queries=[
+ VectorizedQuery(
+ vector=query_embedding,
+ k_nearest_neighbors=10,
+ fields="contentVector"
+ )
+ ],
+ filter="jurisdiction eq 'UK' and year ge 2024 and department eq 'Finance'",
+ top=5
 )
 ```
 
@@ -90,19 +90,19 @@ CURRENT_MODEL = "text-embedding-3-small"
 
 # At index time, store which model was used
 metadata = {
-    "content": chunk_text,
-    "embedding_model_version": CURRENT_MODEL,
-    # ... other metadata
+ "content": chunk_text,
+ "embedding_model_version": CURRENT_MODEL,
+ # ... other metadata
 }
 
 # At startup, validate the index model matches the query model
 def validate_index_integrity(index_client):
-    sample = index_client.get_document(key="metadata_doc")
-    if sample.get(INDEX_METADATA_KEY) != CURRENT_MODEL:
-        raise RuntimeError(
-            f"Index uses {sample[INDEX_METADATA_KEY]}, "
-            f"application configured for {CURRENT_MODEL}. Re-index required."
-        )
+ sample = index_client.get_document(key="metadata_doc")
+ if sample.get(INDEX_METADATA_KEY) != CURRENT_MODEL:
+ raise RuntimeError(
+ f"Index uses {sample[INDEX_METADATA_KEY]}, "
+ f"application configured for {CURRENT_MODEL}. Re-index required."
+ )
 ```
 
 Blue-green indexing (write to a new index, validate, then swap the alias) is the right operational pattern for model migrations.
@@ -121,20 +121,20 @@ from sentence_transformers import CrossEncoder
 reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
 def retrieve_and_rerank(query: str, top_k: int = 5) -> list[dict]:
-    # Stage 1: vector retrieval — broad candidate set
-    candidates = vector_search(query, top_n=20)
-    
-    # Stage 2: cross-encoder re-ranking
-    pairs = [(query, c["content"]) for c in candidates]
-    scores = reranker.predict(pairs)
-    
-    ranked = sorted(
-        zip(candidates, scores),
-        key=lambda x: x[1],
-        reverse=True
-    )
-    
-    return [item for item, _ in ranked[:top_k]]
+ # Stage 1: vector retrieval — broad candidate set
+ candidates = vector_search(query, top_n=20)
+ 
+ # Stage 2: cross-encoder re-ranking
+ pairs = [(query, c["content"]) for c in candidates]
+ scores = reranker.predict(pairs)
+ 
+ ranked = sorted(
+ zip(candidates, scores),
+ key=lambda x: x[1],
+ reverse=True
+ )
+ 
+ return [item for item, _ in ranked[:top_k]]
 ```
 
 Cohere's Rerank API and Azure AI Search's semantic ranker are managed alternatives if you don't want to host the model. The quality improvement on enterprise document Q&A is consistently 15-30% on answer relevance scores.
@@ -158,25 +158,25 @@ in the format [Source: <chunk_id>].
 """
 
 def generate_with_grounding(query: str, chunks: list[dict]) -> dict:
-    context = "\n\n---\n\n".join([
-        f"[Chunk {i+1}]: {c['content']}" 
-        for i, c in enumerate(chunks)
-    ])
-    
-    response = llm.complete(
-        system=SYSTEM_PROMPT,
-        user=f"Context:\n{context}\n\nQuestion: {query}"
-    )
-    
-    # Check if all cited chunk IDs exist in our retrieved set
-    cited_ids = extract_citations(response.text)
-    ungrounded = [cid for cid in cited_ids if cid not in valid_chunk_ids(chunks)]
-    
-    return {
-        "answer": response.text,
-        "grounded": len(ungrounded) == 0,
-        "hallucinated_citations": ungrounded
-    }
+ context = "\n\n---\n\n".join([
+ f"[Chunk {i+1}]: {c['content']}" 
+ for i, c in enumerate(chunks)
+ ])
+ 
+ response = llm.complete(
+ system=SYSTEM_PROMPT,
+ user=f"Context:\n{context}\n\nQuestion: {query}"
+ )
+ 
+ # Check if all cited chunk IDs exist in our retrieved set
+ cited_ids = extract_citations(response.text)
+ ungrounded = [cid for cid in cited_ids if cid not in valid_chunk_ids(chunks)]
+ 
+ return {
+ "answer": response.text,
+ "grounded": len(ungrounded) == 0,
+ "hallucinated_citations": ungrounded
+ }
 ```
 
 Beyond prompt engineering, set temperature to 0 or near-0 for factual Q&A tasks. Evaluate your pipeline with a held-out test set and track answer faithfulness scores using frameworks like RAGAS — not just user satisfaction.

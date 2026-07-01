@@ -1,13 +1,13 @@
 ---
 title: "Implementing Razorpay Route & Split Payments for Multi-Vendor Marketplaces"
 slug: razorpay-route-split-payments-marketplace
-description: A hands-on guide from kothapallisandeep at SandyTech on implementing Razorpay Route for multi-vendor marketplaces — covering linked account creation, transfer objects, split payment logic, webhook handling, idempotency keys, and reconciliation. Real patterns used in production marketplace builds at sandytech.
+description: A hands-on guide from kothapallisandeep on implementing Razorpay Route for multi-vendor marketplaces — covering linked account creation, transfer objects, split payment logic, webhook handling, idempotency keys, and reconciliation. Real patterns used in production marketplace builds in production.
 imageUrl: https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Architecture
 date: 2025-03-15
 readTime: 11 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "Razorpay Route", "split payments", "multi-vendor marketplace", "payment gateway", "linked accounts", "vendor payouts", "webhooks", "idempotency", "payment reconciliation", "India payments"]
-hashtags: ["#Razorpay", "#Payments", "#Marketplace", "#SplitPayments", "#SandyTech", "#KothapalliSandeep", "#Fintech", "#NodeJS", "#APIDesign"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "Razorpay Route", "split payments", "multi-vendor marketplace", "payment gateway", "linked accounts", "vendor payouts", "webhooks", "idempotency", "payment reconciliation", "India payments"]
+hashtags: ["#Razorpay", "#Payments", "#Marketplace", "#SplitPayments", "#KothapalliSandeep", "#Fintech", "#NodeJS", "#APIDesign"]
 ---
 
 # Implementing Razorpay Route & Split Payments for Multi-Vendor Marketplaces
@@ -35,36 +35,36 @@ Each vendor on your platform needs a Razorpay Linked Account. Do this during onb
 ```javascript
 // POST /v1/accounts (Route API)
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
+ key_id: process.env.RAZORPAY_KEY_ID,
+ key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 async function createLinkedAccount(vendor) {
-  const account = await razorpay.accounts.create({
-    email: vendor.email,
-    profile: {
-      category: "education",           // or "services", "ecommerce", etc.
-      subcategory: "coaching",
-      addresses: {
-        registered: {
-          street1: vendor.address.street,
-          city: vendor.address.city,
-          state: vendor.address.state,
-          postal_code: vendor.address.pincode,
-          country: "IN",
-        },
-      },
-    },
-    legal_business_name: vendor.businessName,
-    business_type: "individual",       // or "route" for a company
-    legal_info: {
-      pan: vendor.pan,
-    },
-    type: "route",
-  });
+ const account = await razorpay.accounts.create({
+ email: vendor.email,
+ profile: {
+ category: "education", // or "services", "ecommerce", etc.
+ subcategory: "coaching",
+ addresses: {
+ registered: {
+ street1: vendor.address.street,
+ city: vendor.address.city,
+ state: vendor.address.state,
+ postal_code: vendor.address.pincode,
+ country: "IN",
+ },
+ },
+ },
+ legal_business_name: vendor.businessName,
+ business_type: "individual", // or "route" for a company
+ legal_info: {
+ pan: vendor.pan,
+ },
+ type: "route",
+ });
 
-  // Store account.id as vendor.razorpayAccountId in your DB
-  return account;
+ // Store account.id as vendor.razorpayAccountId in your DB
+ return account;
 }
 ```
 
@@ -74,15 +74,15 @@ After creating the account, you need to create a **Stakeholder** and submit the 
 
 ```javascript
 await razorpay.accounts.createStakeholder(accountId, {
-  name: vendor.name,
-  email: vendor.email,
-  phone: { primary: vendor.phone },
-  relationship: {
-    director: true,
-  },
-  kyc_details: {
-    pan: vendor.pan,
-  },
+ name: vendor.name,
+ email: vendor.email,
+ phone: { primary: vendor.phone },
+ relationship: {
+ director: true,
+ },
+ kyc_details: {
+ pan: vendor.pan,
+ },
 });
 ```
 
@@ -95,7 +95,7 @@ Standard Razorpay payment capture — nothing special here yet:
 ```javascript
 // After client-side Razorpay checkout completes:
 async function capturePayment(paymentId, amount, currency = "INR") {
-  return await razorpay.payments.capture(paymentId, amount, currency);
+ return await razorpay.payments.capture(paymentId, amount, currency);
 }
 ```
 
@@ -109,26 +109,25 @@ This is where Route does its work. After capturing, initiate transfers:
 
 ```javascript
 async function transferToVendor(payment, order) {
-  const platformFeePercent = 0.10; // 10% platform commission
-  const vendorAmount = Math.floor(order.amount * (1 - platformFeePercent));
+ const platformFeePercent = 0.10; // 10% platform commission
+ const vendorAmount = Math.floor(order.amount * (1 - platformFeePercent));
 
-  const transfer = await razorpay.payments.transfer(payment.id, {
-    transfers: [
-      {
-        account: order.vendor.razorpayAccountId,
-        amount: vendorAmount,          // in paise
-        currency: "INR",
-        notes: {
-          order_id: order.id,
-          vendor_id: order.vendor.id,
-        },
-        linked_account_notes: ["order_id"],  // visible to vendor
-        on_hold: 0,                    // 0 = release immediately, 1 = hold
-      },
-    ],
-  });
+ const transfer = await razorpay.payments.transfer(payment.id, {
+ transfers: [
+ {
+ account: order.vendor.razorpayAccountId,
+ amount: vendorAmount, // in paise
+ currency: "INR",
+ notes: {
+ order_id: order.id,
+ vendor_id: order.vendor.id,
+ },
+ linked_account_notes: ["order_id"], // visible to vendor
+ on_hold: 0, // 0 = release immediately, 1 = hold
+ }],
+ });
 
-  return transfer.items[0];
+ return transfer.items[0];
 }
 ```
 
@@ -142,24 +141,24 @@ Network failures happen. Without idempotency, a retry can double-pay a vendor. R
 
 ```javascript
 async function safeTransferToVendor(payment, order) {
-  const idempotencyKey = `transfer-${order.id}-${payment.id}`;
+ const idempotencyKey = `transfer-${order.id}-${payment.id}`;
 
-  const response = await fetch(
-    `https://api.razorpay.com/v1/payments/${payment.id}/transfers`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Razorpay-Idempotency-Key": idempotencyKey,
-        Authorization: "Basic " + Buffer.from(
-          `${process.env.RAZORPAY_KEY_ID}:${process.env.RAZORPAY_KEY_SECRET}`
-        ).toString("base64"),
-      },
-      body: JSON.stringify({ transfers: [/* ... */] }),
-    }
-  );
+ const response = await fetch(
+ `https://api.razorpay.com/v1/payments/${payment.id}/transfers`,
+ {
+ method: "POST",
+ headers: {
+ "Content-Type": "application/json",
+ "X-Razorpay-Idempotency-Key": idempotencyKey,
+ Authorization: "Basic " + Buffer.from(
+ `${process.env.RAZORPAY_KEY_ID}:${process.env.RAZORPAY_KEY_SECRET}`
+ ).toString("base64"),
+ },
+ body: JSON.stringify({ transfers: [/* ... */] }),
+ }
+ );
 
-  return response.json();
+ return response.json();
 }
 ```
 
@@ -184,36 +183,36 @@ Key events for a marketplace:
 ```javascript
 // Express webhook handler
 app.post("/webhooks/razorpay", express.raw({ type: "application/json" }), async (req, res) => {
-  const signature = req.headers["x-razorpay-signature"];
-  const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+ const signature = req.headers["x-razorpay-signature"];
+ const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
 
-  const isValid = razorpay.webhooks.validateWebhookSignature(
-    req.body.toString(),
-    signature,
-    secret
-  );
+ const isValid = razorpay.webhooks.validateWebhookSignature(
+ req.body.toString(),
+ signature,
+ secret
+ );
 
-  if (!isValid) return res.status(400).send("Invalid signature");
+ if (!isValid) return res.status(400).send("Invalid signature");
 
-  const event = JSON.parse(req.body);
+ const event = JSON.parse(req.body);
 
-  // Idempotent processing — check if we've already handled this event
-  const alreadyProcessed = await db.webhookEvents.findOne({ eventId: event.id });
-  if (alreadyProcessed) return res.status(200).send("Already processed");
+ // Idempotent processing — check if we've already handled this event
+ const alreadyProcessed = await db.webhookEvents.findOne({ eventId: event.id });
+ if (alreadyProcessed) return res.status(200).send("Already processed");
 
-  await db.webhookEvents.insert({ eventId: event.id, processedAt: new Date() });
+ await db.webhookEvents.insert({ eventId: event.id, processedAt: new Date() });
 
-  switch (event.event) {
-    case "payment.captured":
-      await paymentService.handleCapture(event.payload.payment.entity);
-      break;
-    case "transfer.processed":
-      await payoutService.handleTransferSuccess(event.payload.transfer.entity);
-      break;
-    // ...
-  }
+ switch (event.event) {
+ case "payment.captured":
+ await paymentService.handleCapture(event.payload.payment.entity);
+ break;
+ case "transfer.processed":
+ await payoutService.handleTransferSuccess(event.payload.transfer.entity);
+ break;
+ // ...
+ }
 
-  res.status(200).send("OK");
+ res.status(200).send("OK");
 });
 ```
 
@@ -227,23 +226,23 @@ At month-end, you need to verify that every order's transfer matches what Razorp
 
 ```javascript
 async function dailyReconciliation(date) {
-  // Fetch all orders marked "transfer_initiated" for the date
-  const orders = await db.orders.findByDate(date, "transfer_initiated");
+ // Fetch all orders marked "transfer_initiated" for the date
+ const orders = await db.orders.findByDate(date, "transfer_initiated");
 
-  for (const order of orders) {
-    const transfer = await razorpay.transfers.fetch(order.transferId);
+ for (const order of orders) {
+ const transfer = await razorpay.transfers.fetch(order.transferId);
 
-    if (transfer.status === "processed") {
-      await db.orders.update(order.id, {
-        status: "transfer_settled",
-        settledAt: new Date(transfer.processed_at * 1000),
-        settledAmount: transfer.amount,
-      });
-    } else if (transfer.status === "failed") {
-      await alertOps(`Transfer failed for order ${order.id}`);
-      await retryTransfer(order);
-    }
-  }
+ if (transfer.status === "processed") {
+ await db.orders.update(order.id, {
+ status: "transfer_settled",
+ settledAt: new Date(transfer.processed_at * 1000),
+ settledAmount: transfer.amount,
+ });
+ } else if (transfer.status === "failed") {
+ await alertOps(`Transfer failed for order ${order.id}`);
+ await retryTransfer(order);
+ }
+ }
 }
 ```
 

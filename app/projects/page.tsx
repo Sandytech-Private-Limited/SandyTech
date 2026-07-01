@@ -25,17 +25,17 @@ import { projects } from "@/data/projects";
 export const metadata: Metadata = {
   title: 'Projects',
   description: 'Live products and enterprise projects by Sandeep Kothapalli — NexusEd (real-time EdTech), 360JobReady (AI career platform), Affixx (affiliate & creator platform), and cloud-native enterprise platforms built with .NET, Azure, Kubernetes, and AI/LLM systems.',
-  keywords: ['Sandeep Kothapalli projects', 'kothapallisandeep', 'SandyTech', 'NexusEd', '360JobReady', 'Affixx', 'cloud-native projects', 'AI products', 'MVP portfolio', 'enterprise architecture'],
+  keywords: ['Sandeep Kothapalli projects', 'kothapallisandeep', 'NexusEd', '360JobReady', 'Affixx', 'cloud-native projects', 'AI products', 'MVP portfolio', 'enterprise architecture'],
   alternates: { canonical: 'https://kothapallisandeep.com/projects' },
   openGraph: {
-    title: 'Projects — Sandeep Kothapalli & SandyTech',
+    title: 'Projects — Sandeep Kothapalli',
     description: 'Live products and enterprise projects: NexusEd, 360JobReady, Affixx, and more. Cloud-native platforms, AI/LLM systems, and MVPs.',
     type: 'website',
     url: 'https://kothapallisandeep.com/projects',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Projects — Sandeep Kothapalli & SandyTech',
+    title: 'Projects — Sandeep Kothapalli',
     description: 'Live products: NexusEd, 360JobReady, Affixx. Enterprise cloud-native and AI/LLM projects.',
     creator: '@sandeepattech',
   },

@@ -1,13 +1,13 @@
 ---
 title: "Cutting LLM Costs by 70%: Caching, Batching, and Model Routing in Production"
 slug: ai-cost-optimisation-llm-production
-description: Practical strategies for reducing LLM API costs in production — semantic caching, prompt compression, GPT-4o vs GPT-4o-mini routing, batching, and Azure OpenAI reserved capacity. Real cost breakdowns from SandyTech client projects. By Sandeep Kothapalli.
+description: Practical strategies for reducing LLM API costs in production — semantic caching, prompt compression, GPT-4o vs GPT-4o-mini routing, batching, and Azure OpenAI reserved capacity. Real cost breakdowns from client projects. By Sandeep Kothapalli.
 imageUrl: https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: AI
 date: 2026-02-05
 readTime: 11 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "LLM cost optimization", "GPT-4o", "semantic caching", "Azure OpenAI", "prompt compression", "model routing", "AI production", "LLM engineering"]
-hashtags: ["#LLM", "#AIEngineering", "#GPT4o", "#AzureOpenAI", "#CostOptimization", "#SandyTech", "#KothapalliSandeep", "#GenerativeAI"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "LLM cost optimization", "GPT-4o", "semantic caching", "Azure OpenAI", "prompt compression", "model routing", "AI production", "LLM engineering"]
+hashtags: ["#LLM", "#AIEngineering", "#GPT4o", "#AzureOpenAI", "#CostOptimization", "#KothapalliSandeep", "#GenerativeAI"]
 ---
 
 # Cutting LLM Costs by 70%: Caching, Batching, and Model Routing in Production
@@ -21,26 +21,26 @@ Before optimising anything, instrument your costs. Azure OpenAI's token usage is
 ```csharp
 public class TokenUsageMiddleware
 {
-    private readonly IMetricsCollector _metrics;
-    
-    public async Task<ChatCompletion> CompleteAsync(
-        string operation,
-        ChatCompletionRequest request)
-    {
-        var response = await _openAiClient.GetChatCompletionAsync(request);
-        
-        _metrics.Record("llm.tokens.prompt", 
-            response.Usage.PromptTokens,
-            tags: new { operation });
-        _metrics.Record("llm.tokens.completion", 
-            response.Usage.CompletionTokens,
-            tags: new { operation });
-        _metrics.Record("llm.cost.estimated",
-            EstimateCost(response.Usage, request.Model),
-            tags: new { operation });
-            
-        return response;
-    }
+ private readonly IMetricsCollector _metrics;
+ 
+ public async Task<ChatCompletion> CompleteAsync(
+ string operation,
+ ChatCompletionRequest request)
+ {
+ var response = await _openAiClient.GetChatCompletionAsync(request);
+ 
+ _metrics.Record("llm.tokens.prompt", 
+ response.Usage.PromptTokens,
+ tags: new { operation });
+ _metrics.Record("llm.tokens.completion", 
+ response.Usage.CompletionTokens,
+ tags: new { operation });
+ _metrics.Record("llm.cost.estimated",
+ EstimateCost(response.Usage, request.Model),
+ tags: new { operation });
+ 
+ return response;
+ }
 }
 ```
 
@@ -58,46 +58,46 @@ from redis import Redis
 import json
 
 redis = Redis.from_url(os.environ["REDIS_URL"])
-SIMILARITY_THRESHOLD = 0.92  # tune this — higher = stricter matching
+SIMILARITY_THRESHOLD = 0.92 # tune this — higher = stricter matching
 
 async def semantic_cache_lookup(query: str, namespace: str) -> str | None:
-    query_embedding = await get_embedding(query)
-    
-    # Fetch all cached entries for this namespace
-    cached_keys = redis.keys(f"semantic:{namespace}:*")
-    
-    best_score = 0.0
-    best_response = None
-    
-    for key in cached_keys:
-        entry = json.loads(redis.get(key))
-        cached_embedding = np.array(entry["embedding"])
-        similarity = cosine_similarity(query_embedding, cached_embedding)
-        
-        if similarity > best_score:
-            best_score = similarity
-            best_response = entry["response"]
-    
-    if best_score >= SIMILARITY_THRESHOLD:
-        return best_response
-    return None
+ query_embedding = await get_embedding(query)
+ 
+ # Fetch all cached entries for this namespace
+ cached_keys = redis.keys(f"semantic:{namespace}:*")
+ 
+ best_score = 0.0
+ best_response = None
+ 
+ for key in cached_keys:
+ entry = json.loads(redis.get(key))
+ cached_embedding = np.array(entry["embedding"])
+ similarity = cosine_similarity(query_embedding, cached_embedding)
+ 
+ if similarity > best_score:
+ best_score = similarity
+ best_response = entry["response"]
+ 
+ if best_score >= SIMILARITY_THRESHOLD:
+ return best_response
+ return None
 
 async def answer_with_cache(query: str) -> str:
-    cached = await semantic_cache_lookup(query, namespace="faq")
-    if cached:
-        return cached
-    
-    response = await llm.complete(query)
-    
-    # Store for future lookups
-    embedding = await get_embedding(query)
-    redis.setex(
-        f"semantic:faq:{hash(query)}",
-        86400,  # 24 hour TTL
-        json.dumps({"embedding": embedding.tolist(), "response": response})
-    )
-    
-    return response
+ cached = await semantic_cache_lookup(query, namespace="faq")
+ if cached:
+ return cached
+ 
+ response = await llm.complete(query)
+ 
+ # Store for future lookups
+ embedding = await get_embedding(query)
+ redis.setex(
+ f"semantic:faq:{hash(query)}",
+ 86400, # 24 hour TTL
+ json.dumps({"embedding": embedding.tolist(), "response": response})
+ )
+ 
+ return response
 ```
 
 The 0.92 threshold was calibrated by manually reviewing 50 query pairs. Below 0.90 you start returning wrong cached answers; above 0.95 you miss too many semantically-identical queries. The right number depends on your domain and user population.
@@ -115,9 +115,9 @@ ROUTING_PROMPT = """
 Classify this query as SIMPLE or COMPLEX.
 
 SIMPLE: factual lookups, yes/no questions, single-step retrievals, 
-       definitions, date/number lookups
+ definitions, date/number lookups
 COMPLEX: multi-step reasoning, comparisons, synthesis across multiple 
-         documents, strategic questions, ambiguous intent
+ documents, strategic questions, ambiguous intent
 
 Query: {query}
 
@@ -125,16 +125,16 @@ Respond with only: SIMPLE or COMPLEX
 """
 
 async def route_query(query: str) -> str:
-    # Use a very cheap model for the routing decision itself
-    classification = await openai.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": ROUTING_PROMPT.format(query=query)}],
-        max_tokens=5,
-        temperature=0
-    )
-    
-    label = classification.choices[0].message.content.strip()
-    return "gpt-4o" if label == "COMPLEX" else "gpt-4o-mini"
+ # Use a very cheap model for the routing decision itself
+ classification = await openai.chat.completions.create(
+ model="gpt-4o-mini",
+ messages=[{"role": "user", "content": ROUTING_PROMPT.format(query=query)}],
+ max_tokens=5,
+ temperature=0
+ )
+ 
+ label = classification.choices[0].message.content.strip()
+ return "gpt-4o" if label == "COMPLEX" else "gpt-4o-mini"
 ```
 
 The routing call itself costs ~$0.000015 (15 input tokens + 1 output token on mini). GPT-4o-mini is roughly 15x cheaper than GPT-4o on output tokens. If 65% of queries are correctly classified as SIMPLE, the blended cost drops significantly.
@@ -155,16 +155,16 @@ Two techniques work here:
 from llmlingua import PromptCompressor
 
 compressor = PromptCompressor(
-    model_name="microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank",
-    device_map="cpu"
+ model_name="microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank",
+ device_map="cpu"
 )
 
 compressed = compressor.compress_prompt(
-    context_list=[long_document_context],
-    instruction="Answer questions about the provided document.",
-    question=user_query,
-    target_token=800,  # compress to ~800 tokens
-    condition_compare=True
+ context_list=[long_document_context],
+ instruction="Answer questions about the provided document.",
+ question=user_query,
+ target_token=800, # compress to ~800 tokens
+ condition_compare=True
 )
 
 # compressed["compressed_prompt"] is ready to use
@@ -182,17 +182,17 @@ We moved summarisation to an async background job with deduplication:
 // Queue summarisation on document upload/update only
 public async Task QueueDocumentSummarisation(string documentId)
 {
-    var jobId = $"summarise:{documentId}";
-    
-    // Idempotent — don't re-queue if already pending
-    if (!await _jobQueue.ExistsAsync(jobId))
-    {
-        await _jobQueue.EnqueueAsync(new SummariseDocumentJob 
-        { 
-            DocumentId = documentId,
-            JobId = jobId
-        });
-    }
+ var jobId = $"summarise:{documentId}";
+ 
+ // Idempotent — don't re-queue if already pending
+ if (!await _jobQueue.ExistsAsync(jobId))
+ {
+ await _jobQueue.EnqueueAsync(new SummariseDocumentJob 
+ { 
+ DocumentId = documentId,
+ JobId = jobId
+ });
+ }
 }
 ```
 

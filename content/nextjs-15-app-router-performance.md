@@ -1,13 +1,13 @@
 ---
 title: "Next.js 15 App Router: Server Components, Caching, and Performance Patterns That Actually Work"
 slug: nextjs-15-app-router-performance
-description: Practical Next.js 15 App Router performance patterns — server vs client component decisions, partial prerendering, Suspense streaming, and caching strategies that work in production on NexusEd and Affixx. By Sandeep Kothapalli, SandyTech.
+description: Practical Next.js 15 App Router performance patterns — server vs client component decisions, partial prerendering, Suspense streaming, and caching strategies that work in production on NexusEd and Affixx. By Sandeep Kothapalli,.
 imageUrl: https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Architecture
 date: 2026-01-12
 readTime: 11 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "Next.js 15", "App Router", "Server Components", "React Server Components", "partial prerendering", "Suspense", "caching", "performance", "NexusEd", "Affixx"]
-hashtags: ["#NextJS", "#ReactServerComponents", "#AppRouter", "#WebPerformance", "#SandyTech", "#KothapalliSandeep", "#TypeScript", "#React"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "Next.js 15", "App Router", "Server Components", "React Server Components", "partial prerendering", "Suspense", "caching", "performance", "NexusEd", "Affixx"]
+hashtags: ["#NextJS", "#ReactServerComponents", "#AppRouter", "#WebPerformance", "#KothapalliSandeep", "#TypeScript", "#React"]
 ---
 
 # Next.js 15 App Router: Server Components, Caching, and Performance Patterns That Actually Work
@@ -22,12 +22,12 @@ The decision tree I actually use:
 
 ```
 Does this component need:
-  - onClick, onChange, or any event listener? → Client Component
-  - useState or useReducer? → Client Component
-  - useEffect? → Client Component (but ask why first)
-  - Browser APIs (window, localStorage)? → Client Component
-  
-  If none of the above → Server Component
+ - onClick, onChange, or any event listener? → Client Component
+ - useState or useReducer? → Client Component
+ - useEffect? → Client Component (but ask why first)
+ - Browser APIs (window, localStorage)? → Client Component
+ 
+ If none of the above → Server Component
 ```
 
 The "but ask why first" on useEffect is deliberate. I've seen dozens of `useEffect` calls that are really just data fetching that belongs in a Server Component. If you're fetching data on mount, move it to the server.
@@ -36,19 +36,19 @@ The "but ask why first" on useEffect is deliberate. I've seen dozens of `useEffe
 // Before — unnecessary client component
 'use client';
 export default function CourseList() {
-  const [courses, setCourses] = useState([]);
-  
-  useEffect(() => {
-    fetch('/api/courses').then(r => r.json()).then(setCourses);
-  }, []);
-  
-  return <ul>{courses.map(c => <li key={c.id}>{c.title}</li>)}</ul>;
+ const [courses, setCourses] = useState([]);
+ 
+ useEffect(() => {
+ fetch('/api/courses').then(r => r.json()).then(setCourses);
+ }, []);
+ 
+ return <ul>{courses.map(c => <li key={c.id}>{c.title}</li>)}</ul>;
 }
 
 // After — server component, no JS shipped, no waterfall
 export default async function CourseList() {
-  const courses = await db.query.courses.findMany({ where: eq(courses.active, true) });
-  return <ul>{courses.map(c => <li key={c.id}>{c.title}</li>)}</ul>;
+ const courses = await db.query.courses.findMany({ where: eq(courses.active, true) });
+ return <ul>{courses.map(c => <li key={c.id}>{c.title}</li>)}</ul>;
 }
 ```
 
@@ -63,9 +63,9 @@ Enable it experimentally:
 ```typescript
 // next.config.ts
 export default {
-  experimental: {
-    ppr: true
-  }
+ experimental: {
+ ppr: true
+ }
 }
 ```
 
@@ -74,22 +74,22 @@ Then wrap dynamic parts in Suspense:
 ```tsx
 // app/dashboard/page.tsx
 export default function DashboardPage() {
-  return (
-    <main>
-      {/* Static shell — prerendered at build time */}
-      <DashboardNav />
-      <DashboardHeader />
-      
-      {/* Dynamic content — streamed at request time */}
-      <Suspense fallback={<MetricsSkeleton />}>
-        <LiveMetrics />  {/* fetches real-time data */}
-      </Suspense>
-      
-      <Suspense fallback={<FeedSkeleton />}>
-        <ActivityFeed />  {/* fetches user-specific data */}
-      </Suspense>
-    </main>
-  );
+ return (
+ <main>
+ {/* Static shell — prerendered at build time */}
+ <DashboardNav />
+ <DashboardHeader />
+ 
+ {/* Dynamic content — streamed at request time */}
+ <Suspense fallback={<MetricsSkeleton />}>
+ <LiveMetrics /> {/* fetches real-time data */}
+ </Suspense>
+ 
+ <Suspense fallback={<FeedSkeleton />}>
+ <ActivityFeed /> {/* fetches user-specific data */}
+ </Suspense>
+ </main>
+ );
 }
 ```
 
@@ -104,7 +104,7 @@ The Next.js 15 caching model changed significantly from v13/14. Here's what actu
 ```typescript
 // Cache for 60 seconds, revalidate on-demand
 const data = await fetch('https://api.example.com/courses', {
-  next: { revalidate: 60, tags: ['courses'] }
+ next: { revalidate: 60, tags: ['courses'] }
 });
 ```
 
@@ -114,13 +114,13 @@ const data = await fetch('https://api.example.com/courses', {
 import { unstable_cache } from 'next/cache';
 
 const getCoursesByCategory = unstable_cache(
-  async (category: string) => {
-    return db.query.courses.findMany({
-      where: eq(courses.category, category)
-    });
-  },
-  ['courses-by-category'],
-  { revalidate: 300, tags: ['courses'] }
+ async (category: string) => {
+ return db.query.courses.findMany({
+ where: eq(courses.category, category)
+ });
+ },
+ ['courses-by-category'],
+ { revalidate: 300, tags: ['courses'] }
 );
 
 // Usage in a Server Component — result is cached
@@ -134,8 +134,8 @@ Tag-based revalidation is the pattern that makes on-demand revalidation work:
 import { revalidateTag } from 'next/cache';
 
 export async function publishCourse(courseId: string) {
-  await db.update(courses).set({ published: true }).where(eq(courses.id, courseId));
-  revalidateTag('courses');  // invalidates all caches tagged 'courses'
+ await db.update(courses).set({ published: true }).where(eq(courses.id, courseId));
+ revalidateTag('courses'); // invalidates all caches tagged 'courses'
 }
 ```
 
@@ -165,24 +165,24 @@ Streaming is not just for performance — it's for user experience under slow da
 ```tsx
 // Granular boundaries — each section renders independently
 export default function CoursePage({ params }: { params: { id: string } }) {
-  return (
-    <div>
-      {/* This resolves fast — static course metadata */}
-      <Suspense fallback={<CourseHeaderSkeleton />}>
-        <CourseHeader id={params.id} />
-      </Suspense>
-      
-      {/* This may be slower — aggregated enrollment stats */}
-      <Suspense fallback={<StatsSkeleton />}>
-        <EnrollmentStats id={params.id} />
-      </Suspense>
-      
-      {/* This is slowest — user-specific progress */}
-      <Suspense fallback={<ProgressSkeleton />}>
-        <UserProgress id={params.id} />
-      </Suspense>
-    </div>
-  );
+ return (
+ <div>
+ {/* This resolves fast — static course metadata */}
+ <Suspense fallback={<CourseHeaderSkeleton />}>
+ <CourseHeader id={params.id} />
+ </Suspense>
+ 
+ {/* This may be slower — aggregated enrollment stats */}
+ <Suspense fallback={<StatsSkeleton />}>
+ <EnrollmentStats id={params.id} />
+ </Suspense>
+ 
+ {/* This is slowest — user-specific progress */}
+ <Suspense fallback={<ProgressSkeleton />}>
+ <UserProgress id={params.id} />
+ </Suspense>
+ </div>
+ );
 }
 ```
 
@@ -199,13 +199,13 @@ export function ProductCard({ product }: Props) { ... }
 
 // Good: only the interactive part is a client component
 export function ProductCard({ product }: Props) {
-  // Server Component — no 'use client'
-  return (
-    <div>
-      <h2>{product.name}</h2>
-      <AddToCartButton productId={product.id} /> {/* client leaf */}
-    </div>
-  );
+ // Server Component — no 'use client'
+ return (
+ <div>
+ <h2>{product.name}</h2>
+ <AddToCartButton productId={product.id} /> {/* client leaf */}
+ </div>
+ );
 }
 ```
 

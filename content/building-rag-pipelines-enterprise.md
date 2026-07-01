@@ -6,8 +6,8 @@ imageUrl: https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?aut
 category: AI
 date: 2024-03-15
 readTime: 15 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "RAG", "LLM", "vector search", "embeddings", "retrieval augmented generation", "enterprise AI", "Azure OpenAI", "semantic search"]
-hashtags: ["#RAG", "#LLM", "#AIAutomation", "#VectorSearch", "#Embeddings", "#EnterpriseAI", "#SandyTech", "#KothapalliSandeep", "#IdeaToMVP"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "AI automation", "Idea to MVP", "RAG", "LLM", "vector search", "embeddings", "retrieval augmented generation", "enterprise AI", "Azure OpenAI", "semantic search"]
+hashtags: ["#RAG", "#LLM", "#AIAutomation", "#VectorSearch", "#Embeddings", "#EnterpriseAI", "#KothapalliSandeep", "#IdeaToMVP"]
 ---
 
 # Building RAG Pipelines for Enterprise Applications
@@ -38,8 +38,8 @@ documents = loader.load()
 
 # Split into chunks
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200
+ chunk_size=1000,
+ chunk_overlap=200
 )
 chunks = text_splitter.split_documents(documents)
 ```
@@ -55,10 +55,10 @@ embeddings = OpenAIEmbeddings()
 
 # Store in vector database
 vector_store = AzureSearch(
-    azure_search_endpoint="https://your-search.search.windows.net",
-    azure_search_key="your-key",
-    index_name="documents",
-    embedding_function=embeddings.embed_query
+ azure_search_endpoint="https://your-search.search.windows.net",
+ azure_search_key="your-key",
+ index_name="documents",
+ embedding_function=embeddings.embed_query
 )
 
 vector_store.add_documents(chunks)
@@ -81,9 +81,9 @@ from langchain.llms import AzureOpenAI
 # Create RAG chain
 llm = AzureOpenAI(temperature=0)
 qa_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=vector_store.as_retriever()
+ llm=llm,
+ chain_type="stuff",
+ retriever=vector_store.as_retriever()
 )
 
 # Generate response
@@ -124,9 +124,9 @@ Combine vector search with keyword search for better results:
 ```python
 # Hybrid search combining vector and keyword
 results = vector_store.similarity_search_with_score(
-    query,
-    k=5,
-    filter={"category": "security"}
+ query,
+ k=5,
+ filter={"category": "security"}
 )
 ```
 
@@ -142,8 +142,8 @@ var cacheKey = $"embedding:{documentHash}";
 var cachedEmbedding = await cache.GetAsync<float[]>(cacheKey);
 if (cachedEmbedding == null)
 {
-    cachedEmbedding = await GenerateEmbedding(document);
-    await cache.SetAsync(cacheKey, cachedEmbedding, TimeSpan.FromHours(24));
+ cachedEmbedding = await GenerateEmbedding(document);
+ await cache.SetAsync(cacheKey, cachedEmbedding, TimeSpan.FromHours(24));
 }
 ```
 

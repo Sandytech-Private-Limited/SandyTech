@@ -1,20 +1,20 @@
 ---
 title: "Automating Lead Pipelines with n8n: From Form Submission to CRM in 15 Minutes"
 slug: n8n-crm-lead-automation-workflow
-description: Build a complete lead automation pipeline with n8n — webhook ingestion, data transformation, CRM upsert, Slack notifications, and email follow-up. Real patterns from SandyTech's MVP client workflows. By Sandeep Kothapalli.
+description: Build a complete lead automation pipeline with n8n — webhook ingestion, data transformation, CRM upsert, Slack notifications, and email follow-up. Real patterns from's MVP client workflows. By Sandeep Kothapalli.
 imageUrl: https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: DevOps
 date: 2026-03-05
 readTime: 9 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "n8n automation", "lead pipeline automation", "CRM automation", "workflow automation", "n8n vs Zapier", "n8n self-hosted", "no-code automation", "MVP automation"]
-hashtags: ["#n8n", "#Automation", "#CRM", "#LeadGeneration", "#WorkflowAutomation", "#SandyTech", "#KothapalliSandeep", "#NoCode"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "n8n automation", "lead pipeline automation", "CRM automation", "workflow automation", "n8n vs Zapier", "n8n self-hosted", "no-code automation", "MVP automation"]
+hashtags: ["#n8n", "#Automation", "#CRM", "#LeadGeneration", "#WorkflowAutomation", "#KothapalliSandeep", "#NoCode"]
 ---
 
 # Automating Lead Pipelines with n8n: From Form Submission to CRM in 15 Minutes
 
 Every MVP client I've worked with has the same early problem: leads come in from multiple sources — a landing page form, a Calendly booking, a LinkedIn DM — and someone has to manually copy data into a CRM, send a follow-up email, and ping the sales channel on Slack. It's 20 minutes of copy-paste work per lead, it's error-prone, and it scales to exactly zero.
 
-I've standardised on n8n for this class of problem. It's self-hostable, the node library covers 95% of what you need, and the economics are far better than Zapier or Make at even modest volumes. Here's the exact pipeline I set up for a recent client, and how I've reused variants of it across SandyTech's own lead capture flows.
+I've standardised on n8n for this class of problem. It's self-hostable, the node library covers 95% of what you need, and the economics are far better than Zapier or Make at even modest volumes. Here's the exact pipeline I set up for a recent client, and how I've reused variants of it across's own lead capture flows.
 
 ## Self-Hosting n8n on a $5 VPS
 
@@ -24,36 +24,36 @@ You don't need anything fancy. A 1 vCPU / 1 GB RAM VPS (Hetzner CX11 or DigitalO
 # docker-compose.yml
 version: '3.8'
 services:
-  n8n:
-    image: n8nio/n8n:latest
-    restart: unless-stopped
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_HOST=workflows.yourdomain.com
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=https
-      - WEBHOOK_URL=https://workflows.yourdomain.com/
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n
-      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - n8n_data:/home/node/.n8n
+ n8n:
+ image: n8nio/n8n:latest
+ restart: unless-stopped
+ ports:
+ - "5678:5678"
+ environment:
+ - N8N_HOST=workflows.yourdomain.com
+ - N8N_PORT=5678
+ - N8N_PROTOCOL=https
+ - WEBHOOK_URL=https://workflows.yourdomain.com/
+ - N8N_BASIC_AUTH_ACTIVE=true
+ - N8N_BASIC_AUTH_USER=admin
+ - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
+ - DB_TYPE=postgresdb
+ - DB_POSTGRESDB_HOST=postgres
+ - DB_POSTGRESDB_DATABASE=n8n
+ - DB_POSTGRESDB_USER=n8n
+ - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
+ volumes:
+ - n8n_data:/home/node/.n8n
 
-  postgres:
-    image: postgres:15
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: n8n
-      POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+ postgres:
+ image: postgres:15
+ restart: unless-stopped
+ environment:
+ POSTGRES_DB: n8n
+ POSTGRES_USER: n8n
+ POSTGRES_PASSWORD: ${DB_PASSWORD}
+ volumes:
+ - postgres_data:/var/lib/postgresql/data
 ```
 
 Put this behind Nginx with a Let's Encrypt certificate and you have a production-grade automation server for under $10/month.
@@ -69,18 +69,18 @@ Every form submission hits a unique n8n webhook URL. For a React/Next.js fronten
 ```typescript
 // In your form submit handler
 const response = await fetch(
-  'https://workflows.yourdomain.com/webhook/lead-capture',
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: formData.name,
-      email: formData.email,
-      company: formData.company,
-      source: 'landing-page',
-      timestamp: new Date().toISOString()
-    })
-  }
+ 'https://workflows.yourdomain.com/webhook/lead-capture',
+ {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({
+ name: formData.name,
+ email: formData.email,
+ company: formData.company,
+ source: 'landing-page',
+ timestamp: new Date().toISOString()
+ })
+ }
 );
 ```
 
@@ -95,16 +95,16 @@ Raw form data is rarely clean enough to push directly to a CRM. I always add a J
 const item = $input.first().json;
 
 return [{
-  json: {
-    firstName: item.name.split(' ')[0],
-    lastName: item.name.split(' ').slice(1).join(' ') || '',
-    email: item.email.toLowerCase().trim(),
-    company: item.company?.trim() || 'Unknown',
-    source: item.source,
-    leadScore: item.company ? 8 : 4, // basic scoring
-    createdAt: item.timestamp,
-    tags: [item.source, 'inbound-2026']
-  }
+ json: {
+ firstName: item.name.split(' ')[0],
+ lastName: item.name.split(' ').slice(1).join(' ') || '',
+ email: item.email.toLowerCase().trim(),
+ company: item.company?.trim() || 'Unknown',
+ source: item.source,
+ leadScore: item.company ? 8 : 4, // basic scoring
+ createdAt: item.timestamp,
+ tags: [item.source, 'inbound-2026']
+ }
 }];
 ```
 
@@ -133,7 +133,7 @@ For high-volume flows, I filter this to only post leads above a score threshold 
 An email node (SendGrid or SMTP) sends the lead a personalised acknowledgement. I use n8n's expression syntax to personalise:
 
 ```
-Subject: Your enquiry to SandyTech — {{$json.firstName}}
+Subject: Your enquiry to — {{$json.firstName}}
 
 Hi {{$json.firstName}},
 
@@ -158,20 +158,20 @@ I configure two patterns:
 const error = $input.first().json;
 
 return [{
-  json: {
-    workflowId: error.workflow.id,
-    workflowName: error.workflow.name,
-    nodeName: error.execution.lastNodeExecuted,
-    errorMessage: error.execution.error?.message,
-    timestamp: new Date().toISOString(),
-    inputData: JSON.stringify(error.execution.data)
-  }
+ json: {
+ workflowId: error.workflow.id,
+ workflowName: error.workflow.name,
+ nodeName: error.execution.lastNodeExecuted,
+ errorMessage: error.execution.error?.message,
+ timestamp: new Date().toISOString(),
+ inputData: JSON.stringify(error.execution.data)
+ }
 }];
 ```
 
 ## n8n vs Zapier vs Make
 
-Zapier is the easiest to start with but the economics turn bad fast. Their Starter plan allows 750 tasks/month; a busy lead flow blows through that in days. At SandyTech volumes (a few hundred automations/month), Zapier Professional costs $49/month. Make (formerly Integromat) is cheaper and more powerful, but the scenario editor is quirky and the free tier has operation limits.
+Zapier is the easiest to start with but the economics turn bad fast. Their Starter plan allows 750 tasks/month; a busy lead flow blows through that in days. At volumes (a few hundred automations/month), Zapier Professional costs $49/month. Make (formerly Integromat) is cheaper and more powerful, but the scenario editor is quirky and the free tier has operation limits.
 
 n8n self-hosted is $0 compute beyond the VPS cost. The n8n Cloud plan starts at $24/month and is worth it if you don't want to manage the server. The node library is extensive, the JavaScript function nodes give you full flexibility when a native integration falls short, and the execution logs are excellent for debugging.
 

@@ -29,7 +29,7 @@ export default function Home() {
     { icon: Cpu, title: "AI/LLM Systems", description: "RAG Pipelines, GPT-4o, Agent Workflows, Vector Search, LangChain" },
     { icon: Zap, title: "Real-time Platforms", description: "WebRTC, Socket.io, Event-Driven Architecture, Distributed Systems" },
     { icon: Code, title: "Full-Stack Products", description: "React, Next.js, Node.js, TypeScript, React Native" },
-    { icon: Rocket, title: "MVP Delivery", description: "Idea to production in 6–8 weeks via SandyTech Pvt Ltd" }
+    { icon: Rocket, title: "MVP Delivery", description: "Idea to production in 6–8 weeks — full-stack, production-ready" }
   ];
 
   const products = [
@@ -70,9 +70,9 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Sandeep Kothapalli",
-    "alternateName": ["kothapallisandeep", "sandeepkothapalli", "SandyTech"],
-    "jobTitle": "Senior Architect & Founder",
-    "description": "Senior Architect & Founder of SandyTech with 13+ years of experience in cloud-native platforms, AI automation, and distributed systems. Expert in .NET, Azure, microservices, Dapr, Kubernetes, and AI-enabled platforms.",
+    "alternateName": ["kothapallisandeep", "sandeepkothapalli"],
+    "jobTitle": "Senior Architect",
+    "description": "Senior Architect with 13+ years of experience in cloud-native platforms, AI automation, and distributed systems. Expert in .NET, Azure, microservices, Dapr, Kubernetes, and AI-enabled platforms.",
     "url": "https://kothapallisandeep.com",
     "sameAs": [
       "https://www.linkedin.com/in/kothapallisandeep/",
@@ -95,12 +95,6 @@ export default function Home() {
     "worksFor": {
       "@type": "Organization",
       "name": "Progience Technologies"
-    },
-    "founder": {
-      "@type": "Organization",
-      "name": "SandyTech Private Limited",
-      "url": "https://sandytech.org",
-      "description": "AI-Powered MVPs & Automation | Built in 6-8 Weeks"
     }
   };
 
@@ -116,7 +110,7 @@ export default function Home() {
               {/* Badge */}
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/50 border border-indigo-200 dark:border-indigo-700/50 text-indigo-700 dark:text-indigo-300 text-sm font-medium mb-6">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 mr-2 animate-pulse"></span>
-                Available for new projects · SandyTech Pvt Ltd
+                Available for new projects
               </div>
 
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
@@ -127,7 +121,7 @@ export default function Home() {
               </h1>
 
               <p className="text-xl text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                I turn ideas into deployed AI products. Senior architect, SandyTech founder, 13+ years building enterprise systems.
+                I turn ideas into deployed AI products. Senior architect with 13+ years building enterprise systems.
                 Specialising in AI/LLM platforms, cloud migration, and MVPs shipped in 6–8 weeks.
               </p>
 
@@ -195,7 +189,7 @@ export default function Home() {
               Products Built & Shipped
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Real products, in production, built by SandyTech.
+              Real products, in production, built end-to-end.
             </p>
           </div>
 

@@ -198,18 +198,18 @@ const BlogList = () => {
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Technical blog by Sandeep Kothapalli — in-depth articles on .NET microservices, Azure cloud architecture, AI/LLM and RAG pipelines, Dapr, Kubernetes, WebRTC, n8n automation, and SandyTech MVP delivery. Real-world lessons from 13+ years of enterprise engineering.',
-  keywords: ['Sandeep Kothapalli blog', 'kothapallisandeep', 'SandyTech blog', 'technical blog', '.NET blog', 'Azure blog', 'AI architecture blog', 'RAG pipeline', 'Dapr', 'Kubernetes', 'cloud-native blog'],
+  description: 'Technical blog by Sandeep Kothapalli — in-depth articles on .NET microservices, Azure cloud architecture, AI/LLM and RAG pipelines, Dapr, Kubernetes, WebRTC, n8n automation, and MVP delivery. Real-world lessons from 13+ years of enterprise engineering.',
+  keywords: ['Sandeep Kothapalli blog', 'kothapallisandeep', 'technical blog', '.NET blog', 'Azure blog', 'AI architecture blog', 'RAG pipeline', 'Dapr', 'Kubernetes', 'cloud-native blog'],
   alternates: { canonical: 'https://kothapallisandeep.com/blog' },
   openGraph: {
-    title: 'Technical Blog — Sandeep Kothapalli & SandyTech',
+    title: 'Technical Blog — Sandeep Kothapalli',
     description: 'In-depth articles on .NET, Azure, AI/LLM, RAG pipelines, Dapr, Kubernetes, and MVP delivery from 13+ years of enterprise engineering.',
     type: 'website',
     url: 'https://kothapallisandeep.com/blog',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Technical Blog — Sandeep Kothapalli & SandyTech',
+    title: 'Technical Blog — Sandeep Kothapalli',
     description: 'In-depth articles on .NET, Azure, AI/LLM, RAG pipelines, Dapr, Kubernetes, and MVP delivery.',
     creator: '@sandeepattech',
   },

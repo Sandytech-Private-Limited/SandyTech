@@ -25,19 +25,19 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Sandeep Kothapalli — Senior Architect & Founder of SandyTech Pvt Ltd. 13+ years building enterprise cloud platforms, AI/LLM systems, and production MVPs. Based in Hyderabad. Specialising in .NET, Azure, Dapr, Kubernetes, RAG pipelines, and real-time platforms.",
-  keywords: ["Sandeep Kothapalli", "kothapallisandeep", "SandyTech", "Senior Architect", "SandyTech Founder", "Hyderabad architect", ".NET architect", "Azure architect", "AI MVP", "about"],
+  description: "Sandeep Kothapalli — Senior Architect with 13+ years building enterprise cloud platforms, AI/LLM systems, and production MVPs. Based in Hyderabad. Specialising in .NET, Azure, Dapr, Kubernetes, RAG pipelines, and real-time platforms.",
+  keywords: ["Sandeep Kothapalli", "kothapallisandeep", "Senior Architect", "Hyderabad architect", ".NET architect", "Azure architect", "AI MVP", "about"],
   alternates: { canonical: "https://kothapallisandeep.com/about" },
   openGraph: {
-    title: "About Sandeep Kothapalli — Senior Architect & SandyTech Founder",
-    description: "13+ years building cloud-native platforms, AI/LLM systems, and production MVPs via SandyTech Pvt Ltd. Expert in .NET, Azure, Kubernetes, Dapr, and RAG pipelines.",
+    title: "About Sandeep Kothapalli — Senior Architect",
+    description: "13+ years building cloud-native platforms, AI/LLM systems, and production MVPs. Expert in .NET, Azure, Kubernetes, Dapr, and RAG pipelines.",
     url: "https://kothapallisandeep.com/about",
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Sandeep Kothapalli — Senior Architect & SandyTech Founder",
-    description: "13+ years building cloud-native platforms, AI/LLM systems, and MVPs. Founder of SandyTech Pvt Ltd.",
+    title: "About Sandeep Kothapalli — Senior Architect",
+    description: "13+ years building cloud-native platforms, AI/LLM systems, and production MVPs.",
     creator: "@sandeepattech",
   },
 };
@@ -58,16 +58,16 @@ export default function About() {
 
   const experience = [
     {
-      title: "Founder & Director",
-      company: "SandyTech Private Limited, Hyderabad",
-      period: "Dec 2024 - Present",
+      title: "Independent Developer & Architect",
+      company: "Personal Projects & Consulting",
+      period: "2024 - Present",
       technologies: "Next.js, React, Node.js, AI/LLM, Azure, n8n, Automation",
-      description: "Founded SandyTech Pvt Ltd (CIN: U62011TS2025PTC208019) to deliver AI-powered MVPs and automation solutions for startups and SMBs.",
+      description: "Building AI-powered products and automation solutions for startups and SMBs through independent projects and consulting engagements.",
       achievements: [
-        "Building AI-powered product platforms and automation workflows delivered in 6-8 weeks.",
-        "Architecting multi-agent orchestration systems and LLM-integrated products for client businesses.",
+        "Shipped NexusEd, 360JobReady, and Affixx — live production products from zero to deployment.",
+        "Architecting multi-agent orchestration systems and LLM-integrated products.",
         "Developing full-stack SaaS products including EdTech platforms and B2B lead generation tools.",
-        "Positioning SandyTech as a go-to partner for startups needing cloud-native MVPs with AI capabilities."
+        "Delivering cloud-native MVPs with AI capabilities in 6–8 weeks."
       ]
     },
     {
@@ -217,7 +217,7 @@ export default function About() {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  I help startups and SMEs turn ideas into deployed AI products — typically in 6 to 8 weeks. After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I started SandyTech to solve a problem I kept seeing: founders with strong ideas but no technical partner to ship them.
+                  I help startups and SMEs turn ideas into deployed AI products — typically in 6 to 8 weeks. After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I focus on shipping production-grade products for founders who need a technical partner to execute.
                 </p>
                 <div className="text-lg text-gray-600 dark:text-gray-300 mb-8 space-y-2">
                   <p>Specialising in:</p>
@@ -234,8 +234,8 @@ export default function About() {
                     <Briefcase className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Founder & Director, SandyTech Pvt Ltd</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">AI-Powered MVPs & Automation · Built in 6-8 Weeks · <Link href="https://sandytech.org" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">sandytech.org</Link></p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Technical Lead, Progience Technologies</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">Senior Architect · Cloud-Native & AI Systems · Hyderabad</p>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -278,7 +278,7 @@ export default function About() {
             </h2>
             <div className="bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I founded SandyTech Pvt Ltd to solve a recurring problem: founders with strong ideas but no technical partner to ship them. SandyTech specialises in AI-powered MVP development, cloud migration, automation workflows, and corporate AI training.
+                After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I specialise in AI-powered MVP development, cloud migration, automation workflows, and hands-on architecture for startups and enterprises alike.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
                 This year: built <a href="https://nexused.net" target="_blank" rel="noopener noreferrer" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">NexusEd (nexused.net)</a> — a real-time EdTech platform with WebRTC live classrooms, AI tutor powered by GPT-4o Vision, tutor marketplace with smart matching, and full institutional module — from zero to production in 12 weeks. Also shipped <a href="https://www.360jobready.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">360JobReady (360jobready.com)</a> — an AI career platform for Indian freshers with ATS-optimised resume builder and skill-based job matching. Both are live, in production, and free to start.

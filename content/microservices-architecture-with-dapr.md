@@ -1,13 +1,13 @@
 ---
 title: Building Microservices Architecture with Dapr
 slug: microservices-architecture-with-dapr
-description: Learn how to design and implement scalable microservices using Dapr (Distributed Application Runtime) for building cloud-native applications with .NET. Expert guide from kothapallisandeep (Sandeep Kothapalli) on SandyTech.
+description: Learn how to design and implement scalable microservices using Dapr (Distributed Application Runtime) for building cloud-native applications with .NET. Expert guide from kothapallisandeep.
 imageUrl: https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Cloud
 date: 2024-03-10
 readTime: 12 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "AI automation", "Idea to MVP", "microservices", "Dapr", ".NET", "Azure", "cloud-native", "distributed systems", "actor model", "pub/sub", "service mesh"]
-hashtags: ["#Microservices", "#Dapr", "#DotNet", "#Azure", "#CloudNative", "#DistributedSystems", "#SandyTech", "#KothapalliSandeep"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "AI automation", "Idea to MVP", "microservices", "Dapr", ".NET", "Azure", "cloud-native", "distributed systems", "actor model", "pub/sub", "service mesh"]
+hashtags: ["#Microservices", "#Dapr", "#DotNet", "#Azure", "#CloudNative", "#DistributedSystems", "#KothapalliSandeep"]
 ---
 
 # Building Microservices Architecture with Dapr
@@ -54,8 +54,8 @@ await daprClient.PublishEventAsync("pubsub", "order-created", order);
 [Topic("pubsub", "order-created")]
 public async Task<ActionResult> HandleOrderCreated(Order order)
 {
-    // Process order
-    return Ok();
+ // Process order
+ return Ok();
 }
 ```
 
@@ -66,18 +66,18 @@ Dapr Actors provide a simple way to build stateful, single-threaded objects:
 ```csharp
 public interface IOrderActor : IActor
 {
-    Task<Order> GetOrderAsync();
-    Task UpdateOrderAsync(Order order);
+ Task<Order> GetOrderAsync();
+ Task UpdateOrderAsync(Order order);
 }
 
 public class OrderActor : Actor, IOrderActor
 {
-    public OrderActor(ActorHost host) : base(host) { }
-    
-    public async Task<Order> GetOrderAsync()
-    {
-        return await StateManager.GetStateAsync<Order>("order");
-    }
+ public OrderActor(ActorHost host) : base(host) { }
+ 
+ public async Task<Order> GetOrderAsync()
+ {
+ return await StateManager.GetStateAsync<Order>("order");
+ }
 }
 ```
 

@@ -65,8 +65,8 @@ const htmlContent = (await processor.process(content)).toString()
       "url": "https://kothapallisandeep.com"
     },
     "publisher": {
-      "@type": "Organization",
-      "name": "SandyTech",
+      "@type": "Person",
+      "name": "Sandeep Kothapalli",
       "logo": {
         "@type": "ImageObject",
         "url": "https://kothapallisandeep.com/logo.jpg"
@@ -79,8 +79,6 @@ const htmlContent = (await processor.process(content)).toString()
     "keywords": [
       "kothapallisandeep",
       "sandeepkothapalli",
-      "sandytech",
-      "sandytech org",
       "AI automation",
       "Idea to MVP",
       ...(data.keywords || []),
@@ -127,8 +125,6 @@ export async function generateMetadata(
   const keywords = [
     "kothapallisandeep",
     "sandeepkothapalli",
-    "sandytech",
-    "sandytech org",
     "AI automation",
     "Idea to MVP",
     ...(data.keywords || []),
@@ -136,7 +132,7 @@ export async function generateMetadata(
   ];
   
   const title = data.title;
-  const description = data.description || `${data.title} — technical insights from Sandeep Kothapalli, Senior Architect & Founder of SandyTech Pvt Ltd. 13+ years in ${data.category || 'cloud-native'} engineering.`;
+  const description = data.description || `${data.title} — technical insights from Sandeep Kothapalli, Senior Architect. 13+ years in ${data.category || 'cloud-native'} engineering.`;
   
   return {
     title,

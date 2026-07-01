@@ -9,25 +9,16 @@ export default function Footer() {
           {/* Left: Brand */}
           <div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Sandeep Kothapalli</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">Senior Architect & SandyTech Founder</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">Senior Architect & Cloud-Native Engineer</p>
             <div className="flex items-center gap-4">
               <a
                 href="https://www.linkedin.com/in/kothapallisandeep/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Personal LinkedIn"
+                aria-label="LinkedIn"
                 className="w-9 h-9 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-indigo-200 dark:hover:bg-indigo-700 flex items-center justify-center transition-colors text-slate-600 dark:text-slate-300"
               >
                 <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/sandytech-pvt-ltd/?viewAsMember=false"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="SandyTech LinkedIn"
-                className="w-9 h-9 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-indigo-200 dark:hover:bg-indigo-700 flex items-center justify-center transition-colors"
-              >
-                <Linkedin className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               </a>
               <a
                 href="https://github.com/websabre"
@@ -39,7 +30,7 @@ export default function Footer() {
                 <Github className="w-4 h-4" />
               </a>
               <a
-                href="mailto:info@sandytech.org"
+                href="mailto:Sandeep.kothapalli1@hotmail.com"
                 aria-label="Email"
                 className="w-9 h-9 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-emerald-200 dark:hover:bg-emerald-700 flex items-center justify-center transition-colors text-slate-600 dark:text-slate-300"
               >
@@ -117,13 +108,13 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-500">
           <p>
-            &copy; 2025 Sandeep Kothapalli &middot; Founder, SandyTech Pvt Ltd
+            &copy; 2025 Sandeep Kothapalli
           </p>
           <a
-            href="mailto:info@sandytech.org"
+            href="mailto:Sandeep.kothapalli1@hotmail.com"
             className="hover:text-gray-700 dark:hover:text-slate-300 transition-colors"
           >
-            info@sandytech.org
+            Sandeep.kothapalli1@hotmail.com
           </a>
         </div>
       </div>

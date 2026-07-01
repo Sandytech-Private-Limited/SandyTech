@@ -60,10 +60,10 @@ const ResumePage = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-emerald-600 mx-auto mb-4"></div>
               <p className="text-xl text-indigo-600 dark:text-indigo-400 font-semibold mb-2">
-                SENIOR ARCHITECT & FOUNDER | Cloud-Native Platforms · AI/LLM Systems · Idea-to-MVP
+                SENIOR ARCHITECT | Cloud-Native Platforms · AI/LLM Systems · Idea-to-MVP
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                Founder & Director, SandyTech Pvt Ltd · sandytech.org
+                kothapallisandeep.com
               </p>
               <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">

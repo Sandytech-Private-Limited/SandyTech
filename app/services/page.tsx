@@ -17,18 +17,18 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Cloud architecture, AI/LLM integration, Idea-to-MVP in 6–8 weeks, enterprise platform engineering, payment integration, and n8n automation — by Sandeep Kothapalli and SandyTech Pvt Ltd. Fixed-scope projects, staff augmentation, or advisory.",
-  keywords: ["SandyTech services", "Sandeep Kothapalli services", "AI MVP development", "cloud architecture services", "LLM integration", "Idea to MVP", "microservices consulting", "Azure architect for hire", "Razorpay integration", "n8n automation"],
+  description: "Cloud architecture, AI/LLM integration, Idea-to-MVP in 6–8 weeks, enterprise platform engineering, payment integration, and n8n automation — by Sandeep Kothapalli. Fixed-scope projects, staff augmentation, or advisory.",
+  keywords: ["Sandeep Kothapalli services", "AI MVP development", "cloud architecture services", "LLM integration", "Idea to MVP", "microservices consulting", "Azure architect for hire", "Razorpay integration", "n8n automation"],
   alternates: { canonical: "https://kothapallisandeep.com/services" },
   openGraph: {
-    title: "Services — Sandeep Kothapalli & SandyTech Pvt Ltd",
+    title: "Services — Sandeep Kothapalli",
     description: "Cloud architecture, AI/LLM integration, MVP delivery in 6–8 weeks, enterprise platform engineering. Fixed-scope, staff augmentation, or advisory.",
     type: "website",
     url: "https://kothapallisandeep.com/services",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services — Sandeep Kothapalli & SandyTech Pvt Ltd",
+    title: "Services — Sandeep Kothapalli",
     description: "Cloud architecture, AI/LLM integration, MVP delivery in 6–8 weeks. Fixed-scope, staff augmentation, or advisory.",
     creator: "@sandeepattech",
   },
@@ -72,9 +72,9 @@ const services = [
   {
     icon: Zap,
     title: "Idea-to-MVP in 6–8 Weeks",
-    tagline: "SandyTech · Full-Stack · Production-Ready",
+    tagline: "Full-Stack · Production-Ready",
     description:
-      "Full-stack MVP delivery for startups and SMBs via SandyTech Pvt Ltd. You bring the idea; we handle architecture, design, development, and deployment — production-grade, not a prototype.",
+      "Full-stack MVP delivery for startups and SMBs. You bring the idea; I handle architecture, design, development, and deployment — production-grade, not a prototype.",
     deliverables: [
       "Product scoping and technical architecture",
       "Full-stack development (React/Next.js + Node.js / .NET)",
@@ -174,16 +174,7 @@ export default function ServicesPage() {
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
               13+ years of enterprise engineering distilled into focused services — from cloud migrations and AI/LLM
-              integration to full MVP delivery via{" "}
-              <a
-                href="https://sandytech.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline"
-              >
-                SandyTech
-              </a>
-              .
+              integration to full MVP delivery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8 py-6">
@@ -216,7 +207,7 @@ export default function ServicesPage() {
                   {service.highlight && (
                     <div className="absolute -top-3 left-8">
                       <Badge className="bg-orange-500 text-white border-0 text-xs px-3 py-1">
-                        Most Popular · via SandyTech
+                        Most Popular
                       </Badge>
                     </div>
                   )}
@@ -281,15 +272,8 @@ export default function ServicesPage() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 py-6 border-white text-white hover:bg-white hover:text-indigo-600"
-            >
-              <a href="https://sandytech.org" target="_blank" rel="noopener noreferrer">
-                Visit SandyTech
-              </a>
+            <Button asChild size="lg" variant="outline" className="text-lg px-8 py-6 border-white text-white hover:bg-white hover:text-indigo-600">
+              <Link href="/projects">View Past Work</Link>
             </Button>
           </div>
         </div>

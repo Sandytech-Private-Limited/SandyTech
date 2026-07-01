@@ -1,13 +1,13 @@
 ---
 title: "Azure Container Apps vs Kubernetes: When to Use Each for .NET Microservices"
 slug: azure-container-apps-vs-kubernetes
-description: A practical decision guide for choosing between Azure Container Apps and AKS for .NET microservices — covering cost, autoscaling, Dapr integration, and the trade-offs that actually matter. By Sandeep Kothapalli, SandyTech.
+description: A practical decision guide for choosing between Azure Container Apps and AKS for .NET microservices — covering cost, autoscaling, Dapr integration, and the trade-offs that actually matter. By Sandeep Kothapalli,.
 imageUrl: https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: Cloud
 date: 2026-03-22
 readTime: 11 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "sandytech org", "Azure Container Apps", "AKS", "Kubernetes", ".NET microservices", "KEDA", "autoscaling", "cloud-native", "Azure", "Dapr"]
-hashtags: ["#Azure", "#Kubernetes", "#ContainerApps", "#AKS", "#DotNet", "#KEDA", "#SandyTech", "#KothapalliSandeep", "#CloudNative"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "Azure Container Apps", "AKS", "Kubernetes", ".NET microservices", "KEDA", "autoscaling", "cloud-native", "Azure", "Dapr"]
+hashtags: ["#Azure", "#Kubernetes", "#ContainerApps", "#AKS", "#DotNet", "#KEDA", "#KothapalliSandeep", "#CloudNative"]
 ---
 
 # Azure Container Apps vs Kubernetes: When to Use Each for .NET Microservices
@@ -34,18 +34,18 @@ Container Apps surfaces KEDA scaling rules directly in the configuration. This i
 
 ```yaml
 scale:
-  minReplicas: 0
-  maxReplicas: 20
-  rules:
-    - name: azure-servicebus-rule
-      custom:
-        type: azure-servicebus
-        metadata:
-          queueName: order-processing
-          messageCount: "5"
-        auth:
-          - secretRef: servicebus-connection-string
-            triggerParameter: connection
+ minReplicas: 0
+ maxReplicas: 20
+ rules:
+ - name: azure-servicebus-rule
+ custom:
+ type: azure-servicebus
+ metadata:
+ queueName: order-processing
+ messageCount: "5"
+ auth:
+ - secretRef: servicebus-connection-string
+ triggerParameter: connection
 ```
 
 This scales your order processor from zero up to 20 replicas based on Service Bus queue depth, with no KEDA installation or ScaledObject CRD management on your part. On AKS you'd configure the same thing, but you're also responsible for keeping KEDA updated and monitoring its health.
@@ -56,21 +56,21 @@ Container Apps has first-class Dapr support — you enable it per-app with a few
 
 ```json
 {
-  "dapr": {
-    "enabled": true,
-    "appId": "order-service",
-    "appPort": 80,
-    "components": [
-      {
-        "name": "statestore",
-        "type": "state.azure.cosmosdb"
-      }
-    ]
-  }
+ "dapr": {
+ "enabled": true,
+ "appId": "order-service",
+ "appPort": 80,
+ "components": [
+ {
+ "name": "statestore",
+ "type": "state.azure.cosmosdb"
+ }
+ ]
+ }
 }
 ```
 
-On AKS, you'd install the Dapr operator, manage Dapr component YAML manifests, handle upgrades, and monitor the sidecar separately. Container Apps removes all of that. For teams building Dapr-based architectures (as we often do at SandyTech), this is a meaningful time saving.
+On AKS, you'd install the Dapr operator, manage Dapr component YAML manifests, handle upgrades, and monitor the sidecar separately. Container Apps removes all of that. For teams building Dapr-based architectures (as we often do at), this is a meaningful time saving.
 
 ## Revision Management
 
@@ -78,9 +78,9 @@ Container Apps has a revision model built in. Every deployment creates a new rev
 
 ```
 az containerapp ingress traffic set \
-  --name order-service \
-  --resource-group my-rg \
-  --revision-weight latest=20 order-service--old-revision=80
+ --name order-service \
+ --resource-group my-rg \
+ --revision-weight latest=20 order-service--old-revision=80
 ```
 
 This makes canary deployments and blue-green rollouts trivial without any additional tooling. On AKS you'd reach for Flagger, Argo Rollouts, or manual service weight manipulation.
@@ -123,7 +123,7 @@ There are legitimate reasons to choose AKS. Here's when I recommend it:
 | Time to first deployment | Minutes | Hours/days |
 | Canary deployments | Built-in revisions | External tooling |
 
-## What We Use at SandyTech
+## What We Use at
 
 For our own products and most client MVPs, Container Apps is the default. NexusEd's backend services run on Container Apps — the scale-to-zero behaviour handles off-peak hours automatically, and the Dapr integration aligns with our architecture. We move to AKS recommendations when a client has existing Kubernetes expertise on their team, or when the workload profile clearly crosses the cost crossover point.
 

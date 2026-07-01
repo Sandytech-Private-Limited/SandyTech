@@ -1,18 +1,18 @@
 ---
 title: "Securing CI/CD Pipelines: GitHub Actions & Azure DevOps Best Practices"
 slug: cicd-security-github-actions-azure-devops
-description: Learn how senior architects at SandyTech (kothapallisandeep) harden CI/CD pipelines using GitHub Actions and Azure DevOps. Covers OIDC authentication, secret scanning, SLSA supply chain security, branch protection, and least-privilege service principals — practical security patterns from 13+ years of cloud-native delivery at sandytech.
+description: Learn how senior architect kothapallisandeep harden CI/CD pipelines using GitHub Actions and Azure DevOps. Covers OIDC authentication, secret scanning, SLSA supply chain security, branch protection, and least-privilege service principals — practical security patterns from 13+ years of cloud-native delivery.
 imageUrl: https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 category: DevOps
 date: 2025-04-20
 readTime: 10 min read
-keywords: ["kothapallisandeep", "sandeepkothapalli", "sandytech", "CI/CD security", "GitHub Actions", "Azure DevOps", "OIDC", "secret scanning", "SLSA", "supply chain security", "branch protection", "DevSecOps", "least privilege", "cloud-native"]
-hashtags: ["#DevSecOps", "#GitHubActions", "#AzureDevOps", "#CICD", "#OIDC", "#SLSA", "#SandyTech", "#KothapalliSandeep", "#CloudSecurity"]
+keywords: ["kothapallisandeep", "sandeepkothapalli", "CI/CD security", "GitHub Actions", "Azure DevOps", "OIDC", "secret scanning", "SLSA", "supply chain security", "branch protection", "DevSecOps", "least privilege", "cloud-native"]
+hashtags: ["#DevSecOps", "#GitHubActions", "#AzureDevOps", "#CICD", "#OIDC", "#SLSA", "#KothapalliSandeep", "#CloudSecurity"]
 ---
 
 # Securing CI/CD Pipelines: GitHub Actions & Azure DevOps Best Practices
 
-After 13+ years of building and shipping cloud-native systems, I can tell you the most common vector I see in post-incident reviews is not misconfigured infrastructure — it is the CI/CD pipeline itself. A compromised pipeline is a direct line to production. At SandyTech, every engagement we take on includes a pipeline security review as part of the architecture phase, not an afterthought.
+After 13+ years of building and shipping cloud-native systems, I can tell you the most common vector I see in post-incident reviews is not misconfigured infrastructure — it is the CI/CD pipeline itself. A compromised pipeline is a direct line to production. Every engagement I take on includes a pipeline security review as part of the architecture phase, not an afterthought.
 
 This post covers the patterns I apply across every project, whether it is GitHub Actions, Azure DevOps, or a hybrid.
 
@@ -27,19 +27,19 @@ The single biggest improvement you can make today costs zero money and takes abo
 ```yaml
 # .github/workflows/deploy.yml
 permissions:
-  id-token: write   # Required for OIDC
-  contents: read
+ id-token: write # Required for OIDC
+ contents: read
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: azure/login@v2
-        with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-          # No client-secret here. Azure trusts the OIDC JWT.
+ deploy:
+ runs-on: ubuntu-latest
+ steps:
+ - uses: azure/login@v2
+ with:
+ client-id: ${{ vars.AZURE_CLIENT_ID }}
+ tenant-id: ${{ vars.AZURE_TENANT_ID }}
+ subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+ # No client-secret here. Azure trusts the OIDC JWT.
 ```
 
 On the Azure side, create a federated credential on your App Registration pointing to `repo:your-org/your-repo:ref:refs/heads/main`. The credential is scoped to a specific branch, so a compromised feature branch cannot deploy to production.
@@ -60,10 +60,10 @@ brew install gitleaks
 
 # .pre-commit-config.yaml
 repos:
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.2
-    hooks:
-      - id: gitleaks
+ - repo: https://github.com/gitleaks/gitleaks
+ rev: v8.18.2
+ hooks:
+ - id: gitleaks
 ```
 
 **Layer 2 — GitHub Advanced Security**
@@ -76,9 +76,9 @@ ADO does not have built-in secret scanning, but you can add a pipeline step usin
 
 ```yaml
 - task: CredScan@3
-  inputs:
-    toolMajorVersion: 'V2'
-    suppressionsFile: 'CredScanSuppressions.json'
+ inputs:
+ toolMajorVersion: 'V2'
+ suppressionsFile: 'CredScanSuppressions.json'
 ```
 
 ---
@@ -98,14 +98,14 @@ Deploying to production should require human review, not just a green pipeline. 
 
 ```yaml
 jobs:
-  deploy-prod:
-    environment:
-      name: production
-      url: https://kothapallisandeep.com
-    runs-on: ubuntu-latest
-    # This job will pause until a reviewer approves in the GitHub UI
-    steps:
-      - run: echo "Deploying to production"
+ deploy-prod:
+ environment:
+ name: production
+ url: https://kothapallisandeep.com
+ runs-on: ubuntu-latest
+ # This job will pause until a reviewer approves in the GitHub UI
+ steps:
+ - run: echo "Deploying to production"
 ```
 
 In Azure DevOps, use **Stage approvals** on your release pipeline or YAML `environment` resource with approval checks. I also add a **Business hours** check on production environments — no automated deploys between midnight and 6 AM.
@@ -121,7 +121,7 @@ The `tj-actions/changed-files` incident in 2024 was a wake-up call. A widely use
 - uses: actions/checkout@v3
 
 # Good — pinned to a specific commit
-- uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+- uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 ```
 
 Automate this with Dependabot or Renovate. In your `.github/dependabot.yml`:
@@ -129,13 +129,13 @@ Automate this with Dependabot or Renovate. In your `.github/dependabot.yml`:
 ```yaml
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    groups:
-      actions:
-        patterns: ["*"]
+ - package-ecosystem: "github-actions"
+ directory: "/"
+ schedule:
+ interval: "weekly"
+ groups:
+ actions:
+ patterns: ["*"]
 ```
 
 **SLSA (Supply-chain Levels for Software Artifacts)**
@@ -144,9 +144,9 @@ For your own build artifacts, target SLSA Level 2 as a minimum. This means your 
 
 ```yaml
 - uses: actions/attest-build-provenance@v1
-  with:
-    subject-name: ghcr.io/your-org/your-image
-    subject-digest: ${{ steps.build.outputs.digest }}
+ with:
+ subject-name: ghcr.io/your-org/your-image
+ subject-digest: ${{ steps.build.outputs.digest }}
 ```
 
 ---
@@ -163,14 +163,14 @@ az ad sp create-for-rbac --name "sp-deploy-myapp-prod" --role "" --scopes ""
 
 # Assign only what is needed
 az role assignment create \
-  --assignee <sp-object-id> \
-  --role "AcrPush" \
-  --scope /subscriptions/.../resourceGroups/rg-myapp/providers/Microsoft.ContainerRegistry/registries/myacr
+ --assignee <sp-object-id> \
+ --role "AcrPush" \
+ --scope /subscriptions/.../resourceGroups/rg-myapp/providers/Microsoft.ContainerRegistry/registries/myacr
 
 az role assignment create \
-  --assignee <sp-object-id> \
-  --role "Azure Kubernetes Service Cluster User Role" \
-  --scope /subscriptions/.../resourceGroups/rg-myapp/providers/Microsoft.ContainerService/managedClusters/aks-myapp
+ --assignee <sp-object-id> \
+ --role "Azure Kubernetes Service Cluster User Role" \
+ --scope /subscriptions/.../resourceGroups/rg-myapp/providers/Microsoft.ContainerService/managedClusters/aks-myapp
 ```
 
 Never use `Contributor` at the subscription scope for a deployment SP. I see this constantly on new projects. The blast radius of a compromised token with subscription-level Contributor is devastating.
@@ -201,4 +201,4 @@ The signal-to-noise ratio is good if you scope alerts tightly. These alerts have
 | Least-privilege | SP per pipeline, scoped roles | SP per pipeline, scoped roles |
 | Supply chain | SLSA provenance attestations | SBOM generation |
 
-Building secure pipelines is not glamorous work, but it is foundational. At SandyTech, we bake these controls into the project scaffold so that every MVP we ship starts from a secure baseline, not a debt to pay down later.
+Building secure pipelines is not glamorous work, but it is foundational. I bake these controls into the project scaffold so that every MVP we ship starts from a secure baseline, not a debt to pay down later.

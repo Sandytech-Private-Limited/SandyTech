@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SiteConfig from "@/config/site";
+import { PROFILE } from "@/config/profile";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider"
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
         url: `${SiteConfig.url}/logo.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Sandeep Kothapalli - Senior Architect',
+        alt: `${PROFILE.name} - Technical Lead & Solution Architect`,
       },
     ],
   },

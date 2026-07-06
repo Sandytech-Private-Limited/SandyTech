@@ -22,59 +22,36 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { PROFILE, SKILLS } from "@/config/profile";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Sandeep Kothapalli — Senior Architect with 13+ years building enterprise cloud platforms, AI/LLM systems, and production MVPs. Based in Hyderabad. Specialising in .NET, Azure, Dapr, Kubernetes, RAG pipelines, and real-time platforms.",
-  keywords: ["Sandeep Kothapalli", "kothapallisandeep", "Senior Architect", "Hyderabad architect", ".NET architect", "Azure architect", "AI MVP", "about"],
+  description: `${PROFILE.name} — ${PROFILE.title}. 13+ years building enterprise serverless and cloud-native platforms with AI-enabled systems. Based in ${PROFILE.location}. Expert in .NET, TypeScript, AWS, Azure, Dapr, Kubernetes, and RAG pipelines.`,
+  keywords: ["Sandeep Kothapalli", "kothapallisandeep", "Technical Lead", "Solution Architect", "Bangalore architect", ".NET architect", "Azure architect", "AI architect", "about"],
   alternates: { canonical: "https://kothapallisandeep.com/about" },
   openGraph: {
-    title: "About Sandeep Kothapalli — Senior Architect",
-    description: "13+ years building cloud-native platforms, AI/LLM systems, and production MVPs. Expert in .NET, Azure, Kubernetes, Dapr, and RAG pipelines.",
+    title: `About ${PROFILE.name} — Technical Lead & Solution Architect`,
+    description: PROFILE.summary[0],
     url: "https://kothapallisandeep.com/about",
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Sandeep Kothapalli — Senior Architect",
-    description: "13+ years building cloud-native platforms, AI/LLM systems, and production MVPs.",
+    title: `About ${PROFILE.name} — Technical Lead & Solution Architect`,
+    description: PROFILE.summary[0],
     creator: "@sandeepattech",
   },
 };
 
 export default function About() {
-  const skills = {
-    "Architecture & Design": ["Domain-Driven Design (DDD)", "Clean Architecture", "Event-Driven Architecture", "System Design", "Distributed Systems", "Microservices Architecture", "Dapr Actor Model"],
-    "AI & LLM": ["RAG Fundamentals", "Vector Search & Embeddings", "Agent-based Workflows", "Multi-Agent Orchestration", "Tool Invocation", "Prompt Engineering", "Structured Prompting", "Context Assembly & Ranking", "Token Usage Optimization", "Hybrid Retrieval"],
-    "Programming & Frameworks": ["C#", ".NET", "ASP.NET Core", "JavaScript", "TypeScript", "Python"],
-    "Frontend & Mobile": ["React", "React Native", "Next.js", "JavaScript", "TypeScript"],
-    "Cloud & DevOps": ["Microsoft Azure", "Amazon Web Services (AWS)", "Kubernetes", "Docker", "CI/CD", "Azure DevOps", "Terraform", "Azure Pipelines", "Observability"],
-    "Databases": ["SQL Server", "Azure Cosmos DB", "Azure PostgreSQL Flexible Server", "NoSQL", "Vector Stores"],
-    "APIs & Services": ["REST", "gRPC", "API-First Design", "Dapr", "Microservices"],
-    "Payment & Integrations": ["Razorpay (Payment Gateway, Route & Split)", "API-First Design", "Third-party Integrations"],
-    "Automation": ["n8n Workflow Automation", "Social Media Automation", "Business Process Automation"],
-    "Tools & Practices": ["Git", "Automated Testing", "Code Reviews", "Engineering Best Practices", "Sprint Planning & Estimation", "Supply Chain Security"]
-  };
+  const skills = SKILLS;
 
   const experience = [
-    {
-      title: "Independent Developer & Architect",
-      company: "Personal Projects & Consulting",
-      period: "2024 - Present",
-      technologies: "Next.js, React, Node.js, AI/LLM, Azure, n8n, Automation",
-      description: "Building AI-powered products and automation solutions for startups and SMBs through independent projects and consulting engagements.",
-      achievements: [
-        "Shipped NexusEd, 360JobReady, and Affixx — live production products from zero to deployment.",
-        "Architecting multi-agent orchestration systems and LLM-integrated products.",
-        "Developing full-stack SaaS products including EdTech platforms and B2B lead generation tools.",
-        "Delivering cloud-native MVPs with AI capabilities in 6–8 weeks."
-      ]
-    },
     {
       title: "Technical Lead",
       company: "Progience Technologies, Hyderabad",
       period: "Jun 2023 - Present",
-      technologies: "Next.js, Express.js, Amazon Web Services (AWS), Microsoft Azure, SQL, Entity Framework, Design Patterns",
+      technologies: PROFILE.progienceTechnologies,
       description: "Lead end-to-end architecture and delivery of mission-critical enterprise platforms across multiple domains.",
       achievements: [
         "Define and own the technical roadmap, guiding teams in adopting microservices, Dapr actor model, container orchestration, and cloud-native deployment.",
@@ -217,16 +194,14 @@ export default function About() {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  I help startups and SMEs turn ideas into deployed AI products — typically in 6 to 8 weeks. After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I focus on shipping production-grade products for founders who need a technical partner to execute.
+                  {PROFILE.summary[0]}
                 </p>
                 <div className="text-lg text-gray-600 dark:text-gray-300 mb-8 space-y-2">
                   <p>Specialising in:</p>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>AI-Powered MVP Development (idea to shipped product in 6–8 weeks)</li>
-                    <li>Cloud Architecture & Migration (legacy .NET to Azure — architecture, execution, handover)</li>
-                    <li>Real-time platforms with WebRTC, Socket.io, and event-driven architecture</li>
-                    <li>AI automation workflows (n8n, LangChain, GPT-4o, custom pipelines)</li>
-                    <li>Enterprise .NET, microservices, Dapr, and Kubernetes systems</li>
+                    {PROFILE.specializations.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ul>
                 </div>
                 <div className="flex items-center gap-3 mb-6 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 border border-indigo-100 dark:border-slate-600">
@@ -234,8 +209,8 @@ export default function About() {
                     <Briefcase className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Technical Lead, Progience Technologies</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">Senior Architect · Cloud-Native & AI Systems · Hyderabad</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{PROFILE.currentRole}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">{PROFILE.currentRoleDetail} · {PROFILE.location}</p>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -278,10 +253,10 @@ export default function About() {
             </h2>
             <div className="bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                After 13+ years as a .NET architect building enterprise systems across Azure, AWS, and DevOps, I specialise in AI-powered MVP development, cloud migration, automation workflows, and hands-on architecture for startups and enterprises alike.
+                {PROFILE.summary[1]}
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-                This year: built <a href="https://nexused.net" target="_blank" rel="noopener noreferrer" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">NexusEd (nexused.net)</a> — a real-time EdTech platform with WebRTC live classrooms, AI tutor powered by GPT-4o Vision, tutor marketplace with smart matching, and full institutional module — from zero to production in 12 weeks. Also shipped <a href="https://www.360jobready.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">360JobReady (360jobready.com)</a> — an AI career platform for Indian freshers with ATS-optimised resume builder and skill-based job matching. Both are live, in production, and free to start.
+                Selected achievements include architecting cloud-native microservices platforms with Dapr and Kubernetes, leading monolith-to-distributed migrations, introducing CI/CD and infrastructure automation, and integrating AI-assisted capabilities into enterprise systems while maintaining reliability, security, and performance standards.
               </p>
             </div>
           </div>

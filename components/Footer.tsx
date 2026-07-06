@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
+import { PROFILE } from "@/config/profile";
 
 export default function Footer() {
   return (
@@ -9,10 +10,10 @@ export default function Footer() {
           {/* Left: Brand */}
           <div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Sandeep Kothapalli</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">Senior Architect & Cloud-Native Engineer</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{PROFILE.tagline}</p>
             <div className="flex items-center gap-4">
               <a
-                href="https://www.linkedin.com/in/kothapallisandeep/"
+                href={PROFILE.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -21,7 +22,7 @@ export default function Footer() {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com/websabre"
+                href={PROFILE.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -30,7 +31,7 @@ export default function Footer() {
                 <Github className="w-4 h-4" />
               </a>
               <a
-                href="mailto:Sandeep.kothapalli1@hotmail.com"
+                href={`mailto:${PROFILE.email}`}
                 aria-label="Email"
                 className="w-9 h-9 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-emerald-200 dark:hover:bg-emerald-700 flex items-center justify-center transition-colors text-slate-600 dark:text-slate-300"
               >
@@ -114,7 +115,7 @@ export default function Footer() {
             href="mailto:Sandeep.kothapalli1@hotmail.com"
             className="hover:text-gray-700 dark:hover:text-slate-300 transition-colors"
           >
-            Sandeep.kothapalli1@hotmail.com
+            {PROFILE.email}
           </a>
         </div>
       </div>

@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${project.name} | kothapallisandeep`,
     description: project.description,
-    keywords: ['kothapallisandeep', 'sandeepkothapalli', 'AI automation', 'Idea to MVP', project.category.toLowerCase(), ...project.technologies],
+    keywords: ['kothapallisandeep', 'sandeepkothapalli', 'AI automation', 'cloud-native', project.category.toLowerCase(), ...project.technologies],
     openGraph: {
       title: `${project.name} | kothapallisandeep`,
       description: project.description,

@@ -14,7 +14,8 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { rehypePrettyCode } from 'rehype-pretty-code'
 import { transformerCopyButton } from '@rehype-pretty/transformers'
 import { Metadata, ResolvingMetadata } from 'next'
-import StructuredData from '@/components/StructuredData' 
+import StructuredData from '@/components/StructuredData'
+import { PROFILE } from '@/config/profile' 
 
  
 type Props = {
@@ -132,7 +133,7 @@ export async function generateMetadata(
   ];
   
   const title = data.title;
-  const description = data.description || `${data.title} — technical insights from Sandeep Kothapalli, Senior Architect. 13+ years in ${data.category || 'cloud-native'} engineering.`;
+  const description = data.description || `${data.title} — technical insights from ${PROFILE.name}, Technical Lead & Solution Architect. 13+ years in ${data.category || 'cloud-native'} engineering.`;
   
   return {
     title,

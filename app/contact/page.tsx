@@ -24,6 +24,7 @@ import {
   Loader2
 } from 'lucide-react';
 import Link from 'next/link';
+import { PROFILE } from '@/config/profile';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -100,7 +101,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Location",
-      value: "Hyderabad, India",
+      value: PROFILE.location,
       description: "Available for remote work",
       link: null
     }

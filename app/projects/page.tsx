@@ -21,11 +21,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
+import { PROFILE } from "@/config/profile";
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Live products and enterprise projects by Sandeep Kothapalli — NexusEd (real-time EdTech), 360JobReady (AI career platform), Affixx (affiliate & creator platform), and cloud-native enterprise platforms built with .NET, Azure, Kubernetes, and AI/LLM systems.',
-  keywords: ['Sandeep Kothapalli projects', 'kothapallisandeep', 'NexusEd', '360JobReady', 'Affixx', 'cloud-native projects', 'AI products', 'MVP portfolio', 'enterprise architecture'],
+  description: `Enterprise and product projects by ${PROFILE.name} — cloud-native platforms, serverless architecture, AI-enabled systems, and distributed microservices built with .NET, TypeScript, AWS, Azure, Kubernetes, and AI/LLM systems.`,
+  keywords: ['Sandeep Kothapalli projects', 'kothapallisandeep', 'NexusEd', '360JobReady', 'Affixx', 'cloud-native projects', 'AI products', 'enterprise architecture', 'serverless architecture'],
   alternates: { canonical: 'https://kothapallisandeep.com/projects' },
   openGraph: {
     title: 'Projects — Sandeep Kothapalli',
@@ -121,8 +122,7 @@ export default function Projects() {
               </span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              A collection of enterprise-scale projects showcasing expertise in cloud-native architecture, 
-              microservices, AI/ML integration, and modern software development practices.
+              Enterprise-scale platforms and production products showcasing serverless architecture, cloud-native microservices, AI-enabled systems, and modern distributed engineering.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Badge variant="secondary" className="px-4 py-2">

@@ -6,13 +6,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Cloud, Cpu, Zap, Rocket, ExternalLink } from "lucide-react";
 import StructuredData from "@/components/StructuredData";
+import { PROFILE } from "@/config/profile";
 
 export default function Home() {
   const el = useRef(null);
 
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ['AI-Powered MVPs', 'Cloud Architecture', 'Real-time Platforms', '.NET & Azure', 'Idea to Production'],
+      strings: ['Serverless Architecture', 'Cloud-Native Platforms', 'AI-Enabled Systems', '.NET & Azure', 'RAG Pipelines'],
       typeSpeed: 50,
       backSpeed: 30,
       loop: true,
@@ -24,12 +25,12 @@ export default function Home() {
   }, []);
 
   const skills = [
-    { icon: Code, title: "Backend Engineering", description: ".NET, C#, ASP.NET Core, Microservices, Dapr, Actor Model" },
-    { icon: Cloud, title: "Cloud & DevOps", description: "Azure, AWS, Kubernetes, Docker, Terraform, CI/CD, Observability" },
-    { icon: Cpu, title: "AI/LLM Systems", description: "RAG Pipelines, GPT-4o, Agent Workflows, Vector Search, LangChain" },
-    { icon: Zap, title: "Real-time Platforms", description: "WebRTC, Socket.io, Event-Driven Architecture, Distributed Systems" },
-    { icon: Code, title: "Full-Stack Products", description: "React, Next.js, Node.js, TypeScript, React Native" },
-    { icon: Rocket, title: "MVP Delivery", description: "Idea to production in 6–8 weeks — full-stack, production-ready" }
+    { icon: Code, title: "Backend & Architecture", description: ".NET, C#, TypeScript, Python, FastAPI, Microservices, Dapr, DDD, Clean Architecture" },
+    { icon: Cloud, title: "Cloud & Serverless", description: "Azure, AWS Lambda, Cloudflare Workers, Kubernetes, CI/CD, Observability" },
+    { icon: Cpu, title: "AI-Enabled Platforms", description: "RAG Pipelines, LLM Integration, Agent Workflows, Vector Search, Secure AI Features" },
+    { icon: Zap, title: "Distributed Systems", description: "Event-Driven Architecture, System Design, High Availability, Fault Tolerance" },
+    { icon: Code, title: "Full-Stack Engineering", description: "React, Next.js, Node.js, TypeScript, React Native" },
+    { icon: Rocket, title: "Enterprise Delivery", description: "Legacy modernization, technical roadmaps, team leadership, production-scale platforms" }
   ];
 
   const products = [
@@ -61,9 +62,9 @@ export default function Home() {
 
   const stats = [
     { value: "13+", label: "Years Experience" },
-    { value: "3", label: "Live Products" },
-    { value: "6–8 Weeks", label: "MVP Delivery" },
-    { value: "Enterprise", label: "Scale" }
+    { value: "Enterprise", label: "Scale Delivery" },
+    { value: "AI-Enabled", label: "Platforms" },
+    { value: "Serverless", label: "& Cloud-Native" }
   ];
 
   const structuredData = {
@@ -71,8 +72,8 @@ export default function Home() {
     "@type": "Person",
     "name": "Sandeep Kothapalli",
     "alternateName": ["kothapallisandeep", "sandeepkothapalli"],
-    "jobTitle": "Senior Architect",
-    "description": "Senior Architect with 13+ years of experience in cloud-native platforms, AI automation, and distributed systems. Expert in .NET, Azure, microservices, Dapr, Kubernetes, and AI-enabled platforms.",
+    "jobTitle": PROFILE.shortTitle,
+    "description": PROFILE.summary[0],
     "url": "https://kothapallisandeep.com",
     "sameAs": [
       "https://www.linkedin.com/in/kothapallisandeep/",
@@ -81,11 +82,15 @@ export default function Home() {
     ],
     "knowsAbout": [
       ".NET",
+      "TypeScript",
+      "Python",
+      "FastAPI",
       "Azure",
+      "AWS",
+      "Serverless",
       "Microservices",
       "Dapr",
       "Kubernetes",
-      "AI Automation",
       "RAG Pipelines",
       "Distributed Systems",
       "System Design",
@@ -121,8 +126,11 @@ export default function Home() {
               </h1>
 
               <p className="text-xl text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                I turn ideas into deployed AI products. Senior architect with 13+ years building enterprise systems.
-                Specialising in AI/LLM platforms, cloud migration, and MVPs shipped in 6–8 weeks.
+                {PROFILE.summary[0]}
+              </p>
+
+              <p className="text-lg text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
+                {PROFILE.summary[1]}
               </p>
 
               <p className="text-lg text-slate-500 dark:text-slate-400 mb-8">
@@ -189,7 +197,7 @@ export default function Home() {
               Products Built & Shipped
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Real products, in production, built end-to-end.
+              Enterprise platforms and personal products — serverless, cloud-native, and AI-enabled systems shipped to production.
             </p>
           </div>
 
@@ -241,7 +249,7 @@ export default function Home() {
               What I Do
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              13+ years of enterprise engineering experience across the full stack — from cloud infrastructure to AI/LLM systems.
+              13+ years of enterprise engineering across serverless architecture, cloud-native platforms, and AI-enabled distributed systems.
             </p>
           </div>
 

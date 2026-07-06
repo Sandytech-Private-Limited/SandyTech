@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Download, Printer, Mail, Phone, MapPin, Calendar, Award, Code, Cloud, Database, Cpu, Globe, Briefcase } from "lucide-react";
 import React, { useRef } from "react";
+import { PROFILE, SKILLS } from "@/config/profile";
 
 const ResumePage = () => {
   const resumeRef = useRef<HTMLDivElement>(null);
@@ -13,17 +14,7 @@ const ResumePage = () => {
     }
   };
 
-  const skills = {
-    "Architecture & Design": ["Domain-Driven Design (DDD)", "Clean Architecture", "Event-Driven Architecture", "System Design & Distributed Systems", "Microservices Architecture & Dapr Actor Model", "Performance Optimization & Reliability Engineering", "High Availability, Scalability & Resilience"],
-    "AI & LLM": ["Agent-based Workflows & Tool Invocation", "Multi-Agent Orchestration", "AI Performance Considerations (latency, Cost, Accuracy)", "Secure AI Feature Integrations in Cloud Systems", "RAG Fundamentals", "Vector Search & Embeddings", "LLM integration in Enterprise Applications", "Prompt Engineering for Production workflows", "Structured Prompting & Output Parsing", "Context Assembly & Ranking for LLM inputs", "Token Usage Optimization & Prompt Compression", "Vector indexing & similarity search", "Hybrid Retrieval (Vector+keyword search)", "Applied Vector Stores (cloud-managed or open-source)"],
-    "Programming & Frameworks": ["C#", ".NET", "ASP.NET Core", "JavaScript", "TypeScript", "Python"],
-    "Frontend & Mobile": ["React", "React Native", "Next.js", "JavaScript", "TypeScript"],
-    "Cloud & DevOps": ["Microsoft Azure", "Amazon Web Services (AWS)", "CI/CD", "DevOps & Observability", "Git", "Azure DevOps", "Azure Pipelines", "Terraform", "Automated Testing"],
-    "Databases": ["SQL Server", "Azure Cosmos DB", "Azure PostgreSQL Flexible Server", "NoSQL"],
-    "APIs & Services": ["API-First Design (REST, gRPC)", "Dapr", "Actor Model", "Microservices"],
-    "Payment & Automation": ["Razorpay (Payment Gateway, Route & Split)", "n8n Workflow Automation", "Business Process Automation"],
-    "Tools & Practices": ["Sprint planning & estimation", "Code Reviews & Engineering Best Practices", "Supply Chain Security", "npm Security Auditing"]
-  };
+  const skills = SKILLS;
 
   const getSkillIcon = (category: string) => {
     switch (category) {
@@ -60,23 +51,23 @@ const ResumePage = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-emerald-600 mx-auto mb-4"></div>
               <p className="text-xl text-indigo-600 dark:text-indigo-400 font-semibold mb-2">
-                SENIOR ARCHITECT | Cloud-Native Platforms · AI/LLM Systems · Idea-to-MVP
+                {PROFILE.title.toUpperCase()}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                kothapallisandeep.com
+                {PROFILE.url.replace("https://", "")}
               </p>
               <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  Hyderabad, India (Open to US / EU / Remote)
+                  {PROFILE.locationFull}
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  +91-8019145771
+                  {PROFILE.phone}
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  Sandeep.kothapalli1@hotmail.com
+                  {PROFILE.email}
                 </div>
               </div>
             </header>
@@ -91,16 +82,10 @@ const ResumePage = () => {
               </div>
               <div className="bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
-                  Senior Technical Lead and Solution Architect with <span className="font-semibold text-indigo-600 dark:text-indigo-400">13+ years</span> of experience
-                  designing and delivering <span className="font-semibold">enterprise-scale, cloud-native platforms</span>. Strong expertise in 
-                  <span className="font-semibold"> .NET, Azure, microservices, Dapr, Kubernetes, distributed systems, and system design</span>, 
-                  with a proven track record of leading teams, defining technical roadmaps, and modernizing legacy systems.
+                  {PROFILE.summary[0]}
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Over the past year, expanded expertise into <span className="font-semibold">AI-enabled systems</span>, contributing to the design 
-                  and integration of <span className="font-semibold">LLM-based features such as RAG pipelines and agent-driven workflows</span> within 
-                  existing cloud and microservices architectures. Known for balancing <span className="font-semibold">scalability, reliability, 
-                  security, and performance</span> while aligning technology with business outcomes.
+                  {PROFILE.summary[1]}
                 </p>
               </div>
             </section>
@@ -147,7 +132,7 @@ const ResumePage = () => {
                     <div>
                       <h4 className="text-xl font-bold text-gray-900 dark:text-white">Technical Lead</h4>
                       <p className="text-indigo-600 dark:text-indigo-400 font-semibold">Progience Technologies, Hyderabad</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: Next.js, Express.js, Amazon Web Services (AWS), Microsoft Azure, SQL, Entity Framework, Design Patterns</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Technologies: {PROFILE.progienceTechnologies}</p>
                     </div>
                     <Badge variant="outline" className="text-sm">
                       Jun 2023 - Present
